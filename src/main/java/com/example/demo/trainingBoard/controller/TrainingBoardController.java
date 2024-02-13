@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.trainingBoard.dto.TrainingDTO;
@@ -33,9 +34,9 @@ public class TrainingBoardController {
 	}
 
 	@PostMapping("/register")
-	public String registerPost(TrainingDTO dto, RedirectAttributes redirectAttributes) {
+	public String registerPost(TrainingDTO dto, RedirectAttributes redirectAttributes, MultipartFile file) throws Exception {
 
-		int no = service.register(dto);
+		int no = service.register(dto, file);
 
 		redirectAttributes.addFlashAttribute("msg", no);
 
@@ -58,8 +59,8 @@ public class TrainingBoardController {
 	}
 
 	@PostMapping("/modify")
-	public String modifyPost(TrainingDTO dto, RedirectAttributes redirectAttributes) {
-		service.modify(dto);
+	public String modifyPost(TrainingDTO dto, MultipartFile file, RedirectAttributes redirectAttributes) {
+		service.modify(dto, file);
 		redirectAttributes.addAttribute("no", dto.getNo());
 		return "redirect:/board/read";
 	}

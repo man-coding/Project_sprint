@@ -1,6 +1,8 @@
 package com.example.demo.trainingBoard.service;
 
+import java.io.File;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.trainingBoard.dto.TrainingDTO;
 import com.example.demo.trainingBoard.entity.Training;
@@ -20,9 +23,22 @@ public class TraningBoardServiceImpl implements TrainingBoardService {
 	TrainingRepository repository;
 
 	@Override
-	public int register(TrainingDTO dto) {
-
+	public int register (TrainingDTO dto, MultipartFile file) throws Exception  {
+		
+		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+		UUID uuid = UUID.randomUUID();
+		String fileName = uuid + "_" + file.getOriginalFilename();
+		
+		File saveFile = new File(projectPath, fileName);
+		file.transferTo(saveFile);
+		
+		
+		
 		Training entity = dtoToEntity(dto);
+		
+		entity.setFileName(fileName); //파일명 변경
+		entity.setFilePath("/files/"+fileName);
+		
 		repository.save(entity);
 		int newNo = entity.getNo();
 		return newNo;
@@ -59,7 +75,7 @@ public class TraningBoardServiceImpl implements TrainingBoardService {
 	}
 
 	@Override
-	public void modify(TrainingDTO dto) {
+	public void modify(TrainingDTO dto,MultipartFile file) {
 
 		Optional<Training> result = repository.findById(dto.getNo());
 

@@ -1,19 +1,20 @@
 package com.example.demo.trainingBoard.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.trainingBoard.dto.TrainingDTO;
 import com.example.demo.trainingBoard.entity.Training;
 
 public interface TrainingBoardService {
 
-	int register(TrainingDTO dto);
+	int register(TrainingDTO dto, MultipartFile file) throws Exception;
 
 	Page<TrainingDTO> getList(int pageNumber);
 
 	TrainingDTO read(int no);
 
-	void modify(TrainingDTO dto);
+	void modify(TrainingDTO dto,MultipartFile file);
 
 	int remove(int no);
 
