@@ -20,7 +20,7 @@ public interface TrainingBoardService {
 	default Training dtoToEntity(TrainingDTO dto) {
 
 		Training entity = Training.builder().no(dto.getNo()).title(dto.getTitle()).trainingDate(dto.getTrainingDate())
-				.place(dto.getPlace()).content(dto.getContent()).writer(dto.getWriter()).build();
+				.location(dto.getLocation()).content(dto.getContent()).writer(dto.getWriter()).build();
 
 		return entity;
 
@@ -29,7 +29,7 @@ public interface TrainingBoardService {
 	default TrainingDTO entityToDto(Training entity) {
 
 		TrainingDTO dto = TrainingDTO.builder().no(entity.getNo()).title(entity.getTitle())
-				.trainingDate(entity.getTrainingDate()).place(entity.getPlace()).content(entity.getContent())
+				.trainingDate(entity.getTrainingDate()).location(entity.getLocation()).content(entity.getContent())
 				.writer(entity.getWriter()).regDate(entity.getRegDate()).modDate(entity.getModDate()).build();
 
 		return dto;

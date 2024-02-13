@@ -36,7 +36,7 @@ public class Training extends BaseEntity {
 	String trainingDate;
 	
 	@Column(length = 30, nullable = false)
-	String place;
+	String location;
 
 	@Column(length = 255, nullable = false)
 	String content;

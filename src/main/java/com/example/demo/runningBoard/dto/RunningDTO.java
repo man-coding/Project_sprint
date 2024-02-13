@@ -21,7 +21,7 @@ public class RunningDTO {
 	int no;
 	String title;
 	String runningDate;
-	String place;
+	String location;
 	String content;
 	String writer;
 	LocalDateTime regDate;

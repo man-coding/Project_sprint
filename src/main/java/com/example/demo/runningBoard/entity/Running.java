@@ -36,7 +36,7 @@ public class Running extends BaseEntity {
 	String runningDate;
 	
 	@Column(length = 30, nullable = false)
-	String place;
+	String location;
 
 	@Column(length = 255, nullable = false)
 	String content;

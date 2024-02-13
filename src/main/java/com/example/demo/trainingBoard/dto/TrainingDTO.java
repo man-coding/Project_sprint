@@ -18,7 +18,7 @@ public class TrainingDTO {
 	int no;
 	String title;
 	String trainingDate;
-	String place;
+	String location;
 	String content;
 	String writer;
 	String fileName;

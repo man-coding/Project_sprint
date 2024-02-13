@@ -69,7 +69,7 @@ public class RunningBoardServiceImpl implements RunningBoardService {
 
 			entity.setTitle(dto.getTitle());
 			entity.setRunningDate(dto.getRunningDate());
-			entity.setPlace(dto.getPlace());
+			entity.setLocation(dto.getLocation());
 			entity.setContent(dto.getContent());
 
 			repository.save(entity);

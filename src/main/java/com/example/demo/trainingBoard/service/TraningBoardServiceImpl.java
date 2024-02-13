@@ -69,7 +69,7 @@ public class TraningBoardServiceImpl implements TrainingBoardService {
 
 			entity.setTitle(dto.getTitle());
 			entity.setTrainingDate(dto.getTrainingDate());
-			entity.setPlace(dto.getPlace());
+			entity.setLocation(dto.getLocation());
 			entity.setContent(dto.getContent());
 
 			repository.save(entity);
