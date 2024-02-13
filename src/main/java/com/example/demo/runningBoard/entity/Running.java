@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,8 +21,9 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 
-public class RunningBoard extends BaseEntity {
+public class Running extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,11 +31,17 @@ public class RunningBoard extends BaseEntity {
 
 	@Column(length = 100, nullable = false)
 	String title;
+	
+	@Column(length = 30, nullable = false)
+	String runningDate;
+	
+	@Column(length = 30, nullable = false)
+	String place;
 
 	@Column(length = 255, nullable = false)
 	String content;
 
-	@ManyToOne
+	
 	@Column(length = 20, nullable = false)
 	String writer;
 
@@ -43,5 +49,5 @@ public class RunningBoard extends BaseEntity {
 	String fileName;
 
 	@Column(length = 100, nullable = true)
-	String filePathe;
+	String filePath;
 }
