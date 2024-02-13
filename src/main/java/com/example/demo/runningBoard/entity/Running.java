@@ -45,9 +45,5 @@ public class Running extends BaseEntity {
 	@Column(length = 20, nullable = false)
 	String writer;
 
-	@Column(length = 100, nullable = true)
-	String fileName;
-
-	@Column(length = 100, nullable = true)
-	String filePath;
+	
 }

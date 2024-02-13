@@ -1,5 +1,4 @@
-package com.example.demo.runningBoard.dto;
-
+package com.example.demo.trainingBoard.dto;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -15,15 +14,15 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
-public class RunningDTO {
-
+public class TrainingDTO {
 	int no;
 	String title;
-	String runningDate;
+	String trainingDate;
 	String place;
 	String content;
 	String writer;
+	String fileName;
+	String filePath;
 	LocalDateTime regDate;
 	LocalDateTime modDate;
 	
