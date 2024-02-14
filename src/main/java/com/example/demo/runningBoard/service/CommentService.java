@@ -6,7 +6,7 @@ import java.util.List;
 import com.example.demo.runningBoard.dto.CommentDTO;
 import com.example.demo.runningBoard.entity.Comment;
 import com.example.demo.runningBoard.entity.Member;
-import com.example.demo.runningBoard.entity.RunningBoard;
+import com.example.demo.runningBoard.entity.Running;
 
 public interface CommentService {
 
@@ -26,7 +26,7 @@ public interface CommentService {
 
 		Member member = Member.builder().id(dto.getWriter()).build(); //엔티티 생성
 
-		RunningBoard board = RunningBoard.builder().no(dto.getBoardNo()).build();  //엔티티 생성
+		Running board = Running.builder().no(dto.getBoardNo()).build();  //엔티티 생성
 
 		Comment entity = Comment.builder()
 				.commentNo(dto.getCommentNo())
