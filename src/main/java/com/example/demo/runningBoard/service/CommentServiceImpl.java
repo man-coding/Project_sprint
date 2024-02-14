@@ -1,21 +1,18 @@
 package com.example.demo.runningBoard.service;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication.Running;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.runningBoard.dto.CommentDTO;
 import com.example.demo.runningBoard.entity.Comment;
-import com.example.demo.runningBoard.entity.RunningBoard;
+import com.example.demo.runningBoard.entity.Running;
 import com.example.demo.runningBoard.repository.CommentRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 @Service
-public class CommentServiceImpl2 implements CommentService {
+public class CommentServiceImpl implements CommentService {
 
 	@Autowired
 	private CommentRepository repository;
@@ -39,11 +36,11 @@ public class CommentServiceImpl2 implements CommentService {
 //
 //		return dtoList;
 //	}
-	
+
 	@Override
 	public List<CommentDTO> getListByBoardNo(int boardNo) {
-		RunningBoard board = RunningBoard.builder().no(boardNo).build();  //엔티티 생성
-		List<Comment> entityList = repository.findByBoard(board);
+		Running running = Running.builder().no(boardNo).build(); // 엔티티 생성
+		List<Comment> entityList = repository.findByBoard(running);
 		List<CommentDTO> dtoList = new ArrayList<>();
 		for (Comment entity : entityList) {
 			CommentDTO dto = entityToDto(entity);
@@ -77,6 +74,6 @@ public class CommentServiceImpl2 implements CommentService {
 	@Override
 	public void remove(int no) {
 		repository.deleteById(no);
-	}	
+	}
 
 }

@@ -19,7 +19,7 @@ public class CommentDTO {
 
 	int commentNo;	//댓글번호
 	
-	int boardNo;	//게시물번호
+	int runningNo;	//게시물번호
 	
 	String content;	//댓글내용
 	

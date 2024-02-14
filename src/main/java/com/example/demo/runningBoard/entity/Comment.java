@@ -20,18 +20,19 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Comment extends BaseEntity{
-	
+
+public class Comment extends BaseEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int commentNo;
-	
+
 	@ManyToOne
-	RunningBoard board;	//연관 관계 설정
-	
+	Running running; // 연관 관계 설정
+
 	@Column(length = 1500)
 	String content;
-	
+
 	@ManyToOne
-	Member writer;	//연관 관계 설정
+	Member writer; // 연관 관계 설정
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.runningBoard.dto.RunningBoardDTO;
+import com.example.demo.runningBoard.dto.RunningDTO;
 import com.example.demo.runningBoard.service.RunningBoardService;
 
 @Controller
@@ -23,7 +23,7 @@ public class RunningBoardController {
 	@GetMapping("/list")
 	public void list(@RequestParam(defaultValue = "0", name = "page") int page, Model model) {
 
-		Page<RunningBoardDTO> list = service.getList(page);
+		Page<RunningDTO> list = service.getList(page);
 		model.addAttribute("list", list);
 	}
 
@@ -33,7 +33,7 @@ public class RunningBoardController {
 	}
 
 	@PostMapping("/register")
-	public String registerPost(RunningBoardDTO dto, RedirectAttributes redirectAttributes) {
+	public String registerPost(RunningDTO dto, RedirectAttributes redirectAttributes) {
 
 		int no = service.register(dto);
 
@@ -46,19 +46,19 @@ public class RunningBoardController {
 	public void read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
 			Model model) {
 
-		RunningBoardDTO dto = service.read(no);
+		RunningDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
 	}
 
 	@GetMapping("/modify")
 	public void modify(@RequestParam(name = "no") int no, Model model) {
-		RunningBoardDTO dto = service.read(no);
+		RunningDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
 	}
 
 	@PostMapping("/modify")
-	public String modifyPost(RunningBoardDTO dto, RedirectAttributes redirectAttributes) {
+	public String modifyPost(RunningDTO dto, RedirectAttributes redirectAttributes) {
 		service.modify(dto);
 		redirectAttributes.addAttribute("no", dto.getNo());
 		return "redirect:/board/read";

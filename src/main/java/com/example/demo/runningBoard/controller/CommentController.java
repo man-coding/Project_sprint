@@ -27,9 +27,9 @@ public class CommentController {
 	
 	@ResponseBody
 	@GetMapping("/list")
-	public List<CommentDTO> list(@RequestParam(name = "boardNo") int boardNo) {
+	public List<CommentDTO> list(@RequestParam(name = "runningNo") int runningNo) {
 		
-		List<CommentDTO> commentlist = service.getListByBoardNo(boardNo);
+		List<CommentDTO> commentlist = service.getListByBoardNo(runningNo);
 		
 		return commentlist;
 		
