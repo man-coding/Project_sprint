@@ -9,48 +9,48 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.runningBoard.dto.RunningDTO;
-import com.example.demo.runningBoard.entity.Running;
-import com.example.demo.runningBoard.repository.RunningRepository;
+import com.example.demo.runningBoard.dto.RunningBoardDTO;
+import com.example.demo.runningBoard.entity.RunningBoard;
+import com.example.demo.runningBoard.repository.RunningBoardRepository;
 
 @Service
 public class RunningBoardServiceImpl implements RunningBoardService {
 
 	@Autowired
-	RunningRepository repository;
+	RunningBoardRepository repository;
 
 	@Override
-	public int register(RunningDTO dto) {
+	public int register(RunningBoardDTO dto) {
 
-		Running entity = dtoToEntity(dto);
+		RunningBoard entity = dtoToEntity(dto);
 		repository.save(entity);
 		int newNo = entity.getNo();
 		return newNo;
 	}
 
 	@Override
-	public Page<RunningDTO> getList(int pageNumber) {
+	public Page<RunningBoardDTO> getList(int pageNumber) {
 
 		int pageNum = (pageNumber == 0) ? 0 : pageNumber - 1;
 
 		Pageable pageable = PageRequest.of(pageNumber, 10, Sort.by("no").descending());
 
-		Page<Running> entityPage = repository.findAll(pageable);
+		Page<RunningBoard> entityPage = repository.findAll(pageable);
 
-		Page<RunningDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
+		Page<RunningBoardDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
 
 		return dtoPage;
 	}
 
 	@Override
-	public RunningDTO read(int no) {
-		Optional<Running> result = repository.findById(no);
+	public RunningBoardDTO read(int no) {
+		Optional<RunningBoard> result = repository.findById(no);
 
 		if (result.isPresent()) {
 
-			Running running = result.get();
+			RunningBoard running = result.get();
 
-			RunningDTO dto = entityToDto(running);
+			RunningBoardDTO dto = entityToDto(running);
 
 			return dto;
 
@@ -59,13 +59,13 @@ public class RunningBoardServiceImpl implements RunningBoardService {
 	}
 
 	@Override
-	public void modify(RunningDTO dto) {
+	public void modify(RunningBoardDTO dto) {
 
-		Optional<Running> result = repository.findById(dto.getNo());
+		Optional<RunningBoard> result = repository.findById(dto.getNo());
 
 		if (result.isPresent()) {
 
-			Running entity = result.get();
+			RunningBoard entity = result.get();
 
 			entity.setTitle(dto.getTitle());
 			entity.setRunningDate(dto.getRunningDate());
@@ -80,7 +80,7 @@ public class RunningBoardServiceImpl implements RunningBoardService {
 	@Override
 	public int remove(int no) {
 
-		Optional<Running> result = repository.findById(no);
+		Optional<RunningBoard> result = repository.findById(no);
 		if (result.isPresent()) {
 			repository.deleteById(no);
 
