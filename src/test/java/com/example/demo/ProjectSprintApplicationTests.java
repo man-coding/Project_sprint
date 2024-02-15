@@ -1,15 +1,14 @@
 package com.example.demo;
 
-import org.springframework.boot.SpringApplication;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
-public class ProjectSprintApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(ProjectSprintApplication.class, args);
+public class ProjectSprintApplicationTests {
+	@Test
+	void contextLoads() {
 	}
 
 }
