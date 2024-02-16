@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.runningBoard.dto.MemberDTO;
@@ -19,7 +20,9 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberRepository repository;
 
-	
+
+	@Autowired
+	PasswordEncoder passwordEncoder;
 		
 	@Override
 	public Page<MemberDTO> getList(int pageNumber) {
@@ -41,10 +44,13 @@ public class MemberServiceImpl implements MemberService {
 		}
 		Member entity = dtoToEntity(dto);
 		
-		
+		// 패스워드 인코더로 패스워드 암호화하기
+		String enPw = passwordEncoder.encode(entity.getPassword());
+		entity.setPassword(enPw);
 
 		repository.save(entity);
 		return true;
+
 
 	
 	

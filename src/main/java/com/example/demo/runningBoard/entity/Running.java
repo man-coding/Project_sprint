@@ -27,23 +27,23 @@ public class Running extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int no;
+	private int no;
 
 	@Column(length = 100, nullable = false)
-	String title;
+	private String title;
 	
 	@Column(length = 30, nullable = false)
-	String runningDate;
+	private String runningDate;
 	
 	@Column(length = 30, nullable = false)
-	String location;
+	private String location;
 
 	@Column(length = 255, nullable = false)
-	String content;
+	private String content;
 
 	
 	@Column(length = 20, nullable = false)
-	String writer;
+	private String writer;
 
 	
 }
