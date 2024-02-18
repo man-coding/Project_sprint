@@ -13,14 +13,23 @@ div{
 }
 
 /* Container styles */
-.container{
+.read-l-container{
+	width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    box-sizing: border-box; 
+}
+.read-m-container{
     width: 70%;
     padding: 30px;
     margin: 0 auto;
     align-items: center;
     box-sizing: border-box; 
     background-color: white;
-    border: 1px solid black;
+   
 }
 
 /* Content styles */
@@ -32,12 +41,9 @@ div{
 .content-post{
     width: 100%;
     align-items: center;
-  
+    margin-top: 20px; /* 위쪽 여백 추가 */
+    margin-bottom: 20px; /* 아래쪽 여백 추가 */
 }
-.content-post{
-    width: 100%;
-}
-
 /* First notice styles */
 .notice-first-info{
     width: 80%;
