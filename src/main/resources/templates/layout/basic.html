@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SprintX</title>
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="/img/favicon.png" rel="icon">
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -24,17 +24,19 @@
 
     <!-- Template Main CSS File -->
     <link href="/css/style.css" rel="stylesheet">
+    
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     
 
 </head>
 <body>
      <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top">
+  <header id="header" class="header fix">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/sprintLogo.png" alt="SprintX">
+        <img src="/img/sprintLogo.png" alt="SprintX">
       </a>
 
       <nav id="navbar" class="navbar">
@@ -66,16 +68,8 @@
     </div>
   </header><!-- End Header -->
 
-  <section>
-
-  <div class="container-fluid">
             <th:block th:replace = "${content}"></th:block> <!-- 템플릿 조각 삽입 -->
-        </div>
-    
-
-
-  </section>
-
+ 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
 
