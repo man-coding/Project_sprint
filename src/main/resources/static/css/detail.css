@@ -1,0 +1,142 @@
+/* Import external CSS */
+@import "//cdn.jsdelivr.net/npm/font-applesdgothicneo@1.0/all.min.css";
+
+/* Reset and global styles */
+*{
+
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR','Apple SD Gothic','맑은고딕','Nanum Gothic',sans-serif;
+}
+div{
+    display: block;
+}
+
+/* Container styles */
+.container{
+    width: 70%;
+    padding: 30px;
+    margin: 0 auto;
+    align-items: center;
+    box-sizing: border-box; 
+    background-color: white;
+    border: 1px solid black;
+}
+
+/* Content styles */
+.content-head{
+    width: 100%;
+    align-items: center;
+    border-bottom: 1px solid #000;
+}
+.content-post{
+    width: 100%;
+    align-items: center;
+  
+}
+.content-post{
+    width: 100%;
+}
+
+/* First notice styles */
+.notice-first-info{
+    width: 80%;
+    font-size: 16px;
+    color: #333333;
+    display: flex;
+    gap: 20px;
+    
+}
+.container-cate,
+.container-title,
+.container-ID,
+.notice-first-info {
+    margin-bottom: 20px; /* 아래쪽 margin을 추가합니다 */
+}
+
+/* Detail notice styles */
+.notice-detail-info{
+    font-size: 14px;
+    color: #333333;
+}
+
+/* Flexbox styles */
+.flex {
+    display: flex; 
+    align-items: center;
+}
+
+/* Icon styles */
+.flex i{
+    margin-right: 15px;
+}
+
+
+/* Link styles */
+a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+/* 하단 - 댓글 */
+.heartBtn {
+    border: none; /* 버튼의 테두리 제거 */
+    background: none; /* 버튼의 배경색 제거 */
+    outline: none; /* 클릭 시 생기는 아웃라인 제거 */
+    cursor: pointer; /* 마우스 커서가 버튼 위에 있을 때 손가락 모양으로 변경 */
+    pointer-events: auto;
+    
+}
+i {
+    font-size: 24px; /* 아이콘 크기를 24px로 설정 */
+}
+.bottom-logo-info{
+    pointer-events: none;
+    display: flex; 
+    height: 20%;
+    display: flex;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #000;
+}
+.comment-count{
+    margin-right: 20px;
+}
+
+/* Comment container styles */
+.content-comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+/* Comment input styles */
+#comment-input {
+    flex: 1; /* Flex container 안에서 가능한 한 많은 공간을 차지하도록 설정 */
+    height: 40px;
+    margin-right: 10px; /* input과 button 사이의 간격을 조절 */
+    padding: 5px 10px; /* 텍스트와 input 테두리 사이의 간격을 조절 */
+    border: none;
+    border-radius: 5px; /* input의 모서리를 둥글게 */
+    background-color: #f2f2f2;
+    font-size: 14px;
+}
+
+/* Submit button styles */
+#submit {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; /* 버튼의 모서리를 둥글게 */
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* 버튼 색상을 부드럽게 변경 */
+}
+
+#submit:hover {
+    background-color: #555; /* 마우스 오버 시 버튼 색상 변경 */
+}
+
+
+
