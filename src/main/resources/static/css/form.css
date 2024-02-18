@@ -13,15 +13,12 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #f5f5f5;
     box-sizing: border-box; 
 }
 
 /* 개별 공지사항 박스 스타일링 */
 .notice-m-container {
-    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
     display: flex;
     flex-direction: column; 
     border: 1px solid #ccc;
@@ -29,8 +26,7 @@
     background-color: #fff;
     width: 80%;
     align-items: center; /* 요소들을 가운데 정렬 */
-    margin: 18px;
-    padding: 10px;
+  
 }
 
 /* 공지사항 상세 정보 라인 스타일링 */
@@ -75,7 +71,8 @@
     outline: none; /* 클릭 시 생기는 아웃라인 제거 */
     cursor: pointer; /* 마우스 커서가 버튼 위에 있을 때 손가락 모양으로 변경 */
     pointer-events: auto;
-     font-size: 24px;
+    font-size: 24px;
+    
 }
 
 .people-info{
@@ -101,5 +98,6 @@
    
 }
 
-
-
+h3.title {
+    margin-bottom: 0 !important;
+}
