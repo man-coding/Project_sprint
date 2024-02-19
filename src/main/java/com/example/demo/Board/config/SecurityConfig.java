@@ -39,7 +39,7 @@ public class SecurityConfig {
 	    http.authorizeHttpRequests()
 				.requestMatchers("/register").permitAll() //회원가입은 아무나 접근 가능
 				.requestMatchers("/assets/*","/css/*","/js/*").permitAll() //리소스는 아무나 접근 가능
-				.requestMatchers("/").authenticated() //메인화면은 로그인한 사용자이면 접근 가능
+				.requestMatchers("/").permitAll() //메인화면은 로그인한 사용자이면 접근 가능
 				.requestMatchers("/board/*").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
 				.requestMatchers("/board2/*").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
 				.requestMatchers("/comment/*").hasAnyRole("ADMIN","USER")
