@@ -44,7 +44,7 @@ public class Marathon extends BaseEntity {
 	@Column(length = 255, nullable = false)
 	String content;
 
-	@Column(nullable = true)
+	@Column(length = 10, nullable = true)
 	int like;
 	
 	@Column(length = 100, nullable = true)

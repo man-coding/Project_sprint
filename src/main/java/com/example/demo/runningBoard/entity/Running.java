@@ -44,7 +44,7 @@ public class Running extends BaseEntity {
 	@Column(length = 255, nullable = false)
 	String content;
 
-	@Column(nullable = true)
+	@Column(length = 10, nullable = true)
 	int like;
 	
 	//파일첨부 필요없음
