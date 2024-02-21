@@ -45,7 +45,7 @@ public class Running extends BaseEntity {
 	String content;
 
 	@Column(length = 10, nullable = true)
-	int like;
+	int countLike;
 	
 	//파일첨부 필요없음
 

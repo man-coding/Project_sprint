@@ -24,7 +24,7 @@ public class RunningDTO {
 	String runningDate;
 	String location;
 	String content;
-	int like;
+	int countLike;
 	LocalDateTime regDate;
 	LocalDateTime modDate;
 	

@@ -45,7 +45,7 @@ public class Marathon extends BaseEntity {
 	String content;
 
 	@Column(length = 10, nullable = true)
-	int like;
+	int countLike;
 	
 	@Column(length = 100, nullable = true)
 	String fileName;

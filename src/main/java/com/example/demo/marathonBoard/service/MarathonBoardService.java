@@ -22,7 +22,7 @@ public interface MarathonBoardService {
 
 		Marathon entity = Marathon.builder().no(dto.getNo()).writer(dto.getWriter()).title(dto.getTitle())
 				.marathonDate(dto.getMarathonDate()).location(dto.getLocation()).content(dto.getContent())
-				.like(dto.getLike()).fileName(dto.getFileName()).filePath(dto.getFilePath()).build();
+				.countLike(dto.getCountLike()).fileName(dto.getFileName()).filePath(dto.getFilePath()).build();
 
 		return entity;
 
@@ -32,7 +32,7 @@ public interface MarathonBoardService {
 
 		MarathonDTO dto = MarathonDTO.builder().no(entity.getNo()).writer(entity.getWriter()).title(entity.getTitle())
 				.MarathonDate(entity.getMarathonDate()).location(entity.getLocation()).content(entity.getContent())
-				.like(entity.getLike()).fileName(entity.getFileName()).filePath(entity.getFilePath())
+				.countLike(entity.getCountLike()).fileName(entity.getFileName()).filePath(entity.getFilePath())
 				.regDate(entity.getRegDate()).modDate(entity.getModDate()).build();
 
 		return dto;

@@ -22,7 +22,7 @@ public class MarathonDTO {
 	String MarathonDate;
 	String location;
 	String content;
-	int like;
+	int countLike;
 	String fileName;
 	String filePath;
 	LocalDateTime regDate;
