@@ -1,4 +1,4 @@
-package com.example.demo.weatherAPI;
+package com.example.demo.weatherApi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
