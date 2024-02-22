@@ -19,7 +19,7 @@ public interface RunningBoardService {
 
 	default Running dtoToEntity(RunningDTO dto) {
 
-		Running entity = Running.builder().no(dto.getNo()).writer(dto.getWriter()).title(dto.getTitle())
+		Running entity = Running.builder().no(dto.getNo()).title(dto.getTitle())
 				.runningDate(dto.getRunningDate()).location(dto.getLocation()).content(dto.getContent())
 				.countLike(dto.getCountLike()).build();
 
@@ -29,7 +29,7 @@ public interface RunningBoardService {
 
 	default RunningDTO entityToDto(Running entity) {
 
-		RunningDTO dto = RunningDTO.builder().no(entity.getNo()).writer(entity.getWriter()).title(entity.getTitle())
+		RunningDTO dto = RunningDTO.builder().no(entity.getNo()).title(entity.getTitle())
 				.runningDate(entity.getRunningDate()).location(entity.getLocation()).content(entity.getContent())
 				.countLike(entity.getCountLike()).regDate(entity.getRegDate()).modDate(entity.getModDate()).build();
 

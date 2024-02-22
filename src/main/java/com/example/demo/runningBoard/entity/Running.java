@@ -31,8 +31,8 @@ public class Running extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int no;
 
-	@Column(length = 20, nullable = true)
-	String writer;
+	//@Column(length = 20, nullable = false)
+	//String writer;
 
 	@Column(length = 100, nullable = false)
 	String title;
