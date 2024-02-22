@@ -29,19 +29,19 @@ function countMinus() {
         document.querySelector(".like_count").innerText = "좋아요 " + count + "개";
     }
 }
+  	document.querySelector(".heartBtn").addEventListener('click', addLike);
+	
+	// notice-m-container를 클릭했을 때 이벤트 처리
+	document.querySelector('.notice-m-container').addEventListener('click', function() {
+	    window.location.href = 'https://www.youtube.com/'; // 이동할 링크를 원하는 주소로 변경하세요
+	});
+	
+	// heart-info를 클릭했을 때 이벤트 처리
+	document.querySelector('.fa-regular.fa-heart').addEventListener('click', function(event) {
+	    event.stopPropagation(); // 상위 요소로 이벤트 전파를 막음
+	    // 하트 클릭 시 수행할 동작을 여기에 작성하세요
+	});
 
-document.querySelector(".heartBtn").addEventListener("click", addLike);
-
-// notice-m-container를 클릭했을 때 이벤트 처리
-document.querySelector('.notice-m-container').addEventListener('click', function() {
-    window.location.href = 'https://www.youtube.com/'; // 이동할 링크를 원하는 주소로 변경하세요
-});
-
-// heart-info를 클릭했을 때 이벤트 처리
-document.querySelector('.fa-regular.fa-heart').addEventListener('click', function(event) {
-    event.stopPropagation(); // 상위 요소로 이벤트 전파를 막음
-    // 하트 클릭 시 수행할 동작을 여기에 작성하세요
-});
 
 
 

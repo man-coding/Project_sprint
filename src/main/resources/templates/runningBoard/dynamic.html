@@ -1,0 +1,38 @@
+<div class="notice-l-container" th:each="dto : ${list}"> <!--글 박스 집합-->
+    <div class="notice-m-container" th:onclick="'location.href=\'/board/read?no=' + ${dto.no} + '&page=' + ${list.number + 1} + '\';'" style="cursor: pointer;" > <!-- 글 박스 -->
+        <div class="notice-first-info"> <!-- 로고 + 이름박스 라인 -->
+            <div class="flex flex-col items-center">   <!-- 로고 + 이름박스-->
+                <i class="fa-solid fa-location-dot"></i>
+                <span class="notice-detail-info">Incheon geyangu</span>
+            </div>
+
+            <div class="flex flex-col items-center">   <!-- 로고 + 이름박스-->
+                <i class="fa-regular fa-calendar"></i>
+                <span class="notice-detail-info">[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</span>
+            </div>
+
+            <div class="flex flex-col items-center">   <!-- 로고 + 이름박스-->
+                <i class="fa-solid fa-hashtag"></i>
+                <span class="notice-detail-info">[[${dto.no}]]</span>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h3 class="main-title">[[${dto.title}]]</h3>
+        </div>
+
+        <div class="bottom-logo-info" onclick="event.stopPropagation(); addLike();">
+            <div class="people-info">
+                <i class="fa-solid fa-user"></i>
+                <span class="people-count bottom-logo-font">1명</span>
+            </div>
+
+            <div class="heart-info">
+                <button class="heartBtn" onclick="event.stopPropagation(); addLike();">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+                <span class="like_count bottom-logo-font">좋아요 0개</span>
+            </div>
+        </div>
+    </div>
+</div>
