@@ -45,6 +45,12 @@ public class Running extends BaseEntity {
 
 	@Column(length = 255, nullable = false)
 	String content;
+	
+	@Column(length = 30, nullable = true)
+	double latitude;
+	
+	@Column(length = 30, nullable = true)
+	double longtitude;
 
 	@Column(length = 10, nullable = true)
 	int countLike;

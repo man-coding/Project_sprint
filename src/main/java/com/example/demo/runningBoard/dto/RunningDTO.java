@@ -25,6 +25,8 @@ public class RunningDTO {
 	String runningDate;
 	String location;
 	String content;
+	double latitude;
+	double longtitude;
 	int countLike;
 	LocalDateTime regDate;
 	LocalDateTime modDate;
