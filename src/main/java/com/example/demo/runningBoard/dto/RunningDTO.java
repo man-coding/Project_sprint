@@ -1,5 +1,6 @@
 package com.example.demo.runningBoard.dto;
 
+
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;

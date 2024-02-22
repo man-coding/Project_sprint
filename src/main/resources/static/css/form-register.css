@@ -47,6 +47,11 @@ label {
     font-size: 20px;
     margin-bottom: 10px; /* 간격을 조절했습니다. */
 }
+#image-label label{
+	
+	font-size: 20px;
+    margin-bottom: 10px; /* 간격을 조절했습니다. */
+}
 /* 전송버튼 */
 #submit  {
     background-color: #268dce;
@@ -84,6 +89,7 @@ label {
     width: 120px;
     height: auto;
     text-align: center;
+    font-weight: normal; 
 }
 
 #image-label:hover {
