@@ -1,5 +1,7 @@
 package com.example.demo.runningBoard.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,14 +31,14 @@ public class Running extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int no;
 
-	@Column(length = 20, nullable = false)
+	@Column(length = 20, nullable = true)
 	String writer;
 
 	@Column(length = 100, nullable = false)
 	String title;
 
 	@Column(length = 30, nullable = false)
-	String runningDate;
+	LocalDate  runningDate;
 
 	@Column(length = 30, nullable = false)
 	String location;
