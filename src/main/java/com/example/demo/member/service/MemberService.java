@@ -22,7 +22,7 @@ public interface MemberService {
 				.name(entity.getName())
 				.regDate(entity.getRegDate())
 				.modDate(entity.getModDate())
-				.role(entity.getRole()) //등급 추가
+//				.role(entity.getRole()) //등급 추가
 				.build();
 
 		return dto;
@@ -34,7 +34,7 @@ public interface MemberService {
 				.id(dto.getId())
 				.password(dto.getPassword())
 				.name(dto.getName())
-				.role(dto.getRole()) //등급 추가
+//				.role(dto.getRole()) //등급 추가
 				.build();
 		return entity;
 	}
