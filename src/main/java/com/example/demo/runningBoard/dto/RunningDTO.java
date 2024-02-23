@@ -1,7 +1,10 @@
 package com.example.demo.runningBoard.dto;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +25,8 @@ public class RunningDTO {
 	int no;
 	String writer;
 	String title;
-	String runningDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	LocalDate runningDate;
 	String location;
 	String content;
 	double latitude;

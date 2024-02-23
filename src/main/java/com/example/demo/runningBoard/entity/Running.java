@@ -2,6 +2,8 @@ package com.example.demo.runningBoard.entity;
 
 
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,7 +40,7 @@ public class Running extends BaseEntity {
 	String title;
 
 	@Column(length = 30, nullable = false)
-	String runningDate;
+	LocalDate runningDate;
 
 	@Column(length = 30, nullable = false)
 	String location;

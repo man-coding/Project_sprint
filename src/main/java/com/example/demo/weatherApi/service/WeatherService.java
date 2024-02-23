@@ -1,4 +1,4 @@
-package com.example.demo.weatherApi;
+package com.example.demo.weatherApi.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class weatherApi {
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+
+@Service
+public class WeatherService {
 
 	String serviceKey = "SUGpdq3ufUPY4EA%2Fy6EDsonRTsw4bY%2F9ZInDHY304YJ1hxQYOh1TfWoWy4kVz1L%2Fm9P7ImHvkKGyD83FxWpSjQ%3D%3D";
 	String dataType = "JSON";
@@ -44,6 +52,27 @@ public class weatherApi {
 		rd.close();
 		conn.disconnect();
 
-		return sb.toString();
+		return sb.toString(); 
 	}
+	
+	public Root jsonToDto() throws IOException {
+
+		//매퍼 클래스 생성
+		ObjectMapper mapper = new ObjectMapper();
+
+		//분석할 수 없는 구문을 무시하는 옵션 설정
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+		//날씨 데이터 가져오기
+		String weather = getWeather();
+
+		Root root = null;
+
+		//JSON 문자열을 클래스로 변환
+		root = mapper.readValue(weather, Root.class);
+
+		return root;
+	}
+	
+	
 }
