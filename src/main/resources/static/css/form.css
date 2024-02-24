@@ -122,3 +122,7 @@ h3.main-title {
 .list-register input:hover {
     background-color: #717ff5;
 }
+.pagination{
+	display: flex;
+    justify-content: center;
+}
