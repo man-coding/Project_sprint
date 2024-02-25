@@ -9,43 +9,47 @@
     <title>Document</title>
     <link href="/css/detail.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/fc8d331d05.js" crossorigin="anonymous"></script>
-    <script src="assets/js/from.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    
+     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>    
+    <script src="/js/form.js"></script>
+   	<script src="/js/map.js"></script>
+   
 </head>
 <body>
-<div class="read-l-container">
+   <div class="read-l-container">
     <div class="read-m-container">
         <div class="content-head">
-                <div class="container-cate">
-                <h3><a href="/form.html">파티 참가</a></h3> 
-                </div>
-                <div class="container-title">
-                    <h2>오늘 달리실 분?</h2>
-                </div>
-                <div class="container-ID">
-                    <h5>러닝중독자</h5>
-                </div>
+            <div class="container-cate">
+                <h3><a href="runningBoard/list">파티 참가</a></h3> 
+            </div>
+            <div class="container-title">
+                <h2>오늘 달리실 분?</h2>
+            </div>
+            <div class="container-ID">
+                <h5>러닝중독자</h5>
+            </div>
 
             <div class="notice-first-info">
-                <div class="flex flex-col items-center">   <!-- 로고 + 이름박스-->
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span class="notice-detail-info">Incheon geyangu</span>
+                <div class="flex flex-col items-center">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span class="notice-detail-info">Incheon geyangu</span>
                 </div>
 
-                <div class="flex flex-col items-center">   <!-- 로고 + 이름박스-->
-                        <i class="fa-regular fa-calendar"></i>
-                        <span class="notice-detail-info">2024/2/15</span>
+                <div class="flex flex-col items-center">
+                    <i class="fa-regular fa-calendar"></i>
+                    <span class="notice-detail-info">2024/2/15</span>
                 </div>
 
-                <div class="flex flex-col items-center">   <!-- 로고 + 이름박스-->
-                        <i class="fa-regular fa-clock"></i>
-                        <span class="notice-detail-info">3시45분</span>
+                <div class="flex flex-col items-center">
+                    <i class="fa-regular fa-clock"></i>
+                    <span class="notice-detail-info">3시45분</span>
                 </div>
             </div>
             
         </div>
         <div class="content-post">
-            <h5>전에는 달리 행해진 곳이 없으며, 제1회 1896 아테네 올림픽을 앞두고 흥행 종목을 만들고자 미셸 브레알이 제안한 종목이다. 곧 본질적으로는 사이클 12시간 주행이나 비둘기 사격 같은 초기 올림픽 특유의 정신 나간 실험적인 종목들 가운데 하나이다. 그러나 일회성으로 그친 다른 종목들과는 다르게 올림픽이 근간으로 삼은 고대 그리스 정신과 가장 부합한다는 측면 때문에 영원히 유지될 올림픽의 꽃이다.
+            <h5>
+전에는 달리 행해진 곳이 없으며, 제1회 1896 아테네 올림픽을 앞두고 흥행 종목을 만들고자 미셸 브레알이 제안한 종목이다. 곧 본질적으로는 사이클 12시간 주행이나 비둘기 사격 같은 초기 올림픽 특유의 정신 나간 실험적인 종목들 가운데 하나이다. 그러나 일회성으로 그친 다른 종목들과는 다르게 올림픽이 근간으로 삼은 고대 그리스 정신과 가장 부합한다는 측면 때문에 영원히 유지될 올림픽의 꽃이다.
 
                 마라톤이 어느 정도로 중요하냐면, 마라톤은 (하계) 올림픽의 메인 이벤트이자 올림픽 육상 일정의 마지막 경기로 고정되어 있으며, 메달 시상식을 올림픽 폐회식에서 직접 거행한다.[4] 그러니까 올림픽 폐회식은 전 세계의 사람들이 지켜보고 있을 텐데 그 사람들이 모두 우승자 본인의 메달을 시상하는 장면을 보는 것인데 선수로서는 매우 큰 영광인 셈이다. 즉, 폐회식 도중에 마라톤 우승자의 국가(國歌)가 연주되는 비장하고 장엄한 분위기로 메달 수여식을 경험하는 것이다.[5]
                 
@@ -55,10 +59,14 @@
                 
                 또한 다른 경기에서는 IOC 위원이 메달을 건네지만, 마라톤은 IOC 위원장이 직접 마라톤 메달리스트들에게 메달을 건네준다. 이런 상징성뿐만 아니라 실질적인 흥행(중계권료, 광고 수익 등) 면에서도 마라톤은 올림픽 축구, 육상 100m 달리기와 함께 올림픽에서 가장 중요한 종목으로 꼽힌다.
             </h5>
-
+            
+           
+            <div id="map" style="width: 500px; height: 400px;"></div>
+	
         </div>
+
         <div class="bottom-logo-info">
-                <div class="comment-count">
+            <div class="comment-count">
                 <i class="fa-regular fa-comment"></i>
                 <span id="comment_count bottom-logo-font">0</span>
             </div>
@@ -72,9 +80,11 @@
         
         <div class="content-comment">
             <input id="comment-input" placeholder="댓글을 입력해 주세요.">
-            <button id="submit" onclick="registerComment()">등록</button>
+            <button type="button" id="submit" onclick="registerComment()">등록</button>
         </div>
-        <div class="content-comment-list"></div>
+        <div class="content-comment-list" id="content-comment-list">
+
+        </div>
     </div>
     </div>
 </body>
@@ -82,72 +92,80 @@
 </th:block>
 </th:block>
 <!-- 댓글 이벤트 처리 -->
-<script th:inline="javascript">
+<!-- 댓글 이벤트 처리 -->
+		<script th:inline="javascript">
 
-    $(document).ready(function() {
-        showComment();
-    })
+        	$(document).ready(function() {
+        		showComment();
+        	})
 
-    function showComment(){
-         var board = [[${dto}]];
-         let comment_div = $('#commentdiv');
+        	function showComment(){
+        		//컨트롤러에서 전달받은 게시물 정보 저장
+        		var board = [[${dto}]];
+        		// 댓글 보기 부분 태그 가져오기
+        		let comment_div = $('#content-comment-list');
+        		
+				$.ajax({
+				type: "GET",
+				url: "/comment/list?boardNo="+board.no,
+				success: function(response){
+					
+					// 자식 엘리먼트 모두 지우기
+					comment_div.empty();
+					
+					let commentlist = response;
+					// 화면에 댓글 목록 출력하기
+					for(i in commentlist){
+						 let comment = commentlist[i];
+		    			 let writer_span = '<span class="fw-bold strong mar">'+comment.writer+'</span>';
+		    			 let content_span = '<span class="mar"> '+comment.content+' </span>';
+		    			 let href = '/comment/remove?commentNo='+comment.commentNo;
+		    			 let delete_btn = '<a href="javascript:removeComment('+comment.commentNo+')">삭제</a>';
+		    			 let comment_html = writer_span + content_span + delete_btn + '</br>';
+		    			 comment_div.append(comment_html);
+					}
+				}
+				});
+			}
 
-          $.ajax({
-           type: "GET",
-           url: "/comment/list?boardNo="+board.no,
-           success: function(response){
-               if(response){
-                   comment_div.empty(); 
-                   commentlist = response;
-                   for(i in commentlist){
-                      let comment = commentlist[i];
-                      let writer_span = '<span class="fw-bold strong mar">'+comment.writer+'</span>';
-                      let content_span = '<span class="mar"> '+comment.content+' </span>';
-                      let href = '/comment/remove?commentNo='+comment.commentNo;
-                      let delete_btn = '<a href="javascript:removeComment('+comment.commentNo+')">삭제</a>';
-                      let comment_html = writer_span + content_span + delete_btn + '</br>';
-                      comment_div.append(comment_html);
-                   }
-               }
-             }
-           })
-    }
+        	function registerComment() {
+        		var board = [[${dto}]];
+        		let commentContent = document.getElementById("comment-input");
+        		let commentDto =
+        		{
+        				'commentNo':0,
+        				'boardNo':board.no,
+        				'content': commentContent.value		
+        				
+        				
+        		}
+        	
+        		$.ajax({
+        			type: "POST",
+        			data: commentDto,
+        			url: "/comment/register",
+        			success: function(response){
+        				if(response.success){
+        					commentContent.value = null;
+        					showComment();
+        				}
+        			}
+        			});
+	    	}
+	
+        	function removeComment(commentNo){
+        		var board = [[${dto}]];
+        		 $.ajax({
+        		      type: "GET",
+        		      url: "/comment/remove?commentNo="+commentNo,
+        		      success: function(response){
+						if(response.success){
+							showComment()
+							}
+						}
+        	});
+        	}
 
-    function registerComment() {
-        var board = [[${dto}]];
-        let commentContent = document.getElementById("comment-input");
-        let commentDto =
-        {
-                'commentNo':0,
-                'boardNo': board.no,
-                'content': commentContent.value
-        }
-         $.ajax({
-              type: "POST",
-              url: "/comment/register",
-              data: JSON.stringify(commentDto),
-              contentType: "application/json",
-              success: function(response){
-                  if(response.success){
-                      commentContent.value = null;
-                      showComment();
-                  }
-                }
-              })
-    }
+		</script>
 
-    function removeComment(commentNo){
-        var board = [[${dto}]];
-         $.ajax({
-              type: "GET",
-              url: "/comment/remove?commentNo="+commentNo,
-              success: function(response){
-                  if(response.success){
-                      showComment();
-                  }
-                }
-              })
-    }
-
-</script>
 
