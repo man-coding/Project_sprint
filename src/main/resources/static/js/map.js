@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-
+	var location = document.getElementById('location').value;
 	var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -14,9 +14,9 @@ $(document).ready(function() {
 
 	// 장소 검색 객체를 생성합니다
 	var ps = new kakao.maps.services.Places();
-
+	
 	// 키워드로 장소를 검색합니다
-	ps.keywordSearch('인천 계산체육공원', placesSearchCB);
+	ps.keywordSearch(location, placesSearchCB);
 
 	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 	function placesSearchCB(data, status, pagination) {

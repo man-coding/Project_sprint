@@ -22,8 +22,9 @@
 <body>
 	<div class="notice-l-container">
 		<!--글 박스 집합-->
-		<div class="notice-m-container"
-			onclick="location.href='https://www.youtube.com/';"
+
+		<div th:each="dto : ${list}" class="notice-m-container"  
+		 th:onclick="'window.location.href=\'/runningBoard/read?no=' + ${dto.no} +'&page=' + (${list.number + 1}) + '\''"
 			style="cursor: pointer;">
 			<!-- 글 박스 -->
 			<div class="notice-first-info">
@@ -31,25 +32,24 @@
 				<div class="flex flex-col items-center">
 					<!-- 로고 + 이름박스-->
 					<i class="fa-solid fa-location-dot"></i> <span
-						class="notice-detail-info">Incheon geyangu</span>
+						class="notice-detail-info">[[${dto.location}]]</span>
 				</div>
 
 				<div class="flex flex-col items-center">
 					<!-- 로고 + 이름박스-->
 					<i class="fa-regular fa-calendar"></i> <span
-						class="notice-detail-info">2024/2/15</span>
+						class="notice-detail-info">[[${dto.runningDate}]]</span>
 				</div>
 
 				<div class="flex flex-col items-center">
 					<!-- 로고 + 이름박스-->
 					<i class="fa-solid fa-hashtag"></i> <span
-						class="notice-detail-info">1</span>
+						class="notice-detail-info">[[${dto.no}]]</span>
 				</div>
 
 			</div>
 			<div class="content-box">
-				<h3 class="main-title">[3/23(토)] 2024 Bulls Rase – 제 15회 금융투자인
-					마라톤대회</h3>
+				<h3 class="main-title">[[${dto.title}]]</h3>
 			</div>
 			<div class="bottom-logo-info"
 				onclick="event.stopPropagation(); addLike();">
@@ -70,20 +70,20 @@
 		<div class="list-register">
 			<a th:href="@{/runningBoard/register}"> <input type="button"
 				value="등록">
-			</a>
 		</div>
 	</div>
-	
-	
-	
-	
+
+
+
+
 	<ul class="pagination">
-    <th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
-        <li class="page-item" th:classappend="${list.number+1 == page} ? 'active'">
-            <a class="page-link" th:href="@{/board/list(page = ${page})}">[[${page}]]</a>
-        </li>
-    </th:block>
-</ul>
+		<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
+			<li class="page-item"
+				th:classappend="${list.number+1 == page} ? 'active'"><a
+				class="page-link" th:href="@{/board/list(page = ${page})}">[[${page}]]</a>
+			</li>
+		</th:block>
+	</ul>
 
 
 </body>

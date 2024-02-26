@@ -3,64 +3,68 @@
 
 	<th:block th:fragment="content">
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!---------------------fontawesome------------------>
+    <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/fc8d331d05.js" crossorigin="anonymous"></script>
     <!-- templates css -->
     <link href="/css/form.css" rel="stylesheet">
-    <!--           js              -->
+    <!-- js -->
     <script src="/js/form.js"></script>
-    
 
 </head>
 <body>
-    <div class="notice-l-container"> <!--글 박스 집합-->
-        <div class="notice-m-container" onclick="location.href='https://www.youtube.com/';" style="cursor: pointer;" > <!-- 글 박스 -->
-         <div class="notice-first-info"> <!-- 로고 + 이름박스 라인 -->
-            <div class="flex flex-col items-center">   <!-- 로고 + 이름박스-->
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span class="notice-detail-info">Incheon geyangu</span>
-            </div>
+    <div class="m-l-container">
+        <div class="m-m-container">
+            <div class="notice-first-info">
+                <div class="obj-info">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span class="notice-detail-info">Incheon geyangu</span>
+                </div>
 
-            <div class="flex flex-col items-center">   <!-- 로고 + 이름박스-->
-                    <i class="fa-regular fa-calendar"></i>
-                    <span class="notice-detail-info">2024/2/15</span>
-            </div>
+                <div class="obj-info">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span class="notice-detail-info">2024/2/15</span>
+                </div>
 
-            <div class="flex flex-col items-center">   <!-- 로고 + 이름박스-->
-                    <i class="fa-solid fa-hashtag"></i>
-                    <span class="notice-detail-info">1</span>
+                <div class="obj-info">
+                        <i class="fa-regular fa-clock"></i>
+                        <span class="notice-detail-info">3시45분</span>
+                </div>
             </div>
-
+            
+            <div class="img-container">
+                <img src="https://generated.vusercontent.net/placeholder.svg" alt="Post image">
             </div>
-            <div class="content-box">
-                <h3 class="main-title">[3/23(토)] 2024 Bulls Rase – 제 15회 금융투자인 마라톤대회</h3>
-            </div>
-            <div class="bottom-logo-info" onclick="event.stopPropagation(); addLike();">
+            <div class="info-container" onclick="event.stopPropagation(); addLike();">
                 <div class="people-info">
                     <i class="fa-solid fa-user"></i>
                     <span class="people-count bottom-logo-font">1명</span>
                 </div>
                 <div class="heart-info">
                     <button class="heartBtn" onclick="event.stopPropagation(); addLike();">
-                        <i class="fa-regular fa-heart"></i></button>
+                        <i class="fa-regular fa-heart"></i>
                         <span class="like_count bottom-logo-font">좋아요 0개</span>
                     </button>
                 </div>
             </div>
+            <div class="m-title">
+                <h3>[10/6(금)] 2023 광화문 운동회</h3>
+            </div>
+            
         </div>
-          <div class="list-register">
-      		<a th:href="@{/marathonBoard/register}">
-                    <input type="button" value="등록">
+        
+        <div class="list-register">
+            <a th:href="@{/marathonBoard/register}">
+                <input type="button" value="등록">
             </a>
-   		</div>
-    </div>
-    
+        </div>
+    </div>  
 </body>
 </html>
+
 </th:block>
 </th:block>
