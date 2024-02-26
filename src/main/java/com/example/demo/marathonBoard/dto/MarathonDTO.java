@@ -1,6 +1,9 @@
 package com.example.demo.marathonBoard.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +22,8 @@ public class MarathonDTO {
 	int no;
 	String writer;
 	String title;
-	String MarathonDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	LocalDate MarathonDate;
 	String location;
 	String content;
 	int countLike;

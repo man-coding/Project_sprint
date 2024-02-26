@@ -1,5 +1,6 @@
 package com.example.demo.runningBoard.dto;
 
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -28,6 +29,8 @@ public class RunningDTO {
 	LocalDate runningDate;
 	String location;
 	String content;
+	double latitude;
+	double longtitude;
 	int countLike;
 	LocalDateTime regDate;
 	LocalDateTime modDate;
