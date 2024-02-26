@@ -12,8 +12,8 @@
  	<link href="/css/form-register.css" rel="stylesheet">
 </head>
 <body>
-    <div class="register-l-container " >
-    <form class="register-m-container">
+    <div class="register-l-container">
+    <form class="register-m-container" th:action="@{/marathonBoard/register}" th:method="post">
         <div class="form-title">
             <label>제목</label>
             <input type="text" class="form-con" id="form-title" name="title" placeholder="제목을 입력해주세요">

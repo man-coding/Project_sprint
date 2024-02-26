@@ -1,5 +1,7 @@
 package com.example.demo.runningBoard.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -33,13 +35,16 @@ public class RunningBoardController {
 	}
 
 	@PostMapping("/register")
-	public String registerPost(RunningDTO dto, RedirectAttributes redirectAttributes) {
-
+	public String registerPost(RunningDTO dto, RedirectAttributes redirectAttributes, Principal principal) {
+		
+		String id = principal.getName();
+		dto.setWriter(id);
+		
 		int no = service.register(dto);
 
 		redirectAttributes.addFlashAttribute("msg", no);
 
-		return "redirect:/board/list";
+		return "redirect:/runningBoard/list";
 	}
 
 	@GetMapping("/read")
@@ -61,13 +66,13 @@ public class RunningBoardController {
 	public String modifyPost(RunningDTO dto, RedirectAttributes redirectAttributes) {
 		service.modify(dto);
 		redirectAttributes.addAttribute("no", dto.getNo());
-		return "redirect:/board/read";
+		return "redirect:/runningBoard/read";
 	}
 
 	@PostMapping("/remove")
 	public String removePost(@RequestParam(name = "no") int no) {
 		service.remove(no);
-		return "redirect:/board/list";
+		return "redirect:/runningBoard/list";
 	}
 
 }

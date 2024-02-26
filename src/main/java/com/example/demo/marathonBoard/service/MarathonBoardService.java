@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.marathonBoard.dto.MarathonDTO;
 import com.example.demo.marathonBoard.entity.Marathon;
+import com.example.demo.member.entity.Member;
 
 public interface MarathonBoardService {
 
@@ -19,8 +20,8 @@ public interface MarathonBoardService {
 	int remove(int no);
 
 	default Marathon dtoToEntity(MarathonDTO dto) {
-
-		Marathon entity = Marathon.builder().no(dto.getNo()).writer(dto.getWriter()).title(dto.getTitle())
+		Member member = Member.builder().id(dto.getWriter()).build();
+		Marathon entity = Marathon.builder().no(dto.getNo()).writer(member.getId()).title(dto.getTitle())
 				.marathonDate(dto.getMarathonDate()).location(dto.getLocation()).content(dto.getContent())
 				.countLike(dto.getCountLike()).fileName(dto.getFileName()).filePath(dto.getFilePath()).build();
 

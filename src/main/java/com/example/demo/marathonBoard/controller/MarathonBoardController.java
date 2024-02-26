@@ -1,5 +1,7 @@
 package com.example.demo.marathonBoard.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -36,13 +38,16 @@ public class MarathonBoardController {
 	}
 
 	@PostMapping("/register")
-	public String registerPost(MarathonDTO dto, RedirectAttributes redirectAttributes, MultipartFile file) throws Exception {
-
+	public String registerPost(MarathonDTO dto, RedirectAttributes redirectAttributes, MultipartFile file, Principal principal) throws Exception {
+		
+		String id = principal.getName();
+		dto.setWriter(id);
+		
 		int no = service.register(dto, file);
 
 		redirectAttributes.addFlashAttribute("msg", no);
 
-		return "redirect:/board/list";
+		return "redirect:/marathonBoard/list";
 	}
 
 	@GetMapping("/read")
@@ -64,12 +69,12 @@ public class MarathonBoardController {
 	public String modifyPost(MarathonDTO dto, MultipartFile file, RedirectAttributes redirectAttributes) {
 		service.modify(dto, file);
 		redirectAttributes.addAttribute("no", dto.getNo());
-		return "redirect:/board/read";
+		return "redirect:/marathonBoard/read";
 	}
 
 	@PostMapping("/remove")
 	public String removePost(@RequestParam(name = "no") int no) {
 		service.remove(no);
-		return "redirect:/board/list";
+		return "redirect:/marathonBoard/list";
 	}
 }
