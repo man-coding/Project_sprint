@@ -1,5 +1,7 @@
 package com.example.demo.marathonBoard.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,8 +34,11 @@ public class Marathon extends BaseEntity {
 	@Column(length = 100, nullable = false)
 	String title;
 	
+	@Column(length = 20, nullable = false)
+	String writer;
+	
 	@Column(length = 30, nullable = false)
-	String marathonDate;
+	LocalDate marathonDate;
 	
 	@Column(length = 30, nullable = false)
 	String location;
@@ -41,10 +46,9 @@ public class Marathon extends BaseEntity {
 	@Column(length = 255, nullable = false)
 	String content;
 
+	@Column(length = 10, nullable = true)
+	int countLike;
 	
-	@Column(length = 20, nullable = false)
-	String writer;
-
 	@Column(length = 100, nullable = true)
 	String fileName;
 

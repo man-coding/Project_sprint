@@ -13,10 +13,8 @@ import com.example.demo.runningBoard.dto.RunningDTO;
 import com.example.demo.runningBoard.entity.Running;
 import com.example.demo.runningBoard.repository.RunningRepository;
 
-
-
 @Service
-public class RunningServiceImpl implements RunningService {
+public class RunningBoardServiceImpl implements RunningBoardService {
 
 	@Autowired
 	RunningRepository repository;

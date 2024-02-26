@@ -1,5 +1,7 @@
 package com.example.demo.runningBoard.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -11,15 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.runningBoard.dto.RunningDTO;
-import com.example.demo.runningBoard.service.RunningService;
-
+import com.example.demo.runningBoard.service.RunningBoardService;
 
 @Controller
 @RequestMapping("/runningBoard")
-public class RunningController {
+public class RunningBoardController {
 
 	@Autowired
-	RunningService service;
+	RunningBoardService service;
 
 	@GetMapping("/list")
 	public void list(@RequestParam(defaultValue = "0", name = "page") int page, Model model) {
@@ -34,8 +35,10 @@ public class RunningController {
 	}
 
 	@PostMapping("/register")
-	public String registerPost(RunningDTO dto, RedirectAttributes redirectAttributes) {
-
+	public String registerPost(RunningDTO dto, RedirectAttributes redirectAttributes, Principal principal) {
+		String id = principal.getName();
+		dto.setWriter(id);
+		
 		int no = service.register(dto);
 
 		redirectAttributes.addFlashAttribute("msg", no);

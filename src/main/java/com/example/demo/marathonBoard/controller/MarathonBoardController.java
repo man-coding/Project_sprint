@@ -15,8 +15,9 @@ import com.example.demo.marathonBoard.dto.MarathonDTO;
 import com.example.demo.marathonBoard.service.MarathonBoardService;
 
 
+
 @Controller
-@RequestMapping("/MarathonBoard")
+@RequestMapping("/marathonBoard")
 public class MarathonBoardController {
 
 	@Autowired
@@ -41,7 +42,7 @@ public class MarathonBoardController {
 
 		redirectAttributes.addFlashAttribute("msg", no);
 
-		return "redirect:/MarathonBoard/list";
+		return "redirect:/board/list";
 	}
 
 	@GetMapping("/read")
@@ -63,12 +64,12 @@ public class MarathonBoardController {
 	public String modifyPost(MarathonDTO dto, MultipartFile file, RedirectAttributes redirectAttributes) {
 		service.modify(dto, file);
 		redirectAttributes.addAttribute("no", dto.getNo());
-		return "redirect:/MarathonBoard/read";
+		return "redirect:/board/read";
 	}
 
 	@PostMapping("/remove")
 	public String removePost(@RequestParam(name = "no") int no) {
 		service.remove(no);
-		return "redirect:/MarathonBoard/list";
+		return "redirect:/board/list";
 	}
 }

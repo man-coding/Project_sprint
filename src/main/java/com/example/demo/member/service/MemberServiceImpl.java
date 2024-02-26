@@ -44,7 +44,7 @@ public class MemberServiceImpl implements MemberService {
 			return false;
 		}
 		Member entity = dtoToEntity(dto);
-		
+		entity.setRole("ROLE_USER");
 		// 패스워드 인코더로 패스워드 암호화하기
 		String enPw = passwordEncoder.encode(entity.getPassword());
 		entity.setPassword(enPw);

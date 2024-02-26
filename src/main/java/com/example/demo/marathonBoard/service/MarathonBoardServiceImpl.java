@@ -16,8 +16,6 @@ import com.example.demo.marathonBoard.dto.MarathonDTO;
 import com.example.demo.marathonBoard.entity.Marathon;
 import com.example.demo.marathonBoard.repository.MarathonRepository;
 
-
-
 @Service
 public class MarathonBoardServiceImpl implements MarathonBoardService {
 
@@ -25,22 +23,20 @@ public class MarathonBoardServiceImpl implements MarathonBoardService {
 	MarathonRepository repository;
 
 	@Override
-	public int register (MarathonDTO dto, MultipartFile file) throws Exception  {
-		
+	public int register(MarathonDTO dto, MultipartFile file) throws Exception {
+
 		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 		UUID uuid = UUID.randomUUID();
 		String fileName = uuid + "_" + file.getOriginalFilename();
-		
+
 		File saveFile = new File(projectPath, fileName);
 		file.transferTo(saveFile);
-		
-		
-		
+
 		Marathon entity = dtoToEntity(dto);
-		
-		entity.setFileName(fileName); //파일명 변경
-		entity.setFilePath("/files/"+fileName);
-		
+
+		entity.setFileName(fileName); // 파일명 변경
+		entity.setFilePath("/files/" + fileName);
+
 		repository.save(entity);
 		int newNo = entity.getNo();
 		return newNo;
@@ -77,7 +73,7 @@ public class MarathonBoardServiceImpl implements MarathonBoardService {
 	}
 
 	@Override
-	public void modify(MarathonDTO dto,MultipartFile file) {
+	public void modify(MarathonDTO dto, MultipartFile file) {
 
 		Optional<Marathon> result = repository.findById(dto.getNo());
 
@@ -89,6 +85,8 @@ public class MarathonBoardServiceImpl implements MarathonBoardService {
 			entity.setMarathonDate(dto.getMarathonDate());
 			entity.setLocation(dto.getLocation());
 			entity.setContent(dto.getContent());
+			entity.setFileName(dto.getFileName());
+			entity.setFilePath(dto.getFilePath());
 
 			repository.save(entity);
 		}
