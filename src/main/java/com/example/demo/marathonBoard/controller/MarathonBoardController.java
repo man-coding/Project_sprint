@@ -38,7 +38,7 @@ public class MarathonBoardController {
 	}
 
 	@PostMapping("/register")
-	public String registerPost(MarathonDTO dto, RedirectAttributes redirectAttributes, MultipartFile file, Principal principal) throws Exception {
+	public String registerPost(MarathonDTO dto, RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file, Principal principal) throws Exception {
 		
 		String id = principal.getName();
 		dto.setWriter(id);

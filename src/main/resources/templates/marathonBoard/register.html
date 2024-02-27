@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="register-l-container">
-    <form class="register-m-container" th:action="@{/marathonBoard/register}" th:method="post">
+    <form class="register-m-container" th:action="@{/marathonBoard/register}" th:method="post" enctype="multipart/form-data">
         <div class="form-title">
             <label>제목</label>
             <input type="text" class="form-con" id="form-title" name="title" placeholder="제목을 입력해주세요">
@@ -21,7 +21,7 @@
 
         <div class="form-time">
         <label>일시</label>
-        <input type="date" class="form-con">
+        <input type="date" class="form-con" name="marathonDate">
         </div>
 
         <div class="form-location">

@@ -11,14 +11,16 @@
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/fc8d331d05.js" crossorigin="anonymous"></script>
     <!-- templates css -->
-    <link href="/css/form.css" rel="stylesheet">
+    <link href="/css/mara-list.css" rel="stylesheet">
     <!-- js -->
     <script src="/js/form.js"></script>
 
 </head>
 <body>
     <div class="m-l-container">
-        <div class="m-m-container">
+        <div th:each="dto : ${list}" class="m-m-container"  
+		 th:onclick="'window.location.href=\'/marathonBoard/read?no=' + ${dto.no} +'&page=' + (${list.number + 1}) + '\''"
+			style="cursor: pointer;">
             <div class="notice-first-info">
                 <div class="obj-info">
                         <i class="fa-solid fa-location-dot"></i>
