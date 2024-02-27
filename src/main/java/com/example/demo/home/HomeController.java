@@ -18,8 +18,5 @@ public class HomeController {
 		return "home/login";
 	}
 	
-	@GetMapping("/kakaologin")
-	public String kakaoLogin() {
-		return "login_social/kakao_login";
-	}
+	
 }
