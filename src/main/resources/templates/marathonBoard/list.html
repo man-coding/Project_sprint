@@ -24,12 +24,12 @@
             <div class="notice-first-info">
                 <div class="obj-info">
                         <i class="fa-solid fa-location-dot"></i>
-                        <span class="notice-detail-info">Incheon geyangu</span>
+                        <span class="notice-detail-info">[[${dto.location}]]</span>
                 </div>
 
                 <div class="obj-info">
                         <i class="fa-regular fa-calendar"></i>
-                        <span class="notice-detail-info">2024/2/15</span>
+                        <span class="notice-detail-info">[[${dto.marathonDate}]]</span>
                 </div>
 
                 <div class="obj-info">
@@ -39,7 +39,7 @@
             </div>
             
             <div class="img-container">
-                <img src="/files/57b8584f-d37b-4462-8596-42bfeaca02f5_cup1.png" alt="Post image" width="450px" height="450px">
+                <img th:src="@{${dto.filePath}}" alt="Post image" width="450px" height="450px">
             </div>
             <div class="info-container" onclick="event.stopPropagation(); addLike();">
                 <div class="people-info">
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="m-title">
-                <h3>[10/6(금)] 2023 광화문 운동회</h3>
+                <h3>[[${dto.title}]]</h3>
             </div>
             
         </div>

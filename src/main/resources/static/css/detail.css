@@ -143,6 +143,23 @@ i {
 #submit:hover {
     background-color: #555; /* 마우스 오버 시 버튼 색상 변경 */
 }
+.comment-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
 
+.comment-writer {
+    font-weight: bold;
+    color: #444;
+}
+
+.comment-content {
+    margin: 10px 0;
+}
+
+.comment-delete {
+    color: #888;
+    font-size: 0.8em;
+}
 
 
