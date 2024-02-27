@@ -22,7 +22,9 @@
     border: none; /* 기존 테두리 제거 */
     background-color: white; /* 배경색 변경 */
     margin-bottom: 20px; /* 간격 추가 */
+    
 }
+
 
 .img-container{
     width: 100%;
@@ -46,19 +48,18 @@
     width: 90%;
     display: flex;
     justify-content: center;
-    padding: 20px; /* 패딩 추가 */
+    padding: 25px; /* 패딩 추가 */
     gap: 20px;
+    box-sizing: content-box !important;
 }
 
 
 /* 이미지의 비율을 유지하면서 컨테이너에 맞춰 자동으로 크기를 조절하는 경우 */
-.img-container img {
-    object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 수정 */
-}
 
 img {
     max-width: 100%;
-    height: auto;
+   	max-height: 100%;
+   	object-fit: contain;
 }
 .heartBtn {
     border: none; /* 버튼의 테두리 제거 */

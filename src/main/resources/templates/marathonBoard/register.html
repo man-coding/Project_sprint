@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="register-l-container">
-    <form class="register-m-container" th:action="@{/marathonBoard/register}" th:method="post" enctype="multipart/form-data">
+       <form class="register-m-container" th:action="@{/marathonBoard/register}" th:method="post" enctype="multipart/form-data">
         <div class="form-title">
             <label>제목</label>
             <input type="text" class="form-con" id="form-title" name="title" placeholder="제목을 입력해주세요">
@@ -34,9 +34,10 @@
         <textarea type="text" class="form-con" id="form-content" name="content" rows="10"></textarea>
         </div>
 
-        <input type="submit" id="submit" value="등록">
-        <input type="file" id="image" name="imageFiles">
+     
+         <input type="file" id="image" name="file">
         <label for="image" id="image-label">이미지</label>
+          <input type="submit" id="submit" value="등록">
     </form> 
     </div>
 </body>

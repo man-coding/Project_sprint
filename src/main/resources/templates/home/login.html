@@ -12,6 +12,8 @@
 <script src="https://kit.fontawesome.com/fc8d331d05.js"
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 </head>
 <body>
 	<div class="topbar-login">
@@ -31,9 +33,9 @@
 		<input class="login-set" type="submit" value="로그인">
 			<div class="social-menu">
 				<ul>
-					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+					<li><a href=""><i class="fa fa-facebook"></i></a></li>
 					<li><a href="#"><i class="fa fa-google"></i></a></li>
-					<li><a href="#"><i class="fa-solid fa-comment"></i></a></li>
+					<li><a href="javascript:kakaoLogin();"><i class="fa-solid fa-comment"></i></a></li>
 					<li><a href="#" class="social-menu-naver"><i
 							class="fa-solid fa-n"></i></a></li>
 				</ul>
@@ -43,3 +45,23 @@
 	</div>
 </body>
 </html>
+
+<script>  
+	window.Kakao.init("9f979ab2d4c9a507cc151ab32eebb072");
+	
+	function kakaoLogin() {
+		window.Kakao.Auth.login({
+			scope:'profile_nickname, profile_image',
+			success: function(authObj) {
+				console.log(authObj);
+				window.Kakao.API.request({
+					url:'/v2/user/me',
+					success: res => {
+						const kakao_account = res.kakao_account;
+						console.log(kakao_account);
+					}
+				})
+			}
+		}) 
+	}
+	</script>
