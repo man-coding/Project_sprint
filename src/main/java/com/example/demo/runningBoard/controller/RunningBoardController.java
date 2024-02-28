@@ -66,13 +66,13 @@ public class RunningBoardController {
 	public String modifyPost(RunningDTO dto, RedirectAttributes redirectAttributes) {
 		service.modify(dto);
 		redirectAttributes.addAttribute("no", dto.getNo());
-		return "redirect:/Board/read";
+		return "redirect:/runningBoard/read";
 	}
 
 	@PostMapping("/remove")
 	public String removePost(@RequestParam(name = "no") int no) {
 		service.remove(no);
-		return "redirect:/Board/list";
+		return "redirect:/runningBoard/list";
 	}
 
 }
