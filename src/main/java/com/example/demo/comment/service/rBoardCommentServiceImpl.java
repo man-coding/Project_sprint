@@ -7,21 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.comment.dto.CommentDTO;
-import com.example.demo.comment.entity.Comment;
+import com.example.demo.comment.entity.rBoardComment;
 import com.example.demo.comment.repository.CommentRepository;
 import com.example.demo.runningBoard.entity.Running;
 
 
 
 @Service
-public class CommentServiceImpl implements CommentService {
+public class rBoardCommentServiceImpl implements rBoardCommentService {
 
 	@Autowired
 	private CommentRepository repository;
 
 	@Override
 	public int register(CommentDTO dto) {
-		Comment entity = dtoToEntity(dto);
+		rBoardComment entity = dtoToEntity(dto);
 		repository.save(entity);
 
 		return entity.getCommentNo();
@@ -42,9 +42,9 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<CommentDTO> getListByBoardNo(int boardNo) {
 		Running board = Running.builder().no(boardNo).build();  //엔티티 생성
-		List<Comment> entityList = repository.findByBoard(board);
+		List<rBoardComment> entityList = repository.findByBoard(board);
 		List<CommentDTO> dtoList = new ArrayList<>();
-		for (Comment entity : entityList) {
+		for (rBoardComment entity : entityList) {
 			CommentDTO dto = entityToDto(entity);
 			dtoList.add(dto);
 		}

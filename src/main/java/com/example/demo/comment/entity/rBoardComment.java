@@ -23,14 +23,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Comment extends BaseEntity{
+public class rBoardComment extends BaseEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int commentNo;
 	
 	@ManyToOne
-	Running board;	//연관 관계 설정
+	Running rBoard;	//연관 관계 설정
 	
 	@Column(length = 1500)
 	String content;

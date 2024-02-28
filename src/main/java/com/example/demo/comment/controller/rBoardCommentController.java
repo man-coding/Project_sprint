@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.comment.dto.CommentDTO;
-import com.example.demo.comment.service.CommentService;
+import com.example.demo.comment.service.rBoardCommentService;
 
 
 
@@ -21,10 +21,10 @@ import com.example.demo.comment.service.CommentService;
 
 @Controller
 @RequestMapping("/comment")
-public class CommentController {
+public class rBoardCommentController {
 
 	@Autowired
-	CommentService service;
+	rBoardCommentService service;
 	
 	@ResponseBody
 	@GetMapping("/list")

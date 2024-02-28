@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.demo.comment.entity.Comment;
+import com.example.demo.comment.entity.rBoardComment;
 import com.example.demo.comment.repository.CommentRepository;
 import com.example.demo.member.entity.Member;
 import com.example.demo.runningBoard.entity.Running;
@@ -25,7 +25,7 @@ public class CommentRepositoryTest {
 		Member member = Member.builder().id("user1").build();
 		// 테이블에 있는 게시물
 		Running board  = Running.builder().no(1).build();
-		Comment comment = new Comment(0, board, "댓글입니다", member);
+		rBoardComment comment = new rBoardComment(0, board, "댓글입니다", member);
 		repository.save(comment);	
 	}
 	
