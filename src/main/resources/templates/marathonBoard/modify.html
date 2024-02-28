@@ -14,6 +14,7 @@
 <body>
     <div class="register-l-container " >
     <form class="register-m-container">
+      <input type="hidden" name="no" th:value="${dto.no}">
         <div class="form-title">
             <label>제목</label>
             <input type="text" class="form-con" id="form-title" name="title" th:value="${dto.title}">
@@ -21,12 +22,12 @@
 
         <div class="form-time">
         <label>일시</label>
-        <input type="date" class="form-con">
+        <input type="date" class="form-con" th:value="${dto.marathonDate}" >
         </div>
 
         <div class="form-location">
         <label>위치</label>
-        <input type="text" class="form-con" id="form-location" name="location" placeholder="위치를 입력해주세요">
+        <input type="text" class="form-con" id="form-location" name="location" th:value="${dto.location}">
         </div>
 
         <div class="form-content">

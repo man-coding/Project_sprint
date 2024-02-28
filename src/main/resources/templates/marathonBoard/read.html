@@ -77,6 +77,16 @@
         <div class="content-comment-list" id="content-comment-list">
 
         </div>
+         
+    </div>
+    <div class="bottom-button">
+    		<a th:href="@{/marathonBoard/modify(no =${dto.no})}">
+			<button type="button">수정</button>
+			</a>
+
+			<a th:href="@{/marathonBoard/list(no=${page})}">
+				<button type="button">목록</button>
+			</a>
     </div>
     </div>
 </body>
