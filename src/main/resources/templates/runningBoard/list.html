@@ -80,7 +80,7 @@
 		<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
 			<li class="page-item"
 				th:classappend="${list.number+1 == page} ? 'active'"><a
-				class="page-link" th:href="@{/board/list(page = ${page})}">[[${page}]]</a>
+				class="page-link" th:href="@{/runningBoard/list(page = ${page})}">[[${page}]]</a>
 			</li>
 		</th:block>
 	</ul>

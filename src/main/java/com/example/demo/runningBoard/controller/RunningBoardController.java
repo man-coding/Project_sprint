@@ -24,11 +24,11 @@ public class RunningBoardController {
 
 	@GetMapping("/list")
 	public void list(@RequestParam(defaultValue = "0", name = "page") int page, Model model) {
-
-		Page<RunningDTO> list = service.getList(page);
-		model.addAttribute("list", list);
+		Page<RunningDTO> list = service.getList(page); 
+		model.addAttribute("list", list);	
+		
 	}
-
+	
 	@GetMapping("/register")
 	public void register() {
 
