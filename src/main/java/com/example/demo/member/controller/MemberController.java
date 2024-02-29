@@ -55,4 +55,18 @@ public class MemberController {
 		model.addAttribute("page", page);
 	}
 
+	// 회원 정보 수정 메소드 추가
+	@GetMapping("/member/modify")
+	public void modify(@RequestParam(name = "id") String id, Model model) {
+		MemberDTO dto = service.read(id);
+		model.addAttribute("dto", dto);
+	}
+
+	// 회원 정보 수정 메소드 추가
+	@PostMapping("/member/modify")
+	public String modifyPost(MemberDTO dto, RedirectAttributes redirectAttributes) {
+		service.modify(dto);
+		redirectAttributes.addAttribute("id", dto.getId());
+		return "redirect:/member/read";
+	}
 }

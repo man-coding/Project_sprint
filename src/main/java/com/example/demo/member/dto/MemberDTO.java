@@ -28,4 +28,6 @@ public class MemberDTO {
 	
 	//사용자 권한추가( 사용자 : ROLE_USER, 관리자 : ROLE_ADMIN
 	String role;
+	
+	boolean fromSocial; // 소셜 회원 여부 추가
 }

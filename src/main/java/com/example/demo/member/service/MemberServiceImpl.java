@@ -67,7 +67,57 @@ public class MemberServiceImpl implements MemberService {
 			return null;
 		}
 	}
-
 	
+	// 소셜 로그인한 이메일로 회원가입하는 메소드 추가
+	@Override
+	public MemberDTO saveSocialMember(String email) {
+		//기존에 동일한 이메일로 가입한 회원이 있는지 조회
+		Optional<Member> result = repository.findById(email);
+
+		//해당 이메일로 등록된 회원이 있으면 반환
+		if(result.isPresent()){
+			return entityToDto(result.get());
+		}
+	
+		//해당 이메일로 등록된 회원이 없으면 회원가입 진행
+		Member member = Member.builder()
+				.id(email) // 아이디는 이메일로 처리
+				.name(email) // 이름도 이메일로 처리
+				.password(passwordEncoder.encode("1111")) // 임시 비밀번호
+				.fromSocial(true)
+				.role("ROLE_USER") // 임시 권한
+				.build();
+
+		repository.save(member);
+
+		result = repository.findById(email);
+
+		return entityToDto(result.get()); // 새로운 회원정보 또는 기존 회원정보 반환
+	}
+	@Override
+	public void modify(MemberDTO dto) {
+
+		// 기존 회원 정보 조회
+		Optional<Member> result = repository.findById(dto.getId());
+
+		// 회원 정보 교체
+		if(result.isPresent()){
+			Member entity = result.get();
+			entity.setName(dto.getName());
+			entity.setRole(dto.getRole());
+
+			// 기존 패스워드와 달라졌다면
+			boolean matchResult1 = entity.getPassword().equals(dto.getPassword());
+			//boolean matchResult2 = passwordEncoder.matches(entity.getPassword(), dto.getPassword());
+			if(!matchResult1){
+				System.out.println("패스워드가 변경되었습니다");
+				String hashpassword = passwordEncoder.encode(dto.getPassword());
+				entity.setPassword(hashpassword);
+			}
+
+			repository.save(entity);
+		}
+
+	}
 
 }

@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.comment.dto.CustomUser;
+import com.example.demo.member.dto.CustomUser;
 import com.example.demo.member.dto.MemberDTO;
 import com.example.demo.member.service.MemberService;
 

@@ -48,6 +48,10 @@ public class SecurityConfig {
         http.csrf().disable(); //csrf는 get을 제외하여 상태값을 위조(변경)할 수있는 post,put,delete 메소드를 막음
         http.logout(); // 로그아웃 처리
         
+     // aouth 로그인이 가능하도록 설정
+     		http.oauth2Login()
+     				.successHandler(new CustomAuthenticationSuccessHandler()); // 핸들러 등록
+        
         //커스텀 로그인 페이지 적용
 		http.formLogin()
 		.loginPage("/customlogin")
