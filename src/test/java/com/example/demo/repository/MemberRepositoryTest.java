@@ -24,11 +24,11 @@ public class MemberRepositoryTest {
 		
 		List<Member> list = new ArrayList<>();
 		
-		for(int i = 1; i <= 10; i++) {
+	
 			
-			list.add(new Member("member" + i, "1234", "member"+i, "USER"));
+			list.add(new Member("member23", "1234", "member23", "USER"));
 			repository.saveAll(list);
-		}
+		
 		
 	}
 	

@@ -30,7 +30,7 @@ public class rBoardComment extends BaseEntity{
 	int commentNo;
 	
 	@ManyToOne
-	Running rBoard;	//연관 관계 설정
+	Running board;	//연관 관계 설정
 	
 	@Column(length = 1500)
 	String content;

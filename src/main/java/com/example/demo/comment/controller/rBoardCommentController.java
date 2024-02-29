@@ -20,7 +20,7 @@ import com.example.demo.comment.service.rBoardCommentService;
 
 
 @Controller
-@RequestMapping("/comment")
+@RequestMapping("/rBoardcomment")
 public class rBoardCommentController {
 
 	@Autowired

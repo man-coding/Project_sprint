@@ -2,7 +2,6 @@ package com.example.demo.comment.entity;
 
 import com.example.demo.marathonBoard.entity.Marathon;
 import com.example.demo.member.entity.Member;
-import com.example.demo.runningBoard.entity.Running;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +30,7 @@ public class mBoardComment extends BaseEntity{
 	int commentNo;
 	
 	@ManyToOne
-	Marathon mBoard;	//연관 관계 설정
+	Marathon board;	//연관 관계 설정
 	
 	@Column(length = 1500)
 	String content;

@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class RunningRepositoryTest {
 	@Test
 	void 게시물추가() {
 		List<Running> list = new ArrayList<>();
-		list.add(new Running(0, "제목입니다", "2024-02-23", "인천", "내용입니둥", "짱구"));
+		list.add(new Running(0, "user1", "제목입니다", LocalDate.of(2024, 02, 29), "인천 송도", "내용입니다", 0, 0, 0));
 		
 		repository.saveAll(list);
 	}

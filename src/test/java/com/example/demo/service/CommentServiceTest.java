@@ -20,8 +20,11 @@ public class CommentServiceTest {
 	public void 댓글등록() {
 
 		// 테이블에 있는 게시물번호와 유저아이디 사용해야함
-		CommentDTO dto = CommentDTO.builder().boardNo(1).content("댓글입니다.").writer("ryuji").
-			
+		CommentDTO dto = CommentDTO.builder()
+				.boardNo(1)
+				.content("ㅎㅇㅎㅇ")
+				.writer("member1")
+				.build();
 
 		service.register(dto);
 	}

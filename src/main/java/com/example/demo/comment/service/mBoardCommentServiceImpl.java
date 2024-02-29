@@ -7,33 +7,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.comment.dto.CommentDTO;
-import com.example.demo.comment.entity.rBoardComment;
-import com.example.demo.comment.repository.rBoardCommentRepository;
-import com.example.demo.runningBoard.entity.Running;
-
-
+import com.example.demo.comment.entity.mBoardComment;
+import com.example.demo.comment.repository.mBoardCommentRepository;
+import com.example.demo.marathonBoard.entity.Marathon;
 
 @Service
-public class rBoardCommentServiceImpl implements rBoardCommentService {
-
+public class mBoardCommentServiceImpl implements mBoardCommentService {
+	
 	@Autowired
-	private rBoardCommentRepository repository;
-
+	private mBoardCommentRepository repository;
+	
 	@Override
 	public int register(CommentDTO dto) {
-		rBoardComment entity = dtoToEntity(dto);
+		mBoardComment entity = dtoToEntity(dto);
 		repository.save(entity);
 
 		return entity.getCommentNo();
 	}
-
-
+	
 	@Override
 	public List<CommentDTO> getListByBoardNo(int boardNo) {
-		Running board = Running.builder().no(boardNo).build();  //엔티티 생성
-		List<rBoardComment> entityList = null;
+		Marathon board = Marathon.builder().no(boardNo).build();  //엔티티 생성
+		List<mBoardComment> entityList = null;
 		List<CommentDTO> dtoList = new ArrayList<>();
-		for (rBoardComment entity : entityList) {
+		for (mBoardComment entity : entityList) {
 			CommentDTO dto = entityToDto(entity);
 			dtoList.add(dto);
 		}

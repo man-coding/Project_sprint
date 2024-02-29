@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class MarathonRepositoryTest {
 	@Test
 	void 게시물추가() {
 		List<Marathon> list = new ArrayList<>();
-		list.add(new Marathon(0, "제목입니다", "2024-02-23", "인천", "내용입니다", "둘리", null, null));
+		list.add(new Marathon(0, "달리자", "member1", LocalDate.of(2024, 03, 01), "문학경기장", "ㅎㅇㅎㅇ", 0, null, null));
 		
 		repository.saveAll(list);
 	}

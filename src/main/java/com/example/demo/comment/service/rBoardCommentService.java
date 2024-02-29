@@ -28,7 +28,7 @@ public interface rBoardCommentService {
 
 		rBoardComment entity = rBoardComment.builder()
 				.commentNo(dto.getCommentNo())
-				.rBoard(board)
+				.board(board)
 				.content(dto.getContent())
 				.writer(member)
 				.build();
@@ -40,7 +40,7 @@ public interface rBoardCommentService {
 
 		CommentDTO dto = CommentDTO.builder()
 				.commentNo(entity.getCommentNo())
-				.boardNo(entity.getRBoard().getNo())
+				.boardNo(entity.getBoard().getNo())
 				.content(entity.getContent())
 				.writer(entity.getWriter().getId())
 				.regDate(entity.getRegDate()) 
