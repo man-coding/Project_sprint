@@ -8,13 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.weatherApi.dto.WeatherDTO;
 import com.example.demo.weatherApi.service.WeatherService;
 
 @RestController
-
+@RequestMapping("/runningBoard")
 public class WeatherController {
 
 	@Autowired
@@ -44,7 +45,7 @@ public class WeatherController {
 		return new ResponseEntity<>("Failed to get weather data: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@GetMapping("/weather")
+	@GetMapping("/getWeather")
 	public String getWeather(Model model) throws IOException {
 	    Root root = service.jsonToDto();
 	    
