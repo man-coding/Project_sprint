@@ -1,8 +1,5 @@
 package com.example.demo.joinMember.dto;
 
-import com.example.demo.member.entity.Member;
-import com.example.demo.runningBoard.entity.Running;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +17,7 @@ import lombok.ToString;
 
 public class JoinMemberDTO {
 
-	Running runningNo;
+	int runningNo;
 	int joinNo;
-	Member runner;
+	String runnerId;
 }

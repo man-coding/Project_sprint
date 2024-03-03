@@ -33,4 +33,6 @@ public class Member extends BaseEntity{
 	@Column(length = 100, nullable = true)
 	String role;	//사용자 등급 추가
 	
+	private boolean fromSocial;
+	
 }

@@ -36,6 +36,6 @@ public class JoinMember {
 	Running runningNo;
 
 	@ManyToOne
-	Member runner;
+	Member runnerId;
 
 }

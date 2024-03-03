@@ -23,8 +23,6 @@ import jakarta.servlet.http.HttpServletResponse;
 @EnableWebSecurity //스프링 시큐리티 설정 클래스임을 명시
 public class SecurityConfig {
 
-	// 패스워드 인코더를 컨테이너에 빈으로 등록하는 메소드
-	// 메소드에 @Bean을 붙이면, 반환값인 인코더 객체가 스프링 컨테이너에 등록됨
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -38,17 +36,20 @@ public class SecurityConfig {
 		// 보안규칙 (메뉴별 접근제한 설정)
 	    http.authorizeHttpRequests()
 				.requestMatchers("/register").permitAll() //회원가입은 아무나 접근 가능
-				.requestMatchers("/assets/*", "/css/*", "/js/*", "/vendor/**", "/img/*", "/files/*").permitAll() //리소스는 아무나 접근 가능
-				.requestMatchers("/").permitAll() //메인화면은 로그인한 사용자이면 접근 가능
+				.requestMatchers("/assets/*", "/css/*", "/js/*", "/vendor/**", "/img/*","/files/*").permitAll() //리소스는 아무나 접근 가능
+				.requestMatchers("/").authenticated() //메인화면은 로그인한 사용자이면 접근 가능
 				.requestMatchers("/runningBoard/*").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
 				.requestMatchers("/marathonBoard/*").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
 				.requestMatchers("/comment/*").hasAnyRole("ADMIN","USER")
-				.requestMatchers("/member/*").hasRole("ADMIN"); //회원 관리는 관리자이면 접근 가능
+	    		.requestMatchers("/member/*").hasAnyRole("ADMIN","USER"); // 소셜로그인 회원 정보를 수정하기 위해 변경
 
-
-	    http.formLogin(); //시큐리티가 제공하는 기본 로그인페이지 사용하기
+	    http.formLogin(); 
         http.csrf().disable(); //csrf는 get을 제외하여 상태값을 위조(변경)할 수있는 post,put,delete 메소드를 막음
         http.logout(); // 로그아웃 처리
+        
+     // aouth 로그인이 가능하도록 설정
+     		http.oauth2Login()
+     				.successHandler(new CustomAuthenticationSuccessHandler()); // 핸들러 등록
         
         //커스텀 로그인 페이지 적용
 		http.formLogin()
