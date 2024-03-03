@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,23 +44,23 @@ public class WeatherController {
 		return new ResponseEntity<>("Failed to get weather data: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@GetMapping("/getWeather")
-	public String getWeather(Model model) throws IOException {
-	    Root root = service.jsonToDto();
-	    
-	    if (root != null && root.getResponse() != null && 
-	        root.getResponse().getBody() != null && 
-	        root.getResponse().getBody().getItems() != null) 
-	    {
-	        WeatherDTO dto = WeatherDTO.builder()
-	            .temperature(root.getResponse().getBody().getItems().getItem().get(0).getTa())
-	            .weather(root.getResponse().getBody().getItems().getItem().get(0).getWf())
-	            .rainpossi(root.getResponse().getBody().getItems().getItem().get(0).getRnSt())
-	            .build();
-
-	        model.addAttribute("weather", dto);
-	    }
-
-	    return "read";
-	}
+//	@GetMapping("/getWeather")
+//	public String getWeather(Model model) throws IOException {
+//	    Root root = service.jsonToDto();
+//	    
+//	    if (root != null && root.getResponse() != null && 
+//	        root.getResponse().getBody() != null && 
+//	        root.getResponse().getBody().getItems() != null) 
+//	    {
+//	        WeatherDTO dto = WeatherDTO.builder()
+//	            .temperature(root.getResponse().getBody().getItems().getItem().get(0).getTa())
+//	            .weather(root.getResponse().getBody().getItems().getItem().get(0).getWf())
+//	            .rainpossi(root.getResponse().getBody().getItems().getItem().get(0).getRnSt())
+//	            .build();
+//
+//	        model.addAttribute("weather", dto);
+//	    }
+//
+//	    return "redirection:";
+//	}
 }

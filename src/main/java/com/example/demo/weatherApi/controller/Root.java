@@ -50,7 +50,7 @@ class Item {
 	public String regId;
 	public int rnSt;
 	public int rnYn;
-	public String ta;
+	public int ta;
 	public String wd1;
 	public String wd2;
 	public String wdTnd;
@@ -62,6 +62,7 @@ class Item {
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @ToString
 class Items {
