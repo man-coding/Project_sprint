@@ -66,7 +66,7 @@ public class MarathonBoardController {
 	}
 
 	@PostMapping("/modify")
-	public String modifyPost(MarathonDTO dto, MultipartFile file, RedirectAttributes redirectAttributes) {
+	public String modifyPost(MarathonDTO dto, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		service.modify(dto, file);
 		redirectAttributes.addAttribute("no", dto.getNo());
 		return "redirect:/marathonBoard/read";
