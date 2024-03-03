@@ -41,6 +41,7 @@ public class SecurityConfig {
 				.requestMatchers("/runningBoard/*").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
 				.requestMatchers("/marathonBoard/*").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
 				.requestMatchers("/comment/*").hasAnyRole("ADMIN","USER")
+				.requestMatchers("/joinMember/*").hasAnyRole("ADMIN","USER")
 	    		.requestMatchers("/member/*").hasAnyRole("ADMIN","USER"); // 소셜로그인 회원 정보를 수정하기 위해 변경
 
 	    http.formLogin(); 

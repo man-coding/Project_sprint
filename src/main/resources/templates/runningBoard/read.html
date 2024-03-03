@@ -66,8 +66,15 @@
                 <button class="heartBtn" onclick="event.stopPropagation(); addLike();">
                     <i class="fa-regular fa-heart"></i></button>
                     <span class="like_count bottom-logo-font">0</span>
-                </button>
             </div>
+            <div class="participate-info">
+           		<div class="user-icon">
+			        <i class="fa-solid fa-user bottom-logo-font"></i>
+			        <div class="tooltip" >참석자 리스트</div>
+   			 	</div>
+   			 	 <button class="participateBtn" onclick="participateEvent();">같이뛰기</button>
+        		
+   			 </div>
         </div>
         
         <div class="content-comment">
@@ -108,7 +115,7 @@
 		
 		$.ajax({
 		type: "GET",
-		url: "/comment/list?boardNo="+board.no,
+		url: "/rBoardcomment/list?boardNo="+board.no,
 		success: function(response){
 			
 			// 자식 엘리먼트 모두 지우기
@@ -143,7 +150,7 @@
 		$.ajax({
 			type: "POST",
 			data: commentDto,
-			url: "/comment/register",
+			url: "/rBoardcomment/register",
 			success: function(response){
 				if(response.success){
 					commentContent.value = null;
@@ -157,7 +164,7 @@
 		var board = [[${dto}]];
 		 $.ajax({
 		      type: "GET",
-		      url: "/comment/remove?commentNo="+commentNo,
+		      url: "/rBoardcomment/remove?commentNo="+commentNo,
 		      success: function(response){
 				if(response.success){
 					showComment()
@@ -165,7 +172,15 @@
 				}
 		});
 	}
-
+	
+	function participateEvent() {
+	    // 참가 이벤트 처리
+	    alert("참가 버튼이 클릭되었습니다.");
+	}
+	
+	
 </script>
+
+
 
 
