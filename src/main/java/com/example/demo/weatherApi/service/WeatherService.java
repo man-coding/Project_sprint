@@ -9,10 +9,9 @@ import java.net.URLEncoder;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.weatherApi.controller.Root;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-
 
 @Service
 public class WeatherService {
@@ -52,27 +51,26 @@ public class WeatherService {
 		rd.close();
 		conn.disconnect();
 
-		return sb.toString(); 
+		return sb.toString();
 	}
-	
+
 	public Root jsonToDto() throws IOException {
 
-		//매퍼 클래스 생성
+		// 매퍼 클래스 생성
 		ObjectMapper mapper = new ObjectMapper();
 
-		//분석할 수 없는 구문을 무시하는 옵션 설정
+		// 분석할 수 없는 구문을 무시하는 옵션 설정
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-		//날씨 데이터 가져오기
+		// 날씨 데이터 가져오기
 		String weather = getWeather();
 
 		Root root = null;
 
-		//JSON 문자열을 클래스로 변환
+		// JSON 문자열을 클래스로 변환
 		root = mapper.readValue(weather, Root.class);
 
 		return root;
 	}
-	
-	
+
 }
