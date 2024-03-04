@@ -20,9 +20,6 @@ import lombok.ToString;
 @ToString
 @Builder
 
-
-
-
 @Entity
 public class Weather {
 

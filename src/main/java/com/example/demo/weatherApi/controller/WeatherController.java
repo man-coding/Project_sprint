@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.runningBoard.entity.Running;
 import com.example.demo.runningBoard.repository.RunningRepository;
 import com.example.demo.weatherApi.dto.WeatherDTO;
+import com.example.demo.weatherApi.service.Item;
+import com.example.demo.weatherApi.service.Root;
 import com.example.demo.weatherApi.service.WeatherService;
 
 @RestController
@@ -36,7 +38,7 @@ public class WeatherController {
 		String location = running.getLocation();
 		String code = locationToCode(location);
 
-		Root root = service.jsonToDto(code);
+		Root root = service.jsonToRoot(code);
 		List<WeatherDTO> list = new ArrayList<>();
 
 		if (root != null && root.getResponse() != null && root.getResponse().getBody() != null

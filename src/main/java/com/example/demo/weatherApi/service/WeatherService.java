@@ -9,7 +9,8 @@ import java.net.URLEncoder;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.weatherApi.controller.Root;
+import com.example.demo.weatherApi.dto.WeatherDTO;
+import com.example.demo.weatherApi.entity.Weather;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -54,7 +55,7 @@ public class WeatherService {
 		return sb.toString();
 	}
 
-	public Root jsonToDto(String code) throws IOException {
+	public Root jsonToRoot(String code) throws IOException {
 
 		// 매퍼 클래스 생성
 		ObjectMapper mapper = new ObjectMapper();
@@ -72,5 +73,18 @@ public class WeatherService {
 
 		return root;
 	}
+	
+	public Weather rootToEntity(Root root) throws IOException {
+        
+		Root root1 = jsonToRoot("11B20201");
+		
+		for (Item item : root1.getResponse().getBody().getItems().getItem()) {
+			Weather entity = Weather.builder().when(item.numEf).temperature(item.getTa()).weather(item.getWf())
+					.rainPossi(item.getRnSt()).build();
+		}
+		// Root 객체의 필드 값을 사용하여 Weather 엔티티 생성
+        return entity;
+    }
 
 }
+

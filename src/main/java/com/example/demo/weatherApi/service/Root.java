@@ -1,4 +1,4 @@
-package com.example.demo.weatherApi.controller;
+package com.example.demo.weatherApi.service;
 
 import java.util.ArrayList;
 
