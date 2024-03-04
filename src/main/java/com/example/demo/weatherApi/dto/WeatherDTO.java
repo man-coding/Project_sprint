@@ -15,9 +15,11 @@ import lombok.ToString;
 @Builder
 
 public class WeatherDTO {
-
+	
+	int when;
 	int temperature;
 	String weather;
-	int rainpossi;
+	int rainPossi;
+	
 
 }

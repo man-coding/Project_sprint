@@ -18,16 +18,16 @@ public class WeatherService {
 
 	String serviceKey = "SUGpdq3ufUPY4EA%2Fy6EDsonRTsw4bY%2F9ZInDHY304YJ1hxQYOh1TfWoWy4kVz1L%2Fm9P7ImHvkKGyD83FxWpSjQ%3D%3D";
 	String dataType = "JSON";
-	String code = "11B20201";
+//	String code = "11B20201";
 
-	public String getWeather() throws IOException {
+	public String getWeather(String code) throws IOException {
 		StringBuilder urlBuilder = new StringBuilder(
 				"http://apis.data.go.kr/1360000/VilageFcstMsgService/getLandFcst"); /* URL */
 		urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey); /* Service Key */
 		urlBuilder
-				.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지번호 */
+				.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("5", "UTF-8")); /* 페이지번호 */
 		urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
-				+ URLEncoder.encode("10", "UTF-8")); /* 한 페이지 결과 수 */
+				+ URLEncoder.encode("20", "UTF-8")); /* 한 페이지 결과 수 */
 		urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "="
 				+ URLEncoder.encode(dataType, "UTF-8")); /* 요청자료형식(XML/JSON) Default: XML */
 		urlBuilder.append("&" + URLEncoder.encode("regId", "UTF-8") + "=" + URLEncoder.encode(code,
@@ -54,7 +54,7 @@ public class WeatherService {
 		return sb.toString();
 	}
 
-	public Root jsonToDto() throws IOException {
+	public Root jsonToDto(String code) throws IOException {
 
 		// 매퍼 클래스 생성
 		ObjectMapper mapper = new ObjectMapper();
@@ -63,7 +63,7 @@ public class WeatherService {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		// 날씨 데이터 가져오기
-		String weather = getWeather();
+		String weather = getWeather(code);
 
 		Root root = null;
 
