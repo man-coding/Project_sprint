@@ -72,7 +72,7 @@
 			        <i class="fa-solid fa-user bottom-logo-font"></i>
 			        <div class="tooltip" >참석자 리스트</div>
    			 	</div>
-   			 	 <button class="participateBtn" onclick="participateEvent();">같이뛰기</button>
+   			 	 <button class="participateBtn" onclick="joining();">같이뛰기</button>
         		
    			 </div>
         </div>
@@ -173,12 +173,47 @@
 		});
 	}
 	
-	function participateEvent() {
-	    // 참가 이벤트 처리
-	    alert("참가 버튼이 클릭되었습니다.");
+	
+	function joining(){
+		 var running = [[${dto}]];
+		    $.ajax({
+		        type: "POST",
+		        url: "/joinMember/joinRunning?runningNo="+running.no,
+		        success: function(response){
+		            alert("참가 성공!");
+		            // 참가 성공 후 수행할 작업을 여기에 작성합니다.
+		        },
+		        error: function(response){
+		            alert("참가 실패");
+		            // 참가 실패 시 수행할 작업을 여기에 작성합니다.
+		        }
+		    });
 	}
 	
-	
+	function getAttendeesList(){
+	    var running = [[${dto}]];
+	    $.ajax({
+	        type: "GET", 
+	        url: "/joinMember/joinRunning?runningNo="+running.no,
+	        success: function(response){
+	            var attendees = response; 
+	            var attendeesList = '';
+
+	            for(var i=0; i<attendees.length; i++) {
+	                attendeesList += '<li>' + attendees[i].name + '</li>'; 
+	            }
+
+	            document.querySelector('.tooltip').innerHTML = '<ul>' + attendeesList + '</ul>';
+	        },
+	        error: function(response){
+	            alert("참석자 명단을 가져오는 데 실패했습니다.");
+	        }
+	    });
+	}
+
+	$(document).ready(function() {
+        document.querySelector('.tooltip').addEventListener('mouseover', getAttendeesList);
+    });
 </script>
 
 

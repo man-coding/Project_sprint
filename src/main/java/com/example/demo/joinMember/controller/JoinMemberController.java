@@ -1,5 +1,6 @@
 package com.example.demo.joinMember.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,10 @@ public class JoinMemberController {
 	JoinMemberService joinMemberService;
 
 	@PostMapping("/joinRunning")
-	public ResponseEntity<JoinMemberDTO> joinRunning(@RequestParam(name = "runningNo") int runningNo) {
-		JoinMemberDTO joinMemberDTO = joinMemberService.joinRunning(runningNo);
-		return ResponseEntity.ok(joinMemberDTO);
+	public ResponseEntity<JoinMemberDTO> joinRunning(@RequestParam(name = "runningNo") int runningNo , Principal principal) {
+	    String runnerId = principal.getName();
+	    JoinMemberDTO joinMemberDTO = joinMemberService.joinRunning(runningNo, runnerId);
+	    return ResponseEntity.ok(joinMemberDTO);
 	}
 
 	@GetMapping("/joinList")
