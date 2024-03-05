@@ -16,8 +16,8 @@ public interface JoinMemberService {
 	List<JoinMemberDTO> getList(int runningNo);
 
 	// 참석 취소
-	int cancelJoin(int runningNo, int joinNo);
-
+	int cancelJoin(int runningNo, int joinNo, String runnerId);
+	
 	default JoinMember dtoToEntity(JoinMemberDTO dto) {
 
 		Running running = Running.builder().no(dto.getRunningNo()).build();

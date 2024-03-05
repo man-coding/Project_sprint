@@ -107,6 +107,7 @@
 
 	$(document).ready(function() {
 		showComment();
+		
 	})
 
 	function showComment(){
@@ -177,6 +178,7 @@
 	}
 	$(document).ready(function() {
 		getAttendeesList()
+		
 	})
 	
 	
@@ -211,12 +213,25 @@
 	                let runningMember = runninglist[i];
 	                let writer_div = runningMember.runnerId;
 	                let no_div = runningMember.joinNo; // joinNo를 가져옵니다.
-	                let running_html = no_div + '. ' + writer_div; // 수정: 번호와 이름 사이에 '.'과 공백을 추가해 가독성을 높입니다.
+	                let running_html = no_div + '. ' + writer_div + '<br>'; // 수정: 번호와 이름 사이에 '.'과 공백을 추가해 가독성을 높입니다.
 	                running_div.append(running_html);
 	            } 
 	        },
 	        error: function(response){
 	            alert("참석자 명단을 가져오는 데 실패했습니다.");
+	        }
+	    });
+	}
+	function cancelJoin(runningNo, joinNo){
+	    $.ajax({
+	        type: "get",
+	        url: "/joinMember/cancelJoin?&joinNo="+joinNo,
+	        success: function(response){
+	            alert("참가 취소 성공!");
+	            getAttendeesList(); // 참가자 목록을 다시 불러옵니다.
+	        },
+	        error: function(response){
+	            alert("참가 취소 실패");
 	        }
 	    });
 	}

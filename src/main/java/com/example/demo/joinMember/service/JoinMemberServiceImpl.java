@@ -53,7 +53,7 @@ public class JoinMemberServiceImpl implements JoinMemberService {
 
 	@Transactional
 	@Override
-	public int cancelJoin(int runningNo, int joinNo) {
+	public int cancelJoin(int runningNo, int joinNo, String runnerId) {
 		Optional<JoinMember> result = joinMemberRepository.findByRunningNo_noAndJoinNo(runningNo, joinNo);
 
 		if (result.isPresent()) {
