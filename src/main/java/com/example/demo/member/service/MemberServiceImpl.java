@@ -15,6 +15,7 @@ import com.example.demo.member.entity.Member;
 import com.example.demo.member.repository.MemberRepository;
 
 
+
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -119,5 +120,5 @@ public class MemberServiceImpl implements MemberService {
 		}
 
 	}
-
+	
 }

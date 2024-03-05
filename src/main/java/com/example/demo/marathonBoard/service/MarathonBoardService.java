@@ -1,5 +1,6 @@
 package com.example.demo.marathonBoard.service;
 
+
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -7,6 +8,9 @@ import com.example.demo.marathonBoard.dto.MarathonDTO;
 import com.example.demo.marathonBoard.entity.Marathon;
 
 public interface MarathonBoardService {
+	
+	
+	
 
 	int register(MarathonDTO dto, MultipartFile file) throws Exception;
 
@@ -37,4 +41,5 @@ public interface MarathonBoardService {
 
 		return dto;
 	}
+	
 }

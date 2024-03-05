@@ -12,8 +12,8 @@
  	<link href="/css/form-register.css" rel="stylesheet">
 </head>
 <body>
-    <div class="register-l-container " >
-    <form class="register-m-container">
+    <div class="register-l-container">
+       <form class="register-m-container" th:action="@{/marathonBoard/register}" th:method="post" enctype="multipart/form-data">
         <div class="form-title">
             <label>제목</label>
             <input type="text" class="form-con" id="form-title" name="title" placeholder="제목을 입력해주세요">
@@ -21,7 +21,7 @@
 
         <div class="form-time">
         <label>일시</label>
-        <input type="date" class="form-con">
+        <input type="date" class="form-con" name="marathonDate">
         </div>
 
         <div class="form-location">
@@ -34,9 +34,10 @@
         <textarea type="text" class="form-con" id="form-content" name="content" rows="10"></textarea>
         </div>
 
-        <input type="submit" id="submit" value="등록">
-        <input type="file" id="image" name="imageFiles">
+     
+         <input type="file" id="image" name="file">
         <label for="image" id="image-label">이미지</label>
+          <input type="submit" id="submit" value="등록">
     </form> 
     </div>
 </body>

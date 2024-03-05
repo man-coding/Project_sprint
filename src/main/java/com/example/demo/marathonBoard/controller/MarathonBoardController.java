@@ -1,5 +1,6 @@
 package com.example.demo.marathonBoard.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -72,4 +73,7 @@ public class MarathonBoardController {
 		service.remove(no);
 		return "redirect:/board/list";
 	}
+
+	
+	
 }

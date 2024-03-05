@@ -42,6 +42,27 @@ function countMinus() {
 	    // 하트 클릭 시 수행할 동작을 여기에 작성하세요
 	});
 
-
+$(document).ready(function() {
+    $(".like-button").click(function() { // '.like-button' 클래스를 가진 버튼을 클릭하면
+        var runningNo = $(this).data("runningNo"); // 클릭한 버튼의 'data-running-no' 속성 값을 가져옵니다.
+        
+        // 좋아요 수를 증가시키는 요청을 보냅니다.
+        $.ajax({
+            type: "POST",
+            url: "/runnings/" + runningNo + "/like",
+            success: function() {
+                // 요청이 성공하면, 해당 게시물의 최신 좋아요 수를 받아옵니다.
+                $.ajax({
+                    type: "GET",
+                    url: "/runnings/" + runningNo,
+                    success: function(data) {
+                        // 최신 좋아요 수를 화면에 업데이트합니다.
+                        $("#like-count-" + runningNo).text(data.countLike);
+                    }
+                });
+            }
+        });
+    });
+});
 
 
