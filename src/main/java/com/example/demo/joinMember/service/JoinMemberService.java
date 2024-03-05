@@ -10,13 +10,13 @@ import com.example.demo.runningBoard.entity.Running;
 public interface JoinMemberService {
 
 	// 러닝 참석
-	JoinMemberDTO joinRunning(int runningNo);
+	JoinMemberDTO joinRunning(int runningNo, String runnerId);
 
 	// 참석자 명단 조회
 	List<JoinMemberDTO> getList(int runningNo);
 
 	// 참석 취소
-	int cancelJoin(int runningNo, int joinNo);
+	int cancelJoin(int runningNo, int joinNo, String runnerId);
 
 	default JoinMember dtoToEntity(JoinMemberDTO dto) {
 

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.joinMember.dto.JoinMemberDTO;
 import com.example.demo.joinMember.entity.JoinMember;
 import com.example.demo.joinMember.repository.JoinMemberRepository;
+import com.example.demo.member.entity.Member;
 import com.example.demo.member.repository.MemberRepository;
 import com.example.demo.runningBoard.entity.Running;
 import com.example.demo.runningBoard.repository.RunningRepository;
@@ -27,11 +28,15 @@ public class JoinMemberServiceImpl implements JoinMemberService {
 
 	@Transactional
 	@Override
-	public JoinMemberDTO joinRunning(int runningNo) {
+	public JoinMemberDTO joinRunning(int runningNo, String runnerId) {
 
 		Optional<Running> result1 = runningRepository.findById(runningNo);
 		Running running = result1.get();
-		
+
+		// runnerId에 해당하는 Member를 찾습니다.
+		Optional<Member> result2 = memberRepository.findById(runnerId);
+		Member member = result2.get();
+
 		JoinMember joinMember = JoinMember.builder().runningNo(running).build();
 		joinMemberRepository.save(joinMember);
 
@@ -48,8 +53,8 @@ public class JoinMemberServiceImpl implements JoinMemberService {
 
 	@Transactional
 	@Override
-	public int cancelJoin(int runningNo, int joinNo) {
-		Optional<JoinMember> result = joinMemberRepository.findByRunningNo_noAndJoinNo(runningNo, joinNo);
+	public int cancelJoin(int runningNo, int joinNo, String runnerId) {
+		Optional<JoinMember> result = joinMemberRepository.findByRunningNo_noAndJoinNo_runnerId(runningNo, joinNo, runnerId);
 
 		if (result.isPresent()) {
 			joinMemberRepository.deleteById(joinNo);

@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="register-l-container " >
-    <form class="register-m-container" th:action="@{/marathonBoard/modify}" th:method="post" enctype="multipart/form-data">
+    <form class="register-m-container">
       <input type="hidden" name="no" th:value="${dto.no}">
         <div class="form-title">
             <label>제목</label>
@@ -22,7 +22,7 @@
 
         <div class="form-time">
         <label>일시</label>
-        <input type="date" class="form-con" name = "marathonDate" th:value="${dto.marathonDate}" >
+        <input type="date" class="form-con" th:value="${dto.marathonDate}" >
         </div>
 
         <div class="form-location">
@@ -36,7 +36,7 @@
         </div>
 
         <input type="submit" id="submit" class="modifyBtn" value="수정">
-        <input type="file" id="image" name="file">
+        <input type="file" id="image" name="imageFiles">
         <label for="image" id="image-label">이미지</label>
         <input type="submit" id="submit" class="listBtn" value="목록으로">
         <input type="submit" id="submit" class="removeBtn" value="삭제">
