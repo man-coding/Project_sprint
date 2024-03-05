@@ -37,12 +37,12 @@
 
                 <div class="flex flex-col items-center">
                     <i class="fa-regular fa-calendar"></i>
-                    <span class="notice-detail-info">[[${dto.runningDate}]]</span>
+                    <span class="notice-detail-info">[[${#temporals.format(dto.runningDate, 'yyyy-MM-dd')}]]</span>
                 </div>
 
                 <div class="flex flex-col items-center">
                     <i class="fa-regular fa-clock"></i>
-                    <span class="notice-detail-info">3시45분</span>
+                    <span class="notice-detail-info">[[${#temporals.format(dto.runningDate, 'HH:mm')}]]</span>
                 </div>
             </div>
             

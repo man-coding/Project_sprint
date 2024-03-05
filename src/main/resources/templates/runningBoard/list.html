@@ -38,7 +38,7 @@
 				<div class="flex flex-col items-center">
 					<!-- 로고 + 이름박스-->
 					<i class="fa-regular fa-calendar"></i> <span
-						class="notice-detail-info">[[${dto.runningDate}]]</span>
+						class="notice-detail-info">[[${#temporals.format(dto.runningDate, 'yyyy-MM-dd')}]]</span>
 				</div>
 
 				<div class="flex flex-col items-center">

@@ -3,6 +3,7 @@ package com.example.demo.runningBoard.entity;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,7 +41,7 @@ public class Running extends BaseEntity {
 	String title;
 
 	@Column(length = 30, nullable = false)
-	LocalDate runningDate;
+	LocalDateTime runningDate;
 
 	@Column(length = 30, nullable = false)
 	String location;
