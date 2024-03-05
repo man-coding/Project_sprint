@@ -12,4 +12,7 @@ public interface JoinMemberRepository extends JpaRepository<JoinMember, Integer>
 	List<JoinMember> findByRunningNo_No(int runningNo);
 
 	Optional<JoinMember> findByRunningNo_noAndJoinNo(int runningNo, int joinNo);
+	
+	
+	 Optional<JoinMember> findByRunningNo_NoAndRunnerId_Id(int runningNo, String runnerId);
 }

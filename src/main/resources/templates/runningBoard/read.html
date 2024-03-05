@@ -183,21 +183,23 @@
 	
 	
 	function joining(){
-		 var running = [[${dto}]];
-		    $.ajax({
-		        type: "POST",
-		        url: "/joinMember/joinRunning?runningNo="+running.no,
-		        success: function(response){
-		            alert("참가 성공!");
-		            // 참가 성공 후 수행할 작업을 여기에 작성합니다.
-		        },
-		        error: function(response){
-		            alert("참가 실패");
-		            // 참가 실패 시 수행할 작업을 여기에 작성합니다.
-		        }
-		    });
-	}
-	
+    var running = [[${dto}]];
+    $.ajax({
+        type: "POST",
+        url: "/joinMember/joinRunning?runningNo="+running.no,
+        success: function(response){
+            if (response == "joined") {
+                alert("참가 성공!");
+            } else if (response == "cancelled") {
+                alert("참가 취소 성공!");
+            }
+            getAttendeesList();  // 참가 또는 취소 후에 참가자 목록을 업데이트합니다.
+        },
+        error: function(response){
+            alert("참가 또는 취소 실패");
+        }
+    });
+}
 	function getAttendeesList(){
 	    var running = [[${dto}]];
 	    let running_div = $('.tooltip');

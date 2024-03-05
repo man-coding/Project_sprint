@@ -53,14 +53,24 @@ public class JoinMemberServiceImpl implements JoinMemberService {
 
 	@Transactional
 	@Override
-	public int cancelJoin(int runningNo, int joinNo, String runnerId) {
-		Optional<JoinMember> result = joinMemberRepository.findByRunningNo_noAndJoinNo(runningNo, joinNo);
+	public int cancelJoin(int runningNo, String runnerId) {
+	    // 주어진 참가 번호와 회원 ID에 해당하는 참가 정보를 찾습니다.
+	    Optional<JoinMember> result = joinMemberRepository.findByRunningNo_NoAndRunnerId_Id(runningNo, runnerId);
 
-		if (result.isPresent()) {
-			joinMemberRepository.deleteById(joinNo);
-			return 1; // 성공
-		} else {
-			return 0; // 실패
-		}
+	    if (result.isPresent()) {
+	        // 참가 정보가 존재하면 해당 참가를 취소합니다.
+	        joinMemberRepository.delete(result.get());
+	        return 1; // 성공
+	    } else {
+	        return 0; // 실패
+	    }
 	}
+	@Override
+    public boolean isAlreadyJoined(int runningNo, String runnerId) {
+        // 주어진 참가 번호와 회원 ID에 해당하는 참가 정보를 찾습니다.
+        Optional<JoinMember> result = joinMemberRepository.findByRunningNo_NoAndRunnerId_Id(runningNo, runnerId);
+
+        // 참가 정보가 존재하면 true를, 그렇지 않으면 false를 반환합니다.
+        return result.isPresent();
+    }
 }

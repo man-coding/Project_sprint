@@ -23,11 +23,19 @@ public class JoinMemberController {
 	JoinMemberService joinMemberService;
 
 	@PostMapping("/joinRunning")
-	public ResponseEntity<JoinMemberDTO> joinRunning(@RequestParam(name = "runningNo") int runningNo,
-			Principal principal) {
-		String runnerId = principal.getName();
-		JoinMemberDTO joinMemberDTO = joinMemberService.joinRunning(runningNo, runnerId);
-		return ResponseEntity.ok(joinMemberDTO);
+	public ResponseEntity<String> joinRunning(@RequestParam(name = "runningNo") int runningNo, Principal principal) {
+	    String runnerId = principal.getName();
+	    
+	    // 이미 참가한 상태인지 확인합니다.
+	    if (joinMemberService.isAlreadyJoined(runningNo, runnerId)) {
+	        // 이미 참가한 상태라면 참가를 취소합니다.
+	        joinMemberService.cancelJoin(runningNo, runnerId);
+	        return ResponseEntity.ok("cancelled");
+	    } else {
+	        // 그렇지 않으면 참가를 등록합니다.
+	        JoinMemberDTO joinMemberDTO = joinMemberService.joinRunning(runningNo, runnerId);
+	        return ResponseEntity.ok("joined");
+	    }
 	}
 
 	@GetMapping("/joinList")
@@ -40,7 +48,7 @@ public class JoinMemberController {
 	public ResponseEntity<Integer> cancelJoin(@RequestParam(name = "runningNo") int runningNo,
 			@RequestParam(name = "joinNo") int joinNo, Principal principal) {
 		String currentUserId = principal.getName(); // 현재 로그인한 사용자의 이름을 얻습니다.
-		int result = joinMemberService.cancelJoin(runningNo, joinNo, currentUserId); // 현재 로그인한 사용자의 이름을 전달합니다.
+		int result = joinMemberService.cancelJoin(runningNo, currentUserId); // 현재 로그인한 사용자의 이름을 전달합니다.
 		return ResponseEntity.ok(result);
 	}
 }

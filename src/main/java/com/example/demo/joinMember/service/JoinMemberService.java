@@ -14,9 +14,11 @@ public interface JoinMemberService {
 
 	// 참석자 명단 조회
 	List<JoinMemberDTO> getList(int runningNo);
+	
+	boolean isAlreadyJoined(int runningNo, String runnerId);
 
 	// 참석 취소
-	int cancelJoin(int runningNo, int joinNo, String runnerId);
+	int cancelJoin(int runningNo, String runnerId);
 	
 	default JoinMember dtoToEntity(JoinMemberDTO dto) {
 
