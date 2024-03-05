@@ -57,6 +57,8 @@ public class mBoardCommentController {
 		return map;
 	}
 	
+
+	
 	@ResponseBody
 	@GetMapping("/remove")
 	public HashMap<String,Boolean> remove(@RequestParam(name = "commentNo") int commentNo) {

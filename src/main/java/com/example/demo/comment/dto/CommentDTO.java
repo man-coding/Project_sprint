@@ -16,7 +16,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 public class CommentDTO {
-
+	
+	 
 	int commentNo;	//댓글번호
 	
 	int boardNo;	//게시물번호
@@ -28,4 +29,5 @@ public class CommentDTO {
 	LocalDateTime regDate;	//등록일자
 	
 	LocalDateTime modDate;	//수정일자
+	
 }

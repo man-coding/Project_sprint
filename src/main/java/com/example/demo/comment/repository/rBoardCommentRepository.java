@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.comment.entity.rBoardComment;
 import com.example.demo.runningBoard.entity.Running;
 
+import feign.Param;
 import jakarta.transaction.Transactional;
 
 @Transactional
@@ -15,6 +16,6 @@ public interface rBoardCommentRepository extends JpaRepository<rBoardComment, In
 	List<rBoardComment> findByBoard(Running board);
 	
 	void deleteByBoard(Running board);
-
+	
 	
 }
