@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.weatherApi.entity.Weather;
 
-public interface RainRepository extends JpaRepository<Weather, Integer> {
+public interface WeatherRepository extends JpaRepository<Weather, Integer> {
 
 }
