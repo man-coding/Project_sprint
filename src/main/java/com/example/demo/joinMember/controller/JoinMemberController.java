@@ -31,8 +31,8 @@ public class JoinMemberController {
 
 	@GetMapping("/joinList")
 	public ResponseEntity<List<JoinMemberDTO>> getList(@RequestParam(name = "runningNo") int runningNo) {
-		List<JoinMemberDTO> list = joinMemberService.getList(runningNo);
-		return ResponseEntity.ok(list);
+	    List<JoinMemberDTO> list = joinMemberService.getList(runningNo);
+	    return ResponseEntity.ok(list);
 	}
 
 	@DeleteMapping("/cancelJoin")

@@ -70,7 +70,9 @@
             <div class="participate-info">
            		<div class="user-icon">
 			        <i class="fa-solid fa-user bottom-logo-font"></i>
-			        <div class="tooltip" >참석자 리스트</div>
+			        <div class="tooltip" >
+			        
+			        </div>
    			 	</div>
    			 	 <button class="participateBtn" onclick="joining();">같이뛰기</button>
         		
@@ -162,6 +164,7 @@
 
 	function removeComment(commentNo){
 		var board = [[${dto}]];
+		
 		 $.ajax({
 		      type: "GET",
 		      url: "/rBoardcomment/remove?commentNo="+commentNo,
@@ -172,6 +175,9 @@
 				}
 		});
 	}
+	$(document).ready(function() {
+		getAttendeesList()
+	})
 	
 	
 	function joining(){
@@ -192,28 +198,28 @@
 	
 	function getAttendeesList(){
 	    var running = [[${dto}]];
+	    let running_div = $('.tooltip');
 	    $.ajax({
 	        type: "GET", 
-	        url: "/joinMember/joinRunning?runningNo="+running.no,
+	        url: "/joinMember/joinList?runningNo="+running.no,
 	        success: function(response){
-	            var attendees = response; 
-	            var attendeesList = '';
+	            let runninglist = response;
 
-	            for(var i=0; i<attendees.length; i++) {
-	                attendeesList += '<li>' + attendees[i].name + '</li>'; 
-	            }
+	            running_div.empty(); // 먼저 기존에 출력되었던 내용을 지웁니다.
 
-	            document.querySelector('.tooltip').innerHTML = '<ul>' + attendeesList + '</ul>';
+	            for(let i in runninglist) {
+	                let runningMember = runninglist[i];
+	                let writer_div = runningMember.runnerId;
+	                let no_div = runningMember.joinNo; // joinNo를 가져옵니다.
+	                let running_html = no_div + '. ' + writer_div; // 수정: 번호와 이름 사이에 '.'과 공백을 추가해 가독성을 높입니다.
+	                running_div.append(running_html);
+	            } 
 	        },
 	        error: function(response){
 	            alert("참석자 명단을 가져오는 데 실패했습니다.");
 	        }
 	    });
 	}
-
-	$(document).ready(function() {
-        document.querySelector('.tooltip').addEventListener('mouseover', getAttendeesList);
-    });
 </script>
 
 
