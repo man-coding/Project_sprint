@@ -1470,3 +1470,27 @@ section {
 p {
   color: red;
 }
+.search-container{
+	width: 80%;
+	 margin: 10px 15px 15px; /* 상단에 10, 좌우에 15px, 하단에 15px */
+	text-align: right;
+}
+.search{
+  position: relative;
+  
+
+}
+.search input {
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.search  img {
+  position : absolute;
+  width: 17px;
+  top: 10px;
+  right: 12px;
+  margin: 0;
+}
