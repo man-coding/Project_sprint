@@ -33,7 +33,7 @@ public class RunningBoardServiceImpl implements RunningBoardService {
 
 		int pageNum = (pageNumber == 0) ? 0 : pageNumber - 1;
 
-		Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("no").descending());
+		Pageable pageable = PageRequest.of(pageNum, 5, Sort.by("no").descending());
 
 		Page<Running> entityPage = repository.findAll(pageable);
 
