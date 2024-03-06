@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.thymeleaf.engine.AttributeName;
 
 import com.example.demo.runningBoard.dto.RunningDTO;
-import com.example.demo.runningBoard.entity.Running;
 import com.example.demo.runningBoard.service.RunningBoardService;
 import com.example.demo.runningBoard.service.RunningBoardServiceImpl;
 
@@ -85,7 +83,7 @@ public class RunningBoardController {
 	public String search(@RequestParam(value = "keyword") String keyword, Model model) {
 		List<RunningDTO> boardDtoList = service2.search(keyword);
 		model.addAttribute("boardList", boardDtoList);
-		return "board/list.html";
+		return "runningBoard/list";
 	}
 
 }
