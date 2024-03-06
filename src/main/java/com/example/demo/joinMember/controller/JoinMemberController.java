@@ -1,5 +1,6 @@
 package com.example.demo.joinMember.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,21 @@ public class JoinMemberController {
 	JoinMemberService joinMemberService;
 
 	@PostMapping("/joinRunning")
-	public ResponseEntity<JoinMemberDTO> joinRunning(@RequestParam(name = "runningNo") int runningNo) {
-		JoinMemberDTO joinMemberDTO = joinMemberService.joinRunning(runningNo);
-		return ResponseEntity.ok(joinMemberDTO);
+	public ResponseEntity<String> joinRunning(@RequestParam(name = "runningNo") int runningNo, Principal principal) {
+
+		String runnerId = principal.getName();
+
+		// 이미 참가한 상태인지 확인
+		if (joinMemberService.isAlreadyJoined(runningNo, runnerId)) {
+
+			joinMemberService.cancelJoin(runningNo, runnerId);
+			return ResponseEntity.ok("cancelled");
+		} else {
+			// 그렇지 않으면 참가 등록
+
+			JoinMemberDTO joinMemberDTO = joinMemberService.joinRunning(runningNo, runnerId);
+			return ResponseEntity.ok("joined");
+		}
 	}
 
 	@GetMapping("/joinList")
@@ -35,8 +48,8 @@ public class JoinMemberController {
 
 	@DeleteMapping("/cancelJoin")
 	public ResponseEntity<Integer> cancelJoin(@RequestParam(name = "runningNo") int runningNo,
-			@RequestParam(name = "joinNo") int joinNo) {
-		int result = joinMemberService.cancelJoin(runningNo, joinNo);
+			@RequestParam(name = "joinNo") int joinNo, String runnerId) {
+		int result = joinMemberService.cancelJoin(runningNo, runnerId);
 		return ResponseEntity.ok(result);
 	}
 }
