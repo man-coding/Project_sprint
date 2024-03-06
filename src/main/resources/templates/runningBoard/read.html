@@ -1,109 +1,116 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
 
 	<th:block th:fragment="content">
-<!DOCTYPE html>
-<html lang="en">
+		<!DOCTYPE html>
+		<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="/css/detail.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/fc8d331d05.js" crossorigin="anonymous"></script>
-    
-     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>    
-    <script src="/js/list.js"></script>
-   	<script  src="/js/map.js"></script>
-   
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link href="/css/detail.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/fc8d331d05.js"
+	crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/js/list.js"></script>
+<script src="/js/map.js"></script>
+
 </head>
 <body>
-   <div class="read-l-container">
-    <div class="read-m-container">
-        <div class="content-head">
-            <div class="container-cate">
-                <h3><a href="runningBoard/list">파티 참가</a></h3> 
-            </div>
-            <div class="container-title" >
-                <h2>[[${dto.title}]]</h2>
-            </div>
-            <div class="container-ID">
-                <h5>[[${dto.writer}]]</h5>
-            </div>
+	<div class="read-l-container">
+		<div class="read-m-container">
+			<div class="content-head">
+				<div class="container-cate">
+					<h3>
+						<a href="runningBoard/list">파티 참가</a>
+					</h3>
+				</div>
+				<div class="container-title">
+					<h2>[[${dto.title}]]</h2>
+				</div>
+				<div class="container-ID">
+					<h5>[[${dto.writer}]]</h5>
+				</div>
+				<div class="info-container">
+				<div class="notice-first-info">
+					<div class="flex flex-col items-center">
+						<i class="fa-solid fa-location-dot"></i> <span
+							class="notice-detail-info">[[${dto.location}]]</span>
+					</div>
 
-            <div class="notice-first-info">
-                <div class="flex flex-col items-center">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span class="notice-detail-info">[[${dto.location}]]</span>
-                </div>
+					<div class="flex flex-col items-center">
+						<i class="fa-regular fa-calendar"></i> <span
+							class="notice-detail-info">[[${#temporals.format(dto.runningDate,
+							'yyyy-MM-dd')}]]</span>
+					</div>
 
-                <div class="flex flex-col items-center">
-                    <i class="fa-regular fa-calendar"></i>
-                    <span class="notice-detail-info">[[${#temporals.format(dto.runningDate, 'yyyy-MM-dd')}]]</span>
-                </div>
+					<div class="flex flex-col items-center">
+						<i class="fa-regular fa-clock"></i> <span
+							class="notice-detail-info">[[${#temporals.format(dto.runningDate,
+							'HH:mm')}]]</span>
+					</div>
+				</div>
+				<div class="weather-info" th:each="item : ${weather}"
+					th:if="${item.forecastTime == 0}">
+					<img
+						th:src="${item.weather == '맑음' ? '/img/weather/clear-day.png' : 
+                  item.weather == '구름많음' ? '/img/weather/cloudy.png' : 
+                  item.weather == '흐리고 한때 비' ? '/img/weather/rainy.png' : '/images/default.png'}"
+						alt="Weather Icon">
+				</div>
+			</div>
+			</div>
 
-                <div class="flex flex-col items-center">
-                    <i class="fa-regular fa-clock"></i>
-                    <span class="notice-detail-info">[[${#temporals.format(dto.runningDate, 'HH:mm')}]]</span>
-                </div>
-            </div>
-            
-        </div>
-        <div class="content-post">
-            <h5>
-					[[${dto.content}]]
-            </h5>
-            
-           
-            <div id="map" style="width: 500px; height: 400px;"></div>
-			<input type="hidden" id="location" th:value="${dto.location}">
-        </div>
+			<div class="content-post">
+				<h5>[[${dto.content}]]</h5>
+				[[${weather}]]
+				<div id="map" style="width: 500px; height: 400px;"></div>
+				<input type="hidden" id="location" th:value="${dto.location}">
+			</div>
 
-        <div class="bottom-logo-info">
-            <div class="comment-count">
-                <i class="fa-regular fa-comment"></i>
-                <span id="comment_count bottom-logo-font">[[${dto.location}]]</span>
-            </div>
-            <div class="heart-info">
-                <button class="heartBtn" onclick="event.stopPropagation(); addLike();">
-                    <i class="fa-regular fa-heart"></i></button>
-                    <span class="like_count bottom-logo-font">0</span>
-            </div>
-            <div class="participate-info">
-           		<div class="user-icon">
-			        <i class="fa-solid fa-user bottom-logo-font"></i>
-			        <div class="tooltip" >
-			        
-			        </div>
-   			 	</div>
-   			 	 <button class="participateBtn" onclick="joining();">같이뛰기</button>
-        		
-   			 </div>
-        </div>
-        
-        <div class="content-comment">
-            <input id="comment-input" placeholder="댓글을 입력해 주세요.">
-            <button type="button" id="submit" onclick="registerComment()">등록</button>
-        </div>
-        <div class="content-comment-list" id="content-comment-list">
+			<div class="bottom-logo-info">
+				<div class="comment-count">
+					<i class="fa-regular fa-comment"></i> <span
+						id="comment_count bottom-logo-font">[[${dto.location}]]</span>
+				</div>
+				<div class="heart-info">
+					<button class="heartBtn"
+						onclick="event.stopPropagation(); addLike();">
+						<i class="fa-regular fa-heart"></i>
+					</button>
+					<span class="like_count bottom-logo-font">0</span>
+				</div>
+				<div class="participate-info">
+					<div class="user-icon">
+						<i class="fa-solid fa-user bottom-logo-font"></i>
+						<div class="tooltip"></div>
+					</div>
+					<button class="participateBtn" onclick="joining();">같이뛰기</button>
 
-        </div>
-    </div>
-    <div class="bottom-button">
-    		<a th:href="@{/runningBoard/modify(no = ${dto.no})}">
-			<button type="button">수정</button>
-			</a>
+				</div>
+			</div>
 
-			<a th:href="@{/runningBoard/list(no=${page})}">
+			<div class="content-comment">
+				<input id="comment-input" placeholder="댓글을 입력해 주세요.">
+				<button type="button" id="submit" onclick="registerComment()">등록</button>
+			</div>
+			<div class="content-comment-list" id="content-comment-list"></div>
+		</div>
+		<div class="bottom-button">
+			<a th:href="@{/runningBoard/modify(no = ${dto.no})}">
+				<button type="button">수정</button>
+			</a> <a th:href="@{/runningBoard/list(no=${page})}">
 				<button type="button">목록</button>
 			</a>
-    </div>
-    </div>
+		</div>
+	</div>
 </body>
-</html>
-</th:block>
+		</html>
+	</th:block>
 </th:block>
 <!-- 댓글 이벤트 처리 -->
 <!-- 댓글 이벤트 처리 -->
-		<script th:inline="javascript">
+<script th:inline="javascript">
 
 	$(document).ready(function() {
 		showComment();
@@ -237,6 +244,7 @@
 	        }
 	    });
 	}
+	
 </script>
 
 

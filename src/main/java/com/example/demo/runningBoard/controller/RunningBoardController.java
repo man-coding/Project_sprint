@@ -1,6 +1,8 @@
 package com.example.demo.runningBoard.controller;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.runningBoard.dto.RunningDTO;
 import com.example.demo.runningBoard.service.RunningBoardService;
+import com.example.demo.weatherApi.dto.WeatherDTO;
+import com.example.demo.weatherApi.service.WeatherService;
 
 @Controller
 @RequestMapping("/runningBoard")
@@ -22,13 +26,16 @@ public class RunningBoardController {
 	@Autowired
 	RunningBoardService service;
 
+	@Autowired
+	WeatherService weatherService;
+
 	@GetMapping("/list")
 	public void list(@RequestParam(defaultValue = "0", name = "page") int page, Model model) {
-		Page<RunningDTO> list = service.getList(page); 
-		model.addAttribute("list", list);	
-		
+		Page<RunningDTO> list = service.getList(page);
+		model.addAttribute("list", list);
+
 	}
-	
+
 	@GetMapping("/register")
 	public void register() {
 
@@ -36,10 +43,10 @@ public class RunningBoardController {
 
 	@PostMapping("/register")
 	public String registerPost(RunningDTO dto, RedirectAttributes redirectAttributes, Principal principal) {
-		
+
 		String id = principal.getName();
 		dto.setWriter(id);
-		
+
 		int no = service.register(dto);
 
 		redirectAttributes.addFlashAttribute("msg", no);
@@ -49,11 +56,15 @@ public class RunningBoardController {
 
 	@GetMapping("/read")
 	public void read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
-			Model model) {
+			Model model) throws IOException {
 
 		RunningDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
+
+		List<WeatherDTO> weather = weatherService.entityToDto();
+
+		model.addAttribute("weather", weather);
 	}
 
 	@GetMapping("/modify")

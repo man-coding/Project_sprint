@@ -81,7 +81,7 @@ public class WeatherService {
 		List<Weather> list = new ArrayList<>();
 		// Root 객체의 필드 값을 사용하여 Weather 엔티티 생성
 		for (Item item : root.getResponse().getBody().getItems().getItem()) {
-			Weather entity = Weather.builder().when(item.numEf).temperature(item.getTa()).weather(item.getWf())
+			Weather entity = Weather.builder().forecastTime(item.numEf).temperature(item.getTa()).weather(item.getWf())
 					.rainPossi(item.getRnSt()).build();
 			list.add(entity);
 			repository.save(entity);
@@ -98,7 +98,7 @@ public class WeatherService {
 
 		for (Weather entity : weatherList) {
 
-			WeatherDTO dto = WeatherDTO.builder().when(entity.getWhen()).temperature(entity.getTemperature())
+			WeatherDTO dto = WeatherDTO.builder().forecastTime(entity.getForecastTime()).temperature(entity.getTemperature())
 					.weather(entity.getWeather()).rainPossi(entity.getRainPossi()).build();
 
 			list.add(dto);

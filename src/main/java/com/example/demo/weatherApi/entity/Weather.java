@@ -29,7 +29,7 @@ public class Weather {
 	int id;
 	
 	@Column(length = 20, nullable = false)
-	int when;
+	int forecastTime;
 	
 	@Column(length = 20, nullable = false)
 	int temperature;
