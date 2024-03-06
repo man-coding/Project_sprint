@@ -1,6 +1,8 @@
 package com.example.demo.marathonBoard.service;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.marathonBoard.dto.MarathonDTO;
 import com.example.demo.marathonBoard.entity.Marathon;
 import com.example.demo.marathonBoard.repository.MarathonRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class MarathonBoardServiceImpl implements MarathonBoardService {
@@ -106,4 +110,32 @@ public class MarathonBoardServiceImpl implements MarathonBoardService {
 		}
 
 	}
+	@Transactional
+	public List<MarathonDTO> search(String keyword) {
+		
+		List<Marathon> board = repository.findByTitleContaining(keyword);
+		List<MarathonDTO> boarDtoList = new ArrayList<>();
+		
+		if(board.isEmpty()) return boarDtoList;
+		
+		for(Marathon marathon: board) {
+			boarDtoList.add(this.converEntityToDto(marathon));
+		}
+		
+		return boarDtoList;
+		
+	}
+	
+	private MarathonDTO converEntityToDto(Marathon board) {
+		return MarathonDTO.builder()
+				.writer(board.getWriter())
+				.title(board.getTitle())
+				.MarathonDate(board.getMarathonDate())
+				.location(board.getLocation())
+				.content(board.getContent())
+				.fileName(board.getFileName())
+				.filePath(board.getFilePath())
+				.build();
+	}
+
 }
