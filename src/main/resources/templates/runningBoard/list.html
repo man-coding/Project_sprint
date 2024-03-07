@@ -22,7 +22,10 @@
 <body>
 	<div class="notice-l-container">
 		<!--글 박스 집합-->
-		
+		<div class="list-register">
+			<a th:href="@{/runningBoard/register}"> <input type="button"
+				value="등록"></a>
+		</div>
 		<div th:each="dto : ${list}" class="notice-m-container"  
 		 th:onclick="'window.location.href=\'/runningBoard/read?no=' + ${dto.no} +'&page=' + (${list.number + 1}) + '\''"
 			style="cursor: pointer;">
@@ -67,10 +70,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="list-register">
-			<a th:href="@{/runningBoard/register}"> <input type="button"
-				value="등록"></a>
-		</div>
+		
 	</div>
 		<ul class="pagination">
 				<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">

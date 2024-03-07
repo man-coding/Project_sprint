@@ -13,7 +13,7 @@
 }
 
 .m-m-container{
-    width: 30%; /* 박스 너비를 30%로 설정 */
+    width: 28%; /* 박스 너비를 28%로 설정 */
     height: 30%;
     display: flex;
     align-items: center;
@@ -91,7 +91,7 @@ i {
 .list-register{
 	width: 80%;
 	margin: 20px;
-	
+	text-align: right; /* 텍스트 정렬을 오른쪽으로 변경 */
 }
 
 .list-register input {

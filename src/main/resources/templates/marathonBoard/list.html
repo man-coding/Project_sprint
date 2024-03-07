@@ -18,6 +18,11 @@
 </head>
 <body>
     <div class="m-l-container">
+    <div class="list-register">
+            <a th:href="@{/marathonBoard/register}">
+                <input type="button" value="등록">
+            </a>
+        </div>
         <div th:each="dto : ${list}" class="m-m-container"  
 		 th:onclick="'window.location.href=\'/marathonBoard/read?no=' + ${dto.no} +'&page=' + (${list.number + 1}) + '\''"
 			style="cursor: pointer;">
@@ -59,11 +64,7 @@
             
         </div>
         
-        <div class="list-register">
-            <a th:href="@{/marathonBoard/register}">
-                <input type="button" value="등록">
-            </a>
-        </div>
+        
     </div>  
 </body>
 </html>

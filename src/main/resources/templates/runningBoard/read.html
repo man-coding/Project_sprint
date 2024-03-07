@@ -250,7 +250,14 @@
 	        }
 	    });
 	}
-	
+
+    $(".removeBtn").click(function(){
+    	form
+            .attr("action", "/runningBoard/remove")
+            .attr("method","post")
+            .submit();
+    });
+
 	
 </script>
 
