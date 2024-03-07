@@ -34,4 +34,5 @@ public class RunningDTO {
 	LocalDateTime regDate;
 	LocalDateTime modDate;
 	
+	private String keyword; // 검색 키워드
 }

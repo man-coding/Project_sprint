@@ -51,7 +51,6 @@ div{
     color: #333333;
     display: flex;
     gap: 20px;
-    
 }
 .container-cate,
 .container-title,
@@ -144,13 +143,6 @@ i {
 }
 
 
-
-
-
-
-
-
-
 .comment-count{
     margin-right: 20px;
 }
@@ -227,4 +219,17 @@ i {
 	width:70%;
 	padding: 0px 30px;
 	}
+.weather-info{
+	 margin-top: -20px;
 
+}
+.weather-info img{
+  transform-origin: bottom; /* 변형의 기준점을 아래쪽으로 설정 */
+    transform: scale(3); /* 이미지 크기를 1.5배로 확대 */
+    image-rendering: -webkit-optimize-contrast; /* Chrome, Safari, */
+    image-rendering: crisp-; /* Firefox */
+    image-rendering:ated; /* Chrome, Opera */
+}
+.info-container{
+	display: flex;	
+}

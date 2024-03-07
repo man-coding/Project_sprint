@@ -2,7 +2,6 @@ package com.example.demo.runningBoard.entity;
 
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -58,6 +57,8 @@ public class Running extends BaseEntity {
 	@Column(length = 10, nullable = true)
 	int countLike;
 	
+	@Column(length = 20, nullable = true)
+	String keyword;
 	//파일첨부 필요없음
 
 }

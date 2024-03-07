@@ -38,7 +38,7 @@ public class SecurityConfig {
 				.requestMatchers("/register").permitAll() //회원가입은 아무나 접근 가능
 				.requestMatchers("/assets/*", "/css/*", "/js/*", "/vendor/**", "/img/**","/files/*").permitAll() //리소스는 아무나 접근 가능
 				.requestMatchers("/").authenticated() //메인화면은 로그인한 사용자이면 접근 가능
-				.requestMatchers("/runningBoard/*").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
+				.requestMatchers("/runningBoard/**").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
 				.requestMatchers("/marathonBoard/*").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
 				.requestMatchers("/rBoardcomment/*","/mBoardcomment/*").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/joinMember/*").hasAnyRole("ADMIN","USER")

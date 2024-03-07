@@ -16,13 +16,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.runningBoard.dto.RunningDTO;
 import com.example.demo.runningBoard.service.RunningBoardService;
+import com.example.demo.runningBoard.service.RunningBoardServiceImpl;
 import com.example.demo.weatherApi.dto.WeatherDTO;
 import com.example.demo.weatherApi.service.WeatherService;
 
 @Controller
 @RequestMapping("/runningBoard")
 public class RunningBoardController {
-
+	@Autowired
+	RunningBoardServiceImpl service2;
 	@Autowired
 	RunningBoardService service;
 
@@ -34,6 +36,13 @@ public class RunningBoardController {
 		Page<RunningDTO> list = service.getList(page);
 		model.addAttribute("list", list);
 
+	}
+	
+	@GetMapping("/search")
+	public String search(@RequestParam(value = "searchkeyword") String keyword, Model model) {
+		List<RunningDTO> boardDtoList = service2.search(keyword);
+		model.addAttribute("boardList", boardDtoList);
+		return "runningBoard/list";
 	}
 
 	@GetMapping("/register")
@@ -85,5 +94,6 @@ public class RunningBoardController {
 		service.remove(no);
 		return "redirect:/runningBoard/list";
 	}
+
 
 }

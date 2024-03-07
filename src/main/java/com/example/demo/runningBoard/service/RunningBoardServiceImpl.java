@@ -1,5 +1,7 @@
 package com.example.demo.runningBoard.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.runningBoard.dto.RunningDTO;
 import com.example.demo.runningBoard.entity.Running;
 import com.example.demo.runningBoard.repository.RunningRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class RunningBoardServiceImpl implements RunningBoardService {
@@ -90,5 +94,35 @@ public class RunningBoardServiceImpl implements RunningBoardService {
 		}
 
 	}
+	@Transactional
+	public List<RunningDTO> search(String keyword) {
+		
+		List<Running> board = repository.findByTitleContaining(keyword);
+		List<RunningDTO> boarDtoList = new ArrayList<>();
+		
+		if(board.isEmpty()) {
+			return boarDtoList;
+		}
+		
+		for(Running running : board) {
+			boarDtoList.add(this.converEntityToDto(running));
+		}
+		
+		return boarDtoList;
+		
+	}
+
+	private RunningDTO converEntityToDto(Running board) {
+		return RunningDTO.builder()
+				.writer(board.getWriter())
+				.title(board.getTitle())
+				.runningDate(board.getRunningDate())
+				.location(board.getLocation())
+				.content(board.getContent())
+				.latitude(board.getLatitude())
+				.longtitude(board.getLongtitude())
+				.build();
+	}
+
 
 }

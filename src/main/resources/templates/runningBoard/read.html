@@ -22,7 +22,7 @@
 			<div class="content-head">
 				<div class="container-cate">
 					<h3>
-						<a href="runningBoard/list">파티 참가</a>
+						<a href="http://localhost:8080/runningBoard/list">파티 참가</a>
 					</h3>
 				</div>
 				<div class="container-title">
@@ -31,6 +31,9 @@
 				<div class="container-ID">
 					<h5>[[${dto.writer}]]</h5>
 				</div>
+				
+				
+				<div class="info-l-container">
 				<div class="info-container">
 				<div class="notice-first-info">
 					<div class="flex flex-col items-center">
@@ -50,20 +53,23 @@
 							'HH:mm')}]]</span>
 					</div>
 				</div>
+				<!-- Makin-Things / weather-icons -->
 				<div class="weather-info" th:each="item : ${weather}"
 					th:if="${item.forecastTime == 0}">
 					<img
-						th:src="${item.weather == '맑음' ? '/img/weather/clear-day.png' : 
-                  item.weather == '구름많음' ? '/img/weather/cloudy.png' : 
-                  item.weather == '흐리고 한때 비' ? '/img/weather/rainy.png' : '/images/default.png'}"
-						alt="Weather Icon">
+						th:src="${item.weather == '맑음' ? '/img/weather/day.svg' : 
+                  item.weather == '구름많음' ? '/img/weather/cloudy-original.svg' : 
+                  item.weather == '흐리고 한때 비 곳' ? '/img/weather/rainy-3.svg' : 
+                  item.weather == '구름많고 한때 비 곳' ? '/img/weather/rainy-3.svg' : 
+                  '/images/default.png'}"
+                  
+				alt="Weather Icon">
 				</div>
 			</div>
 			</div>
-
+			</div>
 			<div class="content-post">
 				<h5>[[${dto.content}]]</h5>
-				[[${weather}]]
 				<div id="map" style="width: 500px; height: 400px;"></div>
 				<input type="hidden" id="location" th:value="${dto.location}">
 			</div>
@@ -244,6 +250,7 @@
 	        }
 	    });
 	}
+	
 	
 </script>
 
