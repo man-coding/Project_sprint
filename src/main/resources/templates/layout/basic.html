@@ -58,32 +58,57 @@
 				</a>
 
 				<nav id="navbar" class="navbar">
-					<ul>
-						<li><a class="nav-link scrollto active"
-							href="http://localhost:8080">Home</a></li>
+        <ul>
+        
+         <li class="dropdown"><a href="/runningBoard/list"><span>파티</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+             <li><a href="/runningBoard/list">파티 참가</a></li>
+              <li><a href="/runningBoard/register">파티 만들기</a></li>
+            </ul>
+          </li>
+        
+         
+          <li class="dropdown"><a href="/marathonBoard/list"><span>대회</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="/marathonBoard/list">대회 참가</a></li>
+              <li><a href="/marathonBoard/register">대회 만들기</a></li>
+            </ul>
+          </li>
 
-
-						<li class="dropdown"><a href="/marathonBoard/list"><span>대회</span>
-								<i class="bi bi-chevron-down"></i></a>
-							<ul>
-								<li><a href="/marathonBoard/list">대회 참가</a></li>
-								<li><a href="/marathonBoard/register">대회 만들기</a></li>
-							</ul></li>
-
-						<li class="dropdown"><a href="/runningBoard/list"><span>파티</span>
-								<i class="bi bi-chevron-down"></i></a>
-							<ul>
-								<li><a href="/runningBoard/list">파티 참가</a></li>
-								<li><a href="/runningBoard/register">파티 만들기</a></li>
-							</ul></li>
-
-						<li><a class="nav-link scrollto" href="#about">피드</a></li>
-						<li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-						<li><a class="getstarted scrollto" href="login.html">시작하기</a></li>
-					</ul>
-					<i class="bi bi-list mobile-nav-toggle"></i>
-				</nav>
-				<!-- .navbar -->
+         
+         
+           <li class="dropdown"> <a class="nav-link scrollto" href="#learnRun">커뮤니티<i class="bi bi-chevron-down"></i></a>
+         	<ul>
+             <li><a href="#qna">QnA</a></li>
+              <li><a href="#crew">러닝크루</a></li>
+              <li><a href="#neighborhood">우리동네</a></li>
+               <li><a href="#diary">러닝일기</a></li>
+            </ul>
+         </li>
+         <li class="dropdown"> <a class="nav-link scrollto" href="#learnRun" style="padding: 10px 200px 10px 30px !important;">LEARN & RUN<i class="bi bi-chevron-down"></i></a>
+         	<ul>
+             <li><a href="#method">주법</a></li>
+              <li><a href="#stretching">스트레칭</a></li>
+            </ul>
+         </li>
+          <form class="search-container" action="/runningBoard/search" method="get" id="searchForm" >
+			<div class="search">
+				<input type="text" placeholder="검색어 입력" name="searchkeyword"  >
+				<img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" id="searchImage">
+			</div>
+			<script>
+				document.getElementById('searchImage').addEventListener('click', function() {
+					document.getElementById('searchForm').submit();
+				});
+			</script>
+			</form>
+				<li>
+			<a class="nav-link scrollto" href="/customlogin">로그인</a></li>
+          	<li><a class="nav-link scrollto" href="/register">회원가입</a></li>
+        </ul>
+        
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
 
 			</div>
 		</header>
