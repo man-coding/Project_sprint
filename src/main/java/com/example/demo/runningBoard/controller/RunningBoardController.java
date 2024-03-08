@@ -1,10 +1,12 @@
 package com.example.demo.runningBoard.controller;
 
 import java.security.Principal;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.runningBoard.dto.RunningDTO;
+import com.example.demo.runningBoard.entity.Running;
 import com.example.demo.runningBoard.service.RunningBoardService;
 import com.example.demo.runningBoard.service.RunningBoardServiceImpl;
 
@@ -79,11 +82,21 @@ public class RunningBoardController {
 		return "redirect:/board/list";
 	}
 	
-	@GetMapping("/runningBoard/search")
-	public String search(@RequestParam(value = "keyword") String keyword, Model model) {
-		List<RunningDTO> boardDtoList = service2.search(keyword);
-		model.addAttribute("boardList", boardDtoList);
-		return "runningBoard/list";
+	@GetMapping("/search") 
+	public String search(String keyword, Model model, @PageableDefault(sort = "id", direction = Sort.Direction.DESC)Pageable pageable) {
+		
+		Page<Running> runningSearchList = service2.search(keyword, pageable);
+		
+		model.addAttribute("runningSearchList",runningSearchList);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+		model.addAttribute("next", pageable.next().getPageNumber());
+		model.addAttribute("hasnext", runningSearchList.hasNext());
+		model.addAttribute("hasPrev",runningSearchList.hasPrevious());
+		
+		return "marathon-search";
 	}
+	
+	
 
 }
