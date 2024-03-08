@@ -8,11 +8,20 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @MappedSuperclass // 테이블로 생성하지 않음.
 @EntityListeners(value = { AuditingEntityListener.class }) // 엔티티의 변화
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+
 public abstract class BaseEntity { 
 
 	@CreatedDate

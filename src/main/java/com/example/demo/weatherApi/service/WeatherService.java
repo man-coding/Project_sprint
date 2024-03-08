@@ -6,10 +6,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.weatherApi.dto.WeatherDTO;
@@ -62,6 +65,7 @@ public class WeatherService {
 		return sb.toString();
 	}
 
+	// api 호출 후 entity에 저장하는 메서드
 	public List<Weather> jsonToEntity() throws IOException {
 
 		// 매퍼 클래스 생성
@@ -90,20 +94,51 @@ public class WeatherService {
 		return list; // entity 리스트
 	}
 
+	// 매일 오전 5시 api 호출하여 미리 데이터 저장한다
+	@Scheduled(cron = "* * 5 * * * ", zone = "Asia/Seoul")
+	public void scheduledWeatherApiCall() throws IOException {
+		jsonToEntity();
+	}
+
+	 //미리 저장된 날씨 최신 데이터를 dto로 변환
 	public List<WeatherDTO> entityToDto() throws IOException {
 
-		List<Weather> weatherList = jsonToEntity();
+		// DB에서 모든 Weather 엔티티를 가져옵니다.
+		List<Weather> weatherList = repository.findAll();
 
-		List<WeatherDTO> list = new ArrayList<>();
+		// 가장 최신의 regDate를 찾습니다.
+		LocalDateTime latestRegDate = weatherList.stream().map(Weather::getRegDate).max(LocalDateTime::compareTo)
+				.orElseThrow(() -> new RuntimeException("날씨 데이터가 없습니다."));
 
-		for (Weather entity : weatherList) {
+		// 최신 regDate에 해당하고, forecastTime이 0이거나 1인 데이터만 필터링하여 DTO로 변환합니다.
+		List<WeatherDTO> list = weatherList.stream()
+				.filter(weather -> weather.getRegDate().equals(latestRegDate)
+						&& (weather.getForecastTime() == 0 || weather.getForecastTime() == 1))
+				.map(weather -> WeatherDTO.builder().forecastTime(weather.getForecastTime())
+						.temperature(weather.getTemperature()).weather(weather.getWeather())
+						.rainPossi(weather.getRainPossi()).regDate(weather.getRegDate()).build())
+				.collect(Collectors.toList());
 
-			WeatherDTO dto = WeatherDTO.builder().forecastTime(entity.getForecastTime()).temperature(entity.getTemperature())
-					.weather(entity.getWeather()).rainPossi(entity.getRainPossi()).build();
-
-			list.add(dto);
-		}
-		return list; // dto 리스트
-
+		return list;
 	}
 }
+//		for (Weather entity : weatherList) {
+//
+//			WeatherDTO dto = WeatherDTO.builder().forecastTime(entity.getForecastTime())
+//					.temperature(entity.getTemperature()).weather(entity.getWeather()).rainPossi(entity.getRainPossi())
+//					.build();
+//			int serviceTime = entity.getForecastTime();
+//			if (serviceTime == 0 || serviceTime == 1) {
+//				list.add(dto);
+//			}
+//
+//		}
+//		return list;
+
+//	@Component
+//	public class ScheduledTasks {
+//		@Scheduled(cron = "*/3 * * * * *")
+//		public void printEveryThreeSeconds() {
+//			System.out.println("3초마다 출력 테스트");
+//		}
+//	}
