@@ -81,9 +81,9 @@
               <li><a href="https://www.youtube.com/results?search_query=%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%B9%AD">스트레칭</a></li>
             </ul>
          </li>
-          <form class="search-container" action="/runningBoard/search" method="get" id="searchForm" >
+          <form class="search-container" action="/runningBoard/list" method="get" id="searchForm" >
 			<div class="search">
-				<input type="text" placeholder="검색어 입력" name="searchkeyword"  >
+				<input type="text" placeholder="검색어 입력" name="keyword"  >
 				<img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" id="searchImage">
 			</div>
 			<script>
@@ -92,10 +92,13 @@
 				});
 			</script>
 			</form>
-				<li>
-			<a class="nav-link scrollto" href="/customlogin">로그인</a></li>
-          	<li><a class="nav-link scrollto" href="/register">회원가입</a></li>
-        </ul>
+				 
+			        <li><a sec:authorize="isAuthenticated()" class="nav-link scrollto" href="/logout">로그아웃</a></li>
+			    	
+			        <li><a sec:authorize ="isAnonymous()" class="nav-link scrollto" href="/customlogin">로그인</a></li>
+			        <li><a sec:authorize ="isAnonymous()" class="nav-link scrollto" href="/register">회원가입</a></li>
+			    
+				</ul>
         
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -161,8 +164,7 @@
         <div class="row gy-4">
           <div class="col-lg-5 col-md-12 footer-info">
             <a href="index.html" class="logo d-flex align-items-center">
-              <img src="/img/logo.png" alt="">
-              <span>FlexStart</span>
+              <span>Sprint</span>
             </a>
             <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
             <div class="social-links mt-3">

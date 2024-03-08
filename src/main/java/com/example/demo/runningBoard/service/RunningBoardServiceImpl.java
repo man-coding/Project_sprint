@@ -1,7 +1,5 @@
 package com.example.demo.runningBoard.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +13,12 @@ import com.example.demo.runningBoard.dto.RunningDTO;
 import com.example.demo.runningBoard.entity.Running;
 import com.example.demo.runningBoard.repository.RunningRepository;
 
-import jakarta.transaction.Transactional;
-
 @Service
 public class RunningBoardServiceImpl implements RunningBoardService {
 
 	@Autowired
 	RunningRepository repository;
+	
 
 	@Override
 	public int register(RunningDTO dto) {
@@ -37,7 +34,7 @@ public class RunningBoardServiceImpl implements RunningBoardService {
 
 		int pageNum = (pageNumber == 0) ? 0 : pageNumber - 1;
 
-		Pageable pageable = PageRequest.of(pageNum, 5, Sort.by("no").descending());
+		Pageable pageable = PageRequest.of(pageNumber, 10, Sort.by("no").descending());
 
 		Page<Running> entityPage = repository.findAll(pageable);
 
@@ -94,35 +91,12 @@ public class RunningBoardServiceImpl implements RunningBoardService {
 		}
 
 	}
-	@Transactional
-	public List<RunningDTO> search(String keyword) {
-		
-		List<Running> board = repository.findByTitleContaining(keyword);
-		List<RunningDTO> boarDtoList = new ArrayList<>();
-		
-		if(board.isEmpty()) {
-			return boarDtoList;
-		}
-		
-		for(Running running : board) {
-			boarDtoList.add(this.converEntityToDto(running));
-		}
-		
-		return boarDtoList;
-		
-	}
-
-	private RunningDTO converEntityToDto(Running board) {
-		return RunningDTO.builder()
-				.writer(board.getWriter())
-				.title(board.getTitle())
-				.runningDate(board.getRunningDate())
-				.location(board.getLocation())
-				.content(board.getContent())
-				.latitude(board.getLatitude())
-				.longtitude(board.getLongtitude())
-				.build();
-	}
-
+	 @Override
+	    public Page<RunningDTO>  getSearchList(int pageNumber, String keyword) {
+	        Pageable pageable = PageRequest.of(pageNumber, 10, Sort.by("no").descending());
+	        Page<Running> entityPage = repository.findByTitleContainingIgnoreCase(keyword, pageable);
+	        Page<RunningDTO> dtoPage = entityPage.map(this::entityToDto);
+	        return dtoPage;
+	    }
 
 }

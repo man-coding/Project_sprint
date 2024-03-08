@@ -37,14 +37,14 @@ public class RunningBoardController {
 		model.addAttribute("list", list);
 
 	}
-	
 	@GetMapping("/search")
-	public String search(@RequestParam(value = "searchkeyword") String keyword, Model model) {
-		List<RunningDTO> boardDtoList = service2.search(keyword);
-		model.addAttribute("boardList", boardDtoList);
-		return "runningBoard/list";
+	public String search(@RequestParam(defaultValue = "0", name = "page") int page, 
+	                     @RequestParam(name = "keyword") String keyword, Model model) {
+	    Page<RunningDTO> list = service.getSearchList(page, keyword);
+	    model.addAttribute("list", list);
+	    return "/runningBoard/list";
 	}
-
+	
 	@GetMapping("/register")
 	public void register() {
 
@@ -94,6 +94,7 @@ public class RunningBoardController {
 		service.remove(no);
 		return "redirect:/runningBoard/list";
 	}
+	
 
 
 }

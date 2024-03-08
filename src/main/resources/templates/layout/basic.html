@@ -102,9 +102,10 @@
 				});
 			</script>
 			</form>
-				<li>
-			<a class="nav-link scrollto" href="/customlogin">로그인</a></li>
-          	<li><a class="nav-link scrollto" href="/register">회원가입</a></li>
+					<li><a sec:authorize="isAuthenticated()" class="nav-link scrollto" href="/logout">로그아웃</a></li>
+			    	
+			        <li><a sec:authorize ="isAnonymous()" class="nav-link scrollto" href="/customlogin">로그인</a></li>
+			        <li><a sec:authorize ="isAnonymous()" class="nav-link scrollto" href="/register">회원가입</a></li>
         </ul>
         
         <i class="bi bi-list mobile-nav-toggle"></i>

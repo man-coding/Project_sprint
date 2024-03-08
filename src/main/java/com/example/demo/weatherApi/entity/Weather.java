@@ -21,23 +21,22 @@ import lombok.ToString;
 @Builder
 
 @Entity
-public class Weather {
+public class Weather extends BaseEntity {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
-	
-	@Column(length = 20, nullable = false)
+	int no;
+
+	@Column(length = 20, nullable = true)
 	int forecastTime;
-	
-	@Column(length = 20, nullable = false)
+
+	@Column(length = 20, nullable = true)
 	int temperature;
-	
-	@Column(length = 20, nullable = false)
+
+	@Column(length = 20, nullable = true)
 	String weather;
-	
-	@Column(length = 20, nullable = false)
+
+	@Column(length = 20, nullable = true)
 	int rainPossi;
-	
+
 }
