@@ -35,10 +35,17 @@
         </div>
 
      	<div class="register-container">
-         <input type="file" id="image" name="file">
-        <label for="image" id="image-label">이미지</label>
-          <input type="submit" id="submit" value="등록">
-          </div>
+	    <input type="file" id="image" name="file">
+	    <label for="image" id="image-label">이미지</label>
+	    <input type="submit" id="submit" value="등록">
+	     <span id="file-name"></span> <!-- 파일 이름을 출력할 요소 -->
+	</div>
+	<script>
+    document.getElementById('image').addEventListener('change', function() {
+        var fileName = this.files[0].name; // 선택된 파일의 이름을 가져옵니다.
+        document.getElementById('file-name').textContent = fileName; // 파일 이름을 표시할 요소에 파일 이름을 설정합니다.
+    });
+</script>
     </form> 
     </div>
 </body>

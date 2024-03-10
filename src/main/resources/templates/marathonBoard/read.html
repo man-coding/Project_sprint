@@ -46,13 +46,16 @@
             
         </div>
         <div class="content-post">
+            <div class="img-container">
+                <img th:src="@{${dto.filePath}}" alt="Post image" >
+            </div>
             <h5>
 				[[${dto.content}]]
             </h5>
             
+             
            
-            <div id="map" style="width: 500px; height: 400px;"></div>
-			<input type="hidden" id="location" th:value="${dto.location}">
+            
         </div>
 
         <div class="bottom-logo-info">

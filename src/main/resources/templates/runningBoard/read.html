@@ -89,7 +89,7 @@
 				<div class="participate-info">
 					<div class="user-icon">
 						<i class="fa-solid fa-user bottom-logo-font"></i>
-						<div class="tooltip"></div>
+						<div class="tooltip"> </div>
 					</div>
 					<button class="participateBtn" onclick="joining();">같이뛰기</button>
 
@@ -224,11 +224,15 @@
 
 	            running_div.empty(); // 먼저 기존에 출력되었던 내용을 지웁니다.
 
+	            if(running_div.is(':empty')) {
+	                running_div.append('참석자<br>'); // '참석자' 글씨와 줄바꿈을 추가합니다.
+	            }
+
 	            for(let i in runninglist) {
 	                let runningMember = runninglist[i];
 	                let writer_div = runningMember.runnerId;
 	                let no_div = runningMember.joinNo; // joinNo를 가져옵니다.
-	                let running_html = no_div + '. ' + writer_div + '<br>'; // 수정: 번호와 이름 사이에 '.'과 공백을 추가해 가독성을 높입니다.
+	                let running_html = writer_div + '<br>'; // 수정: 번호와 이름 사이에 '.'과 공백을 추가해 가독성을 높입니다.
 	                running_div.append(running_html);
 	            } 
 	        },

@@ -25,7 +25,6 @@ body {
 	width: 50%;   
     border-radius: 32px;
     padding: 40px; /* 간격을 늘렸습니다. */
-    background: linear-gradient(to bottom , rgba(38, 141, 206, 0.5), rgba(255, 255, 255, 0.5)); 
     border: none; /* 테두리를 제거했습니다. */
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1); /* 그림자를 추가했습니다. */
 }
@@ -57,7 +56,7 @@ label {
 }
 /* 전송버튼 */
 #submit  {
-    background-color: #268dce;
+    background-color: #000000;
     color: white;
     border: none;
     border-radius: 20px;
@@ -71,7 +70,7 @@ label {
 }
 
 #submit:hover {
-    background-color: #1a669b;
+    background-color: #717ff5;;
 }
 
 /* 이미지 버튼 */
@@ -81,7 +80,7 @@ label {
 
 #image-label {
     display: inline-block;
-    background-color: #268dce;
+    background-color: #000000;
     color: white;
     border: none;
     border-radius: 20px;
@@ -94,9 +93,15 @@ label {
     text-align: center;
     font-weight: normal; 
 }
-
+#file-name {
+    display: block; /* 이 요소를 블록 요소로 만들어 줄바꿈 효과를 줍니다. */
+    font-size: 0.8rem; /* 글씨 크기를 작게 조정합니다. */
+    color: #666; /* 글씨 색상을 어둡게 조정합니다. */
+    margin-top: 5px; /* 버튼과의 간격을 조정합니다. */
+    text-align: right; /* 텍스트를 중앙 정렬합니다. */
+}
 #image-label:hover {
-    background-color: #1a669b;
+    background-color: #717ff5;;
 }
 
 
