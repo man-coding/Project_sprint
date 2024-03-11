@@ -17,7 +17,7 @@ function countPlus() {
     if (window.location.pathname.includes('detail.html')) {
         document.querySelector(".like_count").innerText = count;
     } else {
-        document.querySelector(".like_count").innerText = "좋아요 " + count + "개";
+        document.querySelector(".like_count").innerText = count + "개";
     }
 }
 
@@ -26,7 +26,7 @@ function countMinus() {
     if (window.location.pathname.includes('detail.html')) {
         document.querySelector(".like_count").innerText = count;
     } else {
-        document.querySelector(".like_count").innerText = "좋아요 " + count + "개";
+        document.querySelector(".like_count").innerText = count + "개";
     }
 }
   	document.querySelector(".heartBtn").addEventListener('click', addLike);
