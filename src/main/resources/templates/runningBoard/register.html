@@ -13,6 +13,10 @@
 </head>
 <body>
     <div class="register-l-container " >
+    <div class="back-button-container">
+    
+            <div class="back-button" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></div>
+        </div>
     <form class="register-m-container" th:action="@{/runningBoard/register}" th:method="post">
         <div class="form-title">
             <label>제목</label>

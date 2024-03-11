@@ -92,6 +92,7 @@ i {
 	width: 80%;
 	margin: 20px;
 	text-align: right; /* 텍스트 정렬을 오른쪽으로 변경 */
+	padding-right: 175px;
 }
 
 .list-register input {
@@ -102,11 +103,14 @@ i {
   	font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 120px;
+    width: 90px;
     height: auto;
     padding: 10px 20px;
 }
 
+.list-register input:hover {
+    background-color: #717ff5;
+}
 .list-register input:hover {
     background-color: #717ff5;
 }

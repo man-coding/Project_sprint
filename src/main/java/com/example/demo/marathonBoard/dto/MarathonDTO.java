@@ -23,7 +23,7 @@ public class MarathonDTO {
 	String writer;
 	String title;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	LocalDate MarathonDate;
+	LocalDateTime MarathonDate;
 	String location;
 	String content;
 	int countLike;

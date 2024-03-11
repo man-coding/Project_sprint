@@ -1,6 +1,7 @@
 package com.example.demo.marathonBoard.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,7 +39,7 @@ public class Marathon extends BaseEntity {
 	String writer;
 	
 	@Column(length = 30, nullable = false)
-	LocalDate marathonDate;
+	LocalDateTime marathonDate;
 	
 	@Column(length = 30, nullable = false)
 	String location;

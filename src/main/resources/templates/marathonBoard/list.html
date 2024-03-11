@@ -34,17 +34,18 @@
 
                 <div class="obj-info">
                         <i class="fa-regular fa-calendar"></i>
-                        <span class="notice-detail-info">[[${dto.marathonDate}]]</span>
+                        <span class="notice-detail-info">[[${#temporals.format(dto.marathonDate, 'yyyy-MM-dd')}]]</span>
                 </div>
 
                 <div class="obj-info">
                         <i class="fa-regular fa-clock"></i>
-                        <span class="notice-detail-info">3시45분</span>
+                        <span class="notice-detail-info">[[${#temporals.format(dto.marathonDate,
+							'HH:mm')}]]</span>
                 </div>
             </div>
             
             <div class="img-container">
-                <img th:src="@{${dto.filePath}}" alt="Post image" >
+                <img th:src="@{${dto.filePath}}" alt="No image" >
             </div>
             <div class="info-container" onclick="event.stopPropagation(); addLike();">
                 <div class="people-info">

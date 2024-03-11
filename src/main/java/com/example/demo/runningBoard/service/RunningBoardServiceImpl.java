@@ -31,16 +31,17 @@ public class RunningBoardServiceImpl implements RunningBoardService {
 
 	@Override
 	public Page<RunningDTO> getList(int pageNumber) {
+	    // 페이지 번호 조정 (0 기반 인덱스)
+	    int pageNum = (pageNumber == 0) ? 0 : pageNumber - 1;
 
-		int pageNum = (pageNumber == 0) ? 0 : pageNumber - 1;
+	    // 수정된 pageNum 변수 사용
+	    Pageable pageable = PageRequest.of(pageNum, 5, Sort.by("no").descending());
 
-		Pageable pageable = PageRequest.of(pageNumber, 10, Sort.by("no").descending());
+	    Page<Running> entityPage = repository.findAll(pageable);
 
-		Page<Running> entityPage = repository.findAll(pageable);
+	    Page<RunningDTO> dtoPage = entityPage.map(this::entityToDto);
 
-		Page<RunningDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
-
-		return dtoPage;
+	    return dtoPage;
 	}
 
 	@Override

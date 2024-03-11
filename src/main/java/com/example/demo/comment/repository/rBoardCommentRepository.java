@@ -15,6 +15,7 @@ public interface rBoardCommentRepository extends JpaRepository<rBoardComment, In
 	List<rBoardComment> findByBoard(Running board);
 	
 	void deleteByBoard(Running board);
-
+	
+	
 	
 }

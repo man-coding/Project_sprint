@@ -13,6 +13,10 @@
 </head>
 <body>
     <div class="register-l-container">
+    <div class="back-button-container">
+    
+            <div class="back-button" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></div>
+        </div>
        <form class="register-m-container" th:action="@{/marathonBoard/register}" th:method="post" enctype="multipart/form-data">
         <div class="form-title">
             <label>제목</label>
@@ -21,7 +25,7 @@
 
         <div class="form-time">
         <label>일시</label>
-        <input type="date" class="form-con" name="marathonDate">
+        <input type="datetime-local" class="form-con" name="marathonDate">
         </div>
 
         <div class="form-location">
