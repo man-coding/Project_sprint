@@ -53,6 +53,7 @@
 							'HH:mm')}]]</span>
 					</div>
 				</div>
+				<div class="weather-container" >
 				<!-- Makin-Things / weather-icons -->
 				<div class="weather-info" th:each="item : ${weather}"
 					th:if="${item.forecastTime == 0}">
@@ -65,6 +66,7 @@
                   '/images/default.png'}"
                   
 				alt="Weather Icon">
+				</div>
 				</div>
 			</div>
 			</div>
