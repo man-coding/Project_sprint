@@ -60,7 +60,8 @@
 						th:src="${item.weather == '맑음' ? '/img/weather/day.svg' : 
                   item.weather == '구름많음' ? '/img/weather/cloudy-original.svg' : 
                   item.weather == '흐리고 한때 비 곳' ? '/img/weather/rainy-3.svg' : 
-                  item.weather == '구름많고 한때 비 곳' ? '/img/weather/rainy-3.svg' : 
+                  item.weather == '구름많고 한때 비 곳' ? '/img/weather/rainy-3.svg' :
+                    item.weather == '흐림' ? '/img/weather/cloudy-day-1.svg': 
                   '/images/default.png'}"
                   
 				alt="Weather Icon">
