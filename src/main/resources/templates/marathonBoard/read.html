@@ -46,10 +46,15 @@
             </div>
             
         </div>
+        
         <div class="content-post">
-            <div class="img-container" >
-                <img th:src="@{${dto.filePath}}" alt="Post image" >
+            
+            <div class="img-container">
+          		<!-- 상대경로: /uploadfile/apple.png -->
+                <!-- 실제경로: C:\\uploadfile\\apple.png -->
+                <img th:src="'/uploadfile/'+${dto.imgPath}" alt="Post image" >
             </div>
+            
             <h5>
 				[[${dto.content}]]
             </h5>

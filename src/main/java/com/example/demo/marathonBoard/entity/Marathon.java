@@ -1,6 +1,5 @@
 package com.example.demo.marathonBoard.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -50,9 +49,6 @@ public class Marathon extends BaseEntity {
 	@Column(length = 10, nullable = true)
 	int countLike;
 	
-	@Column(length = 100, nullable = true)
-	String fileName;
-
-	@Column(length = 100, nullable = true)
-	String filePath;
+	@Column(length = 200, nullable = true)
+	private String imgPath; //첨부파일 이름
 }

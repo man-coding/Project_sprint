@@ -1,9 +1,9 @@
 package com.example.demo.marathonBoard.dto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,8 +27,8 @@ public class MarathonDTO {
 	String location;
 	String content;
 	int countLike;
-	String fileName;
-	String filePath;
+	MultipartFile uploadFile; // 파일 스트림
+	String imgPath; // 파일 이름
 	LocalDateTime regDate;
 	LocalDateTime modDate;
 

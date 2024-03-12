@@ -45,8 +45,9 @@
             </div>
             
             <div class="img-container">
-                <img th:src="@{${dto.filePath}}" alt="No image" >
+                <img th:src="'/uploadfile/'+${dto.imgPath}" alt="Post image" >
             </div>
+            
             <div class="info-container" onclick="event.stopPropagation(); addLike();">
                 <div class="people-info">
                     <i class="fa-solid fa-user"></i>
