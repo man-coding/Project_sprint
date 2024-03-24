@@ -22,6 +22,8 @@ public class MemberDTO {
 	
 	String name;
 	
+	String nickname;
+	
 	LocalDateTime regDate;
 	
 	LocalDateTime modDate;

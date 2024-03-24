@@ -26,6 +26,7 @@ public interface MemberService {
 				.id(entity.getId())
 				.password(entity.getPassword())
 				.name(entity.getName())
+				.nickname(entity.getNickname())
 				.regDate(entity.getRegDate())
 				.modDate(entity.getModDate())
 				.role(entity.getRole()) //등급 추가
@@ -41,6 +42,7 @@ public interface MemberService {
 				.id(dto.getId())
 				.password(dto.getPassword())
 				.name(dto.getName())
+				.nickname(dto.getNickname())
 				.role(dto.getRole()) //등급 추가
 				.fromSocial(dto.isFromSocial())
 				.build();

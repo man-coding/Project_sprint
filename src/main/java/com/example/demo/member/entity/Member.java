@@ -30,6 +30,9 @@ public class Member extends BaseEntity{
 	@Column(length = 100, nullable = false)
 	String name;
 	
+	@Column(length = 100, nullable = false)
+	String nickname;
+	
 	@Column(length = 100, nullable = true)
 	String role;	//사용자 등급 추가
 	

@@ -20,7 +20,7 @@ public interface MarathonBoardService {
 
 	default Marathon dtoToEntity(MarathonDTO dto) {
 		Member member = Member.builder().id(dto.getWriter()).build();
-		Marathon entity = Marathon.builder().no(dto.getNo()).writer(member.getId()).title(dto.getTitle())
+		Marathon entity = Marathon.builder().no(dto.getNo()).writer(member.getNickname()).title(dto.getTitle())
 				.marathonDate(dto.getMarathonDate()).location(dto.getLocation()).content(dto.getContent())
 				.countLike(dto.getCountLike()).imgPath(dto.getImgPath()).build();
 
