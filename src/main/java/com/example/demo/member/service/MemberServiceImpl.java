@@ -56,6 +56,16 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 	}
+	@Override
+	public MemberDTO findMemberById(String id) {
+		Optional<Member> optionalMember = repository.findById(id);
+		if (optionalMember.isPresent()) {
+			Member member = optionalMember.get();
+			return entityToDto(member);
+		} else {
+			return null; // 또는 예외를 던지거나 다른 적절한 처리를 수행할 수 있습니다.
+		}
+	}
 
 	@Override
 	public MemberDTO read(String id) {

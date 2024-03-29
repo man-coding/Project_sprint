@@ -19,7 +19,10 @@ public interface MemberService {
 
 	// 소셜 로그인한 이메일로 회원가입하는 메소드 추가
 	MemberDTO saveSocialMember(String email);
-	
+
+	MemberDTO findMemberById(String id);
+
+
 	//엔티티를 DTO로 변환하는 메소드
 	default MemberDTO entityToDto(Member entity) {
 		MemberDTO dto = MemberDTO.builder()
