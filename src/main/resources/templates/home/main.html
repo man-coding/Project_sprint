@@ -95,7 +95,7 @@
 			</script>
 			</form>
                     <li th:if="${loggedInUser != null}">
-                        <a th:href="@{'/member/modify?id=' + ${loggedInUser.name}}">
+                        <a th:href="@{'/member/modify?id=' + ${loggedInUser.id}}">
                             <img sec:authorize="isAuthenticated()" src="/img/user.png" class="profile-image">
                         </a>
                     </li>

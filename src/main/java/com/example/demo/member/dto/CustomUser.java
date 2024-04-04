@@ -33,4 +33,5 @@ public class CustomUser extends User implements OAuth2User {
  public String getName() {
      return null;
  }
+
 }
