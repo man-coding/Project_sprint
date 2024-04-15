@@ -7,13 +7,13 @@ import com.example.demo.member.entity.Member;
 
 
 public interface MemberService {
-	
+
 	Page<MemberDTO> getList(int pageNumber); //회원 목록조회
-	
+
 	boolean register(MemberDTO dto); //회원 등록
 
 	MemberDTO read(String id); //회원 단건 조회
-	
+
 	// 회원 정보 수정 메소드 추가
 	void modify(MemberDTO dto);
 
@@ -21,6 +21,8 @@ public interface MemberService {
 	MemberDTO saveSocialMember(String email);
 
 	MemberDTO findMemberById(String id);
+
+	String findNameById(String id);
 
 
 	//엔티티를 DTO로 변환하는 메소드

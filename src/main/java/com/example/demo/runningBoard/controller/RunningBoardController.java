@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.member.service.MemberService;
 import com.example.demo.runningBoard.dto.RunningDTO;
 import com.example.demo.runningBoard.service.RunningBoardService;
 import com.example.demo.runningBoard.service.RunningBoardServiceImpl;
@@ -29,6 +30,9 @@ public class RunningBoardController {
 	RunningBoardService service;
 
 	@Autowired
+	MemberService memberService;
+
+	@Autowired
 	WeatherService weatherService;
 
 	@GetMapping("/list")
@@ -37,14 +41,15 @@ public class RunningBoardController {
 		model.addAttribute("list", list);
 
 	}
+
 	@GetMapping("/search")
-	public String search(@RequestParam(defaultValue = "0", name = "page") int page, 
-	                     @RequestParam(name = "keyword") String keyword, Model model) {
-	    Page<RunningDTO> list = service.getSearchList(page, keyword);
-	    model.addAttribute("list", list);
-	    return "/runningBoard/list";
+	public String search(@RequestParam(defaultValue = "0", name = "page") int page,
+						 @RequestParam(name = "keyword") String keyword, Model model) {
+		Page<RunningDTO> list = service.getSearchList(page, keyword);
+		model.addAttribute("list", list);
+		return "/runningBoard/list";
 	}
-	
+
 	@GetMapping("/register")
 	public void register() {
 
@@ -54,7 +59,10 @@ public class RunningBoardController {
 	public String registerPost(RunningDTO dto, RedirectAttributes redirectAttributes, Principal principal) {
 
 		String id = principal.getName();
-		dto.setWriter(id);
+
+		String name = memberService.findNameById(id);
+
+		dto.setWriter(name);
 
 		int no = service.register(dto);
 
@@ -65,7 +73,7 @@ public class RunningBoardController {
 
 	@GetMapping("/read")
 	public void read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
-			Model model) throws IOException {
+					 Model model) throws IOException {
 
 		RunningDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
@@ -94,7 +102,5 @@ public class RunningBoardController {
 		service.remove(no);
 		return "redirect:/runningBoard/list";
 	}
-	
-
 
 }

@@ -1,6 +1,4 @@
-package com.example.demo.marathonBoard.entity;
-
-import java.time.LocalDateTime;
+package com.example.demo.diaryBoard.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,8 +22,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
-public class Marathon extends BaseEntity {
+public class Diary extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,22 +30,16 @@ public class Marathon extends BaseEntity {
 
 	@Column(length = 100, nullable = false)
 	String title;
-	
-	@Column(length = 40, nullable = false)
+
+	@Column(length = 20, nullable = false)
 	String writer;
-	
-	@Column(length = 30, nullable = false)
-	LocalDateTime marathonDate;
-	
-	@Column(length = 30, nullable = false)
-	String location;
 
 	@Column(length = 255, nullable = false)
 	String content;
 
 	@Column(length = 10, nullable = true)
 	int countLike;
-	
+
 	@Column(length = 200, nullable = true)
-	private String imgPath; //첨부파일 이름
+	private String imgPath; // 첨부파일 이름
 }

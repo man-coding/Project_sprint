@@ -51,6 +51,7 @@ public class OAuthUserDetailsServiceImpl extends DefaultOAuth2UserService {
 
         // 자동으로 회원가입 하기
         MemberDTO memberDTO = memberService.saveSocialMember(email);
+        memberDTO.setRole("ROLE_USER");
 
         // CustomUser로 변환하여 반환 (일반 로그인과 결과를 맞춤)
         return new CustomUser(memberDTO);

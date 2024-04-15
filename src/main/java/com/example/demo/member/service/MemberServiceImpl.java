@@ -14,27 +14,25 @@ import com.example.demo.member.dto.MemberDTO;
 import com.example.demo.member.entity.Member;
 import com.example.demo.member.repository.MemberRepository;
 
-
 @Service
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	MemberRepository repository;
 
-
 	@Autowired
 	PasswordEncoder passwordEncoder;
-		
+
 	@Override
 	public Page<MemberDTO> getList(int pageNumber) {
 		int pageIndex = (pageNumber == 0) ? 0 : pageNumber - 1;
 		Pageable pageable = PageRequest.of(pageIndex, 10, Sort.by("regDate").descending());
 		Page<Member> entityPage = repository.findAll(pageable);
-		Page<MemberDTO> dtoPage = entityPage.map( entity -> entityToDto(entity) );
+		Page<MemberDTO> dtoPage = entityPage.map(entity -> entityToDto(entity));
 
 		return dtoPage;
 	}
-	
+
 	@Override
 	public boolean register(MemberDTO dto) {
 		String id = dto.getId();
@@ -52,10 +50,8 @@ public class MemberServiceImpl implements MemberService {
 		repository.save(entity);
 		return true;
 
-
-	
-	
 	}
+
 	@Override
 	public MemberDTO findMemberById(String id) {
 		Optional<Member> optionalMember = repository.findById(id);
@@ -77,25 +73,23 @@ public class MemberServiceImpl implements MemberService {
 			return null;
 		}
 	}
-	
+
 	// 소셜 로그인한 이메일로 회원가입하는 메소드 추가
 	@Override
 	public MemberDTO saveSocialMember(String email) {
-		//기존에 동일한 이메일로 가입한 회원이 있는지 조회
+		// 기존에 동일한 이메일로 가입한 회원이 있는지 조회
 		Optional<Member> result = repository.findById(email);
 
-		//해당 이메일로 등록된 회원이 있으면 반환
-		if(result.isPresent()){
+		// 해당 이메일로 등록된 회원이 있으면 반환
+		if (result.isPresent()) {
 			return entityToDto(result.get());
 		}
-	
-		//해당 이메일로 등록된 회원이 없으면 회원가입 진행
-		Member member = Member.builder()
-				.id(email) // 아이디는 이메일로 처리
+
+		// 해당 이메일로 등록된 회원이 없으면 회원가입 진행
+		Member member = Member.builder().id(email) // 아이디는 이메일로 처리
 				.name(email) // 이름도 이메일로 처리
 				.password(passwordEncoder.encode("1111")) // 임시 비밀번호
-				.fromSocial(true)
-				.role("ROLE_USER") // 임시 권한
+				.fromSocial(true).role("ROLE_USER") // 임시 권한
 				.build();
 
 		repository.save(member);
@@ -104,6 +98,7 @@ public class MemberServiceImpl implements MemberService {
 
 		return entityToDto(result.get()); // 새로운 회원정보 또는 기존 회원정보 반환
 	}
+
 	@Override
 	public void modify(MemberDTO dto) {
 
@@ -111,15 +106,16 @@ public class MemberServiceImpl implements MemberService {
 		Optional<Member> result = repository.findById(dto.getId());
 
 		// 회원 정보 교체
-		if(result.isPresent()){
+		if (result.isPresent()) {
 			Member entity = result.get();
 			entity.setName(dto.getName());
 			entity.setRole(dto.getRole());
 
 			// 기존 패스워드와 달라졌다면
 			boolean matchResult1 = entity.getPassword().equals(dto.getPassword());
-			//boolean matchResult2 = passwordEncoder.matches(entity.getPassword(), dto.getPassword());
-			if(!matchResult1){
+			// boolean matchResult2 = passwordEncoder.matches(entity.getPassword(),
+			// dto.getPassword());
+			if (!matchResult1) {
 				System.out.println("패스워드가 변경되었습니다");
 				String hashpassword = passwordEncoder.encode(dto.getPassword());
 				entity.setPassword(hashpassword);
@@ -130,4 +126,16 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
+	@Override
+	public String findNameById(String id) {
+		Optional<Member> optionalMember = repository.findById(id);
+		if (optionalMember.isPresent()) {
+			Member member = optionalMember.get();
+			return member.getName(); //멤버 엔티티에서 이름을 직접 반환
+		} else {
+			return null; // 또는 예외를 던지거나 다른 적절한 처리를 수행할 수 있습니다.
+
+		}
+
+	}
 }

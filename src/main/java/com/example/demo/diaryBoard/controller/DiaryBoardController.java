@@ -1,9 +1,8 @@
-package com.example.demo.marathonBoard.controller;
+package com.example.demo.diaryBoard.controller;
 
 import java.security.Principal;
 
 import com.example.demo.member.service.MemberService;
-import com.example.demo.weatherApi.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -14,24 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.marathonBoard.dto.MarathonDTO;
-import com.example.demo.marathonBoard.service.MarathonBoardService;
+import com.example.demo.diaryBoard.dto.DiaryDTO;
+import com.example.demo.diaryBoard.service.DiaryBoardService;
 
 @Controller
-@RequestMapping("/marathonBoard")
-public class MarathonBoardController {
+@RequestMapping("/diaryBoard")
+public class DiaryBoardController {
 
 	@Autowired
-	MarathonBoardService service;
+	DiaryBoardService service;
 	@Autowired
 	MemberService memberService;
-
-	@Autowired
-	WeatherService weatherService;
 	@GetMapping("/list")
 	public void list(@RequestParam(defaultValue = "0", name = "page") int page, Model model) {
 
-		Page<MarathonDTO> list = service.getList(page);
+		Page<DiaryDTO> list = service.getList(page);
 		model.addAttribute("list", list);
 	}
 
@@ -41,7 +37,7 @@ public class MarathonBoardController {
 	}
 
 	@PostMapping("/register")
-	public String registerPost(MarathonDTO dto, RedirectAttributes redirectAttributes, Principal principal)
+	public String registerPost(DiaryDTO dto, RedirectAttributes redirectAttributes, Principal principal)
 			throws Exception {
 
 		String id = principal.getName();
@@ -52,35 +48,34 @@ public class MarathonBoardController {
 
 		redirectAttributes.addFlashAttribute("msg", no);
 
-		return "redirect:/marathonBoard/list";
-
+		return "redirect:/diaryBoard/list";
 	}
 
 	@GetMapping("/read")
 	public void read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
 			Model model) {
 
-		MarathonDTO dto = service.read(no);
+		DiaryDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
 	}
 
 	@GetMapping("/modify")
 	public void modify(@RequestParam(name = "no") int no, Model model) {
-		MarathonDTO dto = service.read(no);
+		DiaryDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
 	}
 
 	@PostMapping("/modify")
-	public String modifyPost(MarathonDTO dto, RedirectAttributes redirectAttributes) {
+	public String modifyPost(DiaryDTO dto, RedirectAttributes redirectAttributes) {
 		service.modify(dto);
 		redirectAttributes.addAttribute("no", dto.getNo());
-		return "redirect:/marathonBoard/read";
+		return "redirect:DiaryBoard/read";
 	}
 
 	@PostMapping("/remove")
 	public String removePost(@RequestParam(name = "no") int no) {
 		service.remove(no);
-		return "redirect:/marathonBoard/list";
+		return "redirect:/DiaryBoard/list";
 	}
 }

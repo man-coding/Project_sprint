@@ -13,25 +13,25 @@ import lombok.Getter;
 @Getter
 public class CustomUser extends User implements OAuth2User {
 
- // 소셜로그인시 패스워드를 확인하기 위해서 필드 추가
- String password;
+    // 소셜로그인시 패스워드를 확인하기 위해서 필드 추가
+    String password;
 
- Map<String, Object> attr;
+    Map<String, Object> attr;
 
- public CustomUser(MemberDTO dto) {
- 	super(dto.getId(), dto.getPassword(), Arrays.asList(new SimpleGrantedAuthority(dto.getRole())));
+    public CustomUser(MemberDTO dto) {
+        super(dto.getId(), dto.getPassword(), Arrays.asList(new SimpleGrantedAuthority(dto.getRole())));
 
-     this.password = dto.getPassword();
- }
+        this.password = dto.getPassword();
+    }
 
- @Override
- public Map<String, Object> getAttributes() {
-     return this.attr;
- }
+    @Override
+    public Map<String, Object> getAttributes() {
+        return this.attr;
+    }
 
- @Override
- public String getName() {
-     return null;
- }
+    @Override
+    public String getName() {
+        return null;
+    }
 
 }
