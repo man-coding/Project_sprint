@@ -19,18 +19,19 @@ public interface RunningBoardService {
 	int remove(int no);
 	
 	 Page<RunningDTO> getSearchList(int pageNumber, String keyword);
-	
-	
+
+
 	default Running dtoToEntity(RunningDTO dto) {
-		Member member = Member.builder().id(dto.getWriter()).build();
-		
-		Running entity = Running.builder().no(dto.getNo()).writer(member.getId()).title(dto.getTitle())
+
+		Member member = Member.builder().name(dto.getWriter()).build();
+
+		Running entity = Running.builder().no(dto.getNo()).writer(member.getName()).title(dto.getTitle())
 				.runningDate(dto.getRunningDate()).location(dto.getLocation()).content(dto.getContent())
 				.latitude(dto.getLatitude()).longtitude(dto.getLongtitude()).countLike(dto.getCountLike()).build();
 
 		return entity;
-
 	}
+
 
 	default RunningDTO entityToDto(Running entity) {
 
