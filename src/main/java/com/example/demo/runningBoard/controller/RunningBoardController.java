@@ -68,7 +68,7 @@ public class RunningBoardController {
 
 		redirectAttributes.addFlashAttribute("msg", no);
 
-		return "redirect:/runningBoard/list";
+		return "redirect:/runningBoard/read?no=" + no;
 	}
 
 	@GetMapping("/read")

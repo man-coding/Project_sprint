@@ -48,7 +48,7 @@ public class DiaryBoardController {
 
 		redirectAttributes.addFlashAttribute("msg", no);
 
-		return "redirect:/diaryBoard/list";
+		return "redirect:/diaryBoard/read?no=" + no;
 	}
 
 	@GetMapping("/read")

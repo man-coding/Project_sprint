@@ -23,7 +23,7 @@
                 <input type="button" value="등록">
             </a>
         </div>
-        <div th:each="dto : ${list}" class="m-m-container"  
+        <div th:each="dto : ${list}" class="m-m-container"
 		 th:onclick="'window.location.href=\'/diaryBoard/read?no=' + ${dto.no} +'&page=' + (${list.number + 1}) + '\''"
 			style="cursor: pointer;">
             <div class="notice-first-info">
@@ -39,11 +39,11 @@
                         <span class="notice-detail-info">[[${#temporals.format(dto.regDate, 'HH:ss')}]]</span>
                 </div>
             </div>
-            
+
             <div class="img-container">
                 <img th:src="'/uploadfile/'+${dto.imgPath}" alt="Post image" >
             </div>
-            
+
             <div class="info-container" onclick="event.stopPropagation(); addLike();">
                 <div class="people-info">
                     <i class="fa-solid fa-user"></i>
@@ -59,11 +59,11 @@
             <div class="m-title">
                 <h3>[[${dto.title}]]</h3>
             </div>
-            
+
         </div>
-        
-        
-    </div>  
+
+
+    </div>
 </body>
 </html>
 
