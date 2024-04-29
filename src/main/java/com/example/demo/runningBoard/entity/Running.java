@@ -16,8 +16,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
+//@Entity 어노테이션은 이 클래스가 JPA 엔티티임을 나타냅니다.
 @Entity
+//@Table 어노테이션은 이 엔티티가 매핑될 테이블 정보를 지정합니다. 여기서는 기본 테이블 이름을 사용합니다.
 @Table
 
 @Getter
@@ -29,8 +30,8 @@ import lombok.ToString;
 
 public class Running extends BaseEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id // 엔티티의 기본 키임을 나타냅니다.
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 생성을 데이터베이스에 위임합니다. (즉, auto_increment)
 	int no;
 
 	@Column(length = 20, nullable = false)

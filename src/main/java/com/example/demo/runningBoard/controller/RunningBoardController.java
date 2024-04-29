@@ -21,10 +21,10 @@ import com.example.demo.runningBoard.service.RunningBoardServiceImpl;
 import com.example.demo.weatherApi.dto.WeatherDTO;
 import com.example.demo.weatherApi.service.WeatherService;
 
-@Controller
-@RequestMapping("/runningBoard")
+@Controller // 스프링 MVC에서 컨트롤러임을 나타냄
+@RequestMapping("/runningBoard") // 이 컨트롤러의 모든 매핑은 /runningBoard로 시작
 public class RunningBoardController {
-	@Autowired
+	@Autowired // 스프링이 자동으로 해당 타입의 빈을 연결
 	RunningBoardServiceImpl service2;
 	@Autowired
 	RunningBoardService service;
@@ -37,69 +37,69 @@ public class RunningBoardController {
 
 	@GetMapping("/list")
 	public void list(@RequestParam(defaultValue = "0", name = "page") int page, Model model) {
-		Page<RunningDTO> list = service.getList(page);
-		model.addAttribute("list", list);
+		Page<RunningDTO> list = service.getList(page); // 페이지 번호에 해당하는 목록을 가져옴
+		model.addAttribute("list", list); // 모델에 목록 추가
 
 	}
 
 	@GetMapping("/search")
 	public String search(@RequestParam(defaultValue = "0", name = "page") int page,
 						 @RequestParam(name = "keyword") String keyword, Model model) {
-		Page<RunningDTO> list = service.getSearchList(page, keyword);
-		model.addAttribute("list", list);
-		return "/runningBoard/list";
+		Page<RunningDTO> list = service.getSearchList(page, keyword); // 검색어로 필터링된 목록을 가져옴
+		model.addAttribute("list", list); // 모델에 목록 추가
+		return "/runningBoard/list"; // 목록 페이지로 리다이렉트
 	}
 
 	@GetMapping("/register")
 	public void register() {
-
+		// 글 등록 페이지를 보여줌
 	}
 
 	@PostMapping("/register")
 	public String registerPost(RunningDTO dto, RedirectAttributes redirectAttributes, Principal principal) {
 
-		String id = principal.getName();
+		String id = principal.getName(); // 현재 사용자의 ID를 가져옴
 
-		String name = memberService.findNameById(id);
+		String name = memberService.findNameById(id); // ID로 사용자 이름을 찾음
 
-		dto.setWriter(name);
+		dto.setWriter(name); // DTO에 작성자 설정
 
-		int no = service.register(dto);
+		int no = service.register(dto); // 글 등록 후 글 번호를 받음
 
-		redirectAttributes.addFlashAttribute("msg", no);
+		redirectAttributes.addFlashAttribute("msg", no); // 리다이렉트 후 한 번만 사용될 데이터를 전달
 
-		return "redirect:/runningBoard/read?no=" + no;
+		return "redirect:/runningBoard/read?no=" + no; // 등록된 글 읽기 페이지로 리다이렉트
 	}
 
 	@GetMapping("/read")
 	public void read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
 					 Model model) throws IOException {
 
-		RunningDTO dto = service.read(no);
-		model.addAttribute("dto", dto);
-		model.addAttribute("page", page);
+		RunningDTO dto = service.read(no); // 글 번호로 글 정보를 가져옴
+		model.addAttribute("dto", dto); // 모델에 글 정보 추가
+		model.addAttribute("page", page); // 조회한 페이지 번호를 모델에 추가
 
-		List<WeatherDTO> weather = weatherService.entityToDto();
+		List<WeatherDTO> weather = weatherService.entityToDto(); // 날씨 정보를 가져옴
 
-		model.addAttribute("weather", weather);
+		model.addAttribute("weather", weather); // 모델에 날씨 정보 추가
 	}
 
 	@GetMapping("/modify")
 	public void modify(@RequestParam(name = "no") int no, Model model) {
-		RunningDTO dto = service.read(no);
-		model.addAttribute("dto", dto);
+		RunningDTO dto = service.read(no); // 수정할 글의 정보를 가져옴
+		model.addAttribute("dto", dto); // 모델에 글 정보 추가
 	}
 
 	@PostMapping("/modify")
 	public String modifyPost(RunningDTO dto, RedirectAttributes redirectAttributes) {
-		service.modify(dto);
-		redirectAttributes.addAttribute("no", dto.getNo());
-		return "redirect:/runningBoard/read";
+		service.modify(dto); // 글 정보를 수정
+		redirectAttributes.addAttribute("no", dto.getNo()); // 수정된 글 번호를 파라미터로 추가
+		return "redirect:/runningBoard/read"; // 수정된 글 읽기 페이지로 리다이렉트
 	}
 
 	@PostMapping("/remove")
 	public String removePost(@RequestParam(name = "no") int no) {
-		service.remove(no);
+		service.remove(no); // 글 번호로 글을 삭제
 		return "redirect:/runningBoard/list";
 	}
 
