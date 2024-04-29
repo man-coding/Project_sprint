@@ -96,79 +96,75 @@
 </html>
 </th:block>
 </th:block>
-				<script th:inline="javascript">
+<script th:inline="javascript">
+    // 문서가 준비되면 showComment 함수 호출
+    $(document).ready(function() {
+        showComment();
+    })
 
-	$(document).ready(function() {
-		showComment();
-	})
+    // 댓글을 보여주는 함수
+    function showComment(){
+        // 컨트롤러에서 전달받은 게시물 정보 저장
+        var board = [[${dto}]];
+        // 댓글 보기 부분 태그 가져오기
+        let comment_div = $('#content-comment-list');
 
-	function showComment(){
-		//컨트롤러에서 전달받은 게시물 정보 저장
-		var board = [[${dto}]];
-		// 댓글 보기 부분 태그 가져오기
-		let comment_div = $('#content-comment-list');
-		
-		$.ajax({
-		type: "GET",
-		url: "/mBoardcomment/list?boardNo="+board.no,
-		success: function(response){
-			
-			// 자식 엘리먼트 모두 지우기
-			comment_div.empty();
-			
-			let commentlist = response;
-			// 화면에 댓글 목록 출력하기
-			for(i in commentlist){
-				 let comment = commentlist[i];
-				 let writer_div = '<div class="comment-writer">' + comment.writer + '</div>';
-				 let content_div = '<div class="comment-content">' + comment.content + '</div>';
-				 let delete_btn = '<div class="comment-delete"><a href="javascript:removeComment('+comment.commentNo+')">삭제</a></div>';
-				 let comment_html = '<div class="comment-item">' + writer_div + content_div + delete_btn + '</div>';
-				 comment_div.append(comment_html);
-			}
-		}
-		});
-	}
+        $.ajax({
+            type: "GET",
+            url: "/dBoardComment/list?boardNo="+board.no,
+            success: function(response){
+                // 자식 엘리먼트 모두 지우기
+                comment_div.empty();
 
-	function registerComment() {
-		var board = [[${dto}]];
-		let commentContent = document.getElementById("comment-input");
-		let commentDto =
-		{
-				'commentNo':0,
-				'boardNo':board.no,
-				'content': commentContent.value		
-				
-				
-		}
-	
-		$.ajax({
-			type: "POST",
-			data: commentDto,
-			url: "/mBoardcomment/register",
-			success: function(response){
-				if(response.success){
-					commentContent.value = null;
-					showComment();
-				}
-			}
-			});
-	}
+                let commentlist = response;
+                // 화면에 댓글 목록 출력하기
+                for(i in commentlist){
+                    let comment = commentlist[i];
+                    let writer_div = '<div class="comment-writer">' + comment.writer + '</div>';
+                    let content_div = '<div class="comment-content">' + comment.content + '</div>';
+                    let delete_btn = '<div class="comment-delete"><a href="javascript:removeComment('+comment.commentNo+')">삭제</a></div>';
+                    let comment_html = '<div class="comment-item">' + writer_div + content_div + delete_btn + '</div>';
+                    comment_div.append(comment_html);
+                }
+            }
+        });
+    }
 
-	function removeComment(commentNo){
-		var board = [[${dto}]];
-		 $.ajax({
-		      type: "GET",
-		      url: "/mBoardcomment/remove?commentNo="+commentNo,
-		      success: function(response){
-				if(response.success){
-					showComment()
-					}
-				}
-		});
-	}
+    // 댓글을 등록하는 함수
+    function registerComment() {
+        var board = [[${dto}]];
+        let commentContent = document.getElementById("comment-input");
+        let commentDto =
+            {
+                'commentNo':0,
+                'boardNo':board.no,
+                'content': commentContent.value
+            }
 
-	
+        $.ajax({
+            type: "POST",
+            data: commentDto,
+            url: "/dBoardComment/register",
+            success: function(response){
+                if(response.success){
+                    commentContent.value = null;
+                    showComment();
+                }
+            }
+        });
+    }
+
+    // 댓글을 삭제하는 함수
+    function removeComment(commentNo){
+        var board = [[${dto}]];
+        $.ajax({
+            type: "GET",
+            url: "/dBoardComment/remove?commentNo="+commentNo,
+            success: function(response){
+                if(response.success){
+                    showComment()
+                }
+            }
+        });
+    }
 </script>
-
-	

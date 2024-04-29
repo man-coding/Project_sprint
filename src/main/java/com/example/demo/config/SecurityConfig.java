@@ -42,7 +42,7 @@ public class SecurityConfig {
 				.requestMatchers("/marathonBoard/*").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
 				.requestMatchers("/diaryBoard/*").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/uploadfile/**").permitAll() //파일첨부 이미지 모두 접근 가능
-				.requestMatchers("/rBoardcomment/*","/mBoardcomment/*").hasAnyRole("ADMIN","USER")
+				.requestMatchers("/rBoardcomment/*","/mBoardcomment/*","/dBoardComment/*").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/joinMember/*").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/search/*").permitAll()
 	    		.requestMatchers("/member/*").hasAnyRole("ADMIN","USER"); // 소셜로그인 회원 정보를 수정하기 위해 변경

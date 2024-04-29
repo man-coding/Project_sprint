@@ -9,10 +9,10 @@
 <!-- =========================================================================== -->
 <link rel="stylesheet" type="text/css" href="/css/login.css">
 <!-- =========================================================================== -->
-<script src="https://kit.fontawesome.com/fc8d331d05.js"
+<script src="https://kit.fontawesome.com/fc8d331d05.js" /> <!-- icon -->
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script> <!-- Kakao Login API-->
 
 </head>
 <body>
@@ -66,7 +66,7 @@
 	}
 	</script>
 <script>
-$(document).ready(function(){
+$(document).ready(function(){ //아이디 비번 저장 cookie
 var key = getCookie("idChk"); //user1
 if(key!=""){
 $("#username").val(key);
