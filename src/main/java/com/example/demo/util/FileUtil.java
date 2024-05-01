@@ -11,33 +11,32 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
 /*
- * 전달받은 파일스트림을 특정 폴더에 저장하고 파일이름을 반환한다
- * 만약 파일스트림이 없다면 메소드를 바로 종료한다
- * */
-@Component
+ * 파일을 특정 폴더에 저장하고 파일 이름을 반환하는 유틸리티 컴포넌트
+ */
+@Component // 스프링 빈으로 등록
 public class FileUtil {
 
-	//이미지 파일을 저장할 경로
-	@Value("${filepath}")
+	@Value("${filepath}") // application.properties에서 설정된 파일 저장 경로를 불러온다
 	String filepath;
 
-	public String fileUpload(MultipartFile multipartFile) {
+	public String fileUpload(MultipartFile multipartFile) { // MultipartFile 형태의 파일을 받아 처리하는 메소드
 		Path copyOfLocation = null;
 		
-		if(multipartFile.isEmpty()) { //파일스트림이 없으면 메소드를 종료한다
+		if(multipartFile.isEmpty()) { // 전달받은 파일이 비어있으면 메서드를 종료한다
 			return null;
 		}
 		try {
 			copyOfLocation = Paths
-					.get(filepath + File.separator + StringUtils.cleanPath(multipartFile.getOriginalFilename())); //파일 전체 경로
+					.get(filepath + File.separator + StringUtils.cleanPath(multipartFile.getOriginalFilename())); // 저장할 파일의 전체 경로를 생성한다
+					// StringUtils.cleanPath로 파일 이름에서 '..' 등의 경로 조작을 방지한다
 			
-			Files.copy(multipartFile.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING); //파일을 폴더에 저장
-			
-		} catch (IOException e) {
+			Files.copy(multipartFile.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING); // 실제 파일을 위에서 생성한 경로에 저장한다. 이미 파일이 존재하면 대체한다
+		} catch (IOException e) { // 파일 처리 중 오류가 발생하면 예외를 캐치한다
 			e.printStackTrace();
 		}
-		//파일이름을 반환한다
+		// 메소드를 성공적으로 마칠 경우, 원본 파일의 이름을 반환한다.
 		return multipartFile.getOriginalFilename();
 	}
 }
