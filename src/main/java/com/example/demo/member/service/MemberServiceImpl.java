@@ -2,6 +2,7 @@ package com.example.demo.member.service;
 
 import java.util.Optional;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +16,7 @@ import com.example.demo.member.entity.Member;
 import com.example.demo.member.repository.MemberRepository;
 
 //MemberServiceImpl 클래스: 회원 관련 서비스를 제공하는 클래스입니다.
+@Slf4j
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -45,6 +47,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean register(MemberDTO dto) {
 		String id = dto.getId();
+		log.info("Register Id = {}", id);
 		// ID로 회원 정보를 조회합니다.
 		MemberDTO getDto = read(id);
 		// 같은 ID의 회원 정보가 이미 있으면 false를 반환합니다.

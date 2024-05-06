@@ -45,6 +45,8 @@ public interface MemberService {
                 .name(dto.getName())
                 .role(dto.getRole()) // 등급 정보
                 .fromSocial(dto.isFromSocial()) // 소셜 로그인 여부
+                .email(dto.getEmail())
+                .oauthType(dto.getOauthType())
                 .build();
         return entity;
     }

@@ -34,5 +34,9 @@ public class Member extends BaseEntity{
 	String role;	//사용자 등급 추가
 	
 	private boolean fromSocial;
+
+	private String email;
+
+	private String oauthType;
 	
 }
