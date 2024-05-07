@@ -2,12 +2,12 @@ package com.example.demo.email.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmailRequestDto {
 
   @Email

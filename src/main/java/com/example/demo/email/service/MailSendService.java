@@ -1,29 +1,40 @@
 package com.example.demo.email.service;
 
 import com.example.demo.email.dto.EmailCheckDto;
+import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class MailSendService {
 
   @Value("${spring.mail.username}")
   private String setFrom;
 
-  @Autowired
-  private JavaMailSender mailSender;
+  private final JavaMailSender mailSender;
+  private final RedisTemplate<String, Object> redisTemplate;
 
   private int authNumber;
+  private ValueOperations<String, Object> valueOperations;
+
+  @PostConstruct
+  public void init() {
+    this.valueOperations = redisTemplate.opsForValue();
+  }
 
   public void makeRandomNumber() {
     Random r = new Random();
@@ -61,6 +72,7 @@ public class MailSendService {
       helper.setSubject(title);
       helper.setText(content, true);
       mailSender.send(message);
+      valueOperations.set(toMail, Integer.toString(authNumber), 5, TimeUnit.MINUTES);
     } catch (MessagingException e) {
       log.error(e.getMessage());
       e.printStackTrace();
@@ -68,6 +80,12 @@ public class MailSendService {
   }
 
   public String checkAuthNum(EmailCheckDto emailCheckDto) {
-
+    if (valueOperations.get(emailCheckDto.getEmail()) == null) {
+      return "이메일이 존재하지 않습니다.";
+    } else if (valueOperations.get(emailCheckDto.getEmail()).equals(emailCheckDto.getAuthNum())) {
+      return "인증 성공";
+    } else {
+      return "실패";
+    }
   }
 }
