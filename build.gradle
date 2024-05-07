@@ -48,7 +48,16 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-jdbc') // JDBC 사용 설정
 	implementation('org.springframework.boot:spring-boot-starter-validation') // Bean Validation API 사용 설정
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // OAuth2/OpenID Connect 클라이언트 기능 지원
-	
+
+	// email
+	implementation 'org.springframework:spring-context-support'
+	implementation 'jakarta.mail:jakarta.mail-api:2.0.1'
+	implementation 'com.sun.mail:jakarta.mail:2.0.1'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+
+	// redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 }
 
 tasks.named('test') {
