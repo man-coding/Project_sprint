@@ -48,6 +48,7 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-jdbc') // JDBC 사용 설정
 	implementation('org.springframework.boot:spring-boot-starter-validation') // Bean Validation API 사용 설정
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // OAuth2/OpenID Connect 클라이언트 기능 지원
+	
 }
 
 tasks.named('test') {

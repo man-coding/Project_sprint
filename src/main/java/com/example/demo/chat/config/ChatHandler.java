@@ -12,7 +12,6 @@ public class ChatHandler extends TextWebSocketHandler {
 
 	private static LinkedHashSet<WebSocketSession> numSet = new LinkedHashSet<>(); // 웹소켓 세션 저장할 해시셋 생성
 
-	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
 		
 		if(numSet.size()>=3) {
