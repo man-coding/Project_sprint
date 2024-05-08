@@ -17,8 +17,6 @@ public class ChatHandler extends TextWebSocketHandler {
 
 		if (numSet.size() >= 3) {
 			WebSocketSession oldSession = numSet.iterator().next(); // 가장 오래된 세션을 가져옴
-
 		}
 	}
-
 }
