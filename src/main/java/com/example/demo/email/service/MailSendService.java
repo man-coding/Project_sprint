@@ -48,7 +48,7 @@ public class MailSendService {
 
   public String joinEmail(String email) {
     if (Objects.isNull(email)) {
-      log.error("[MailSendService] email should not be null");
+      log.error("[MailSendService joinEmail] email should not be null.");
       return null;
     }
 
@@ -73,19 +73,31 @@ public class MailSendService {
       helper.setText(content, true);
       mailSender.send(message);
       valueOperations.set(toMail, Integer.toString(authNumber), 5, TimeUnit.MINUTES);
+      log.info("Join email send success. email: {}, authNum: {}", toMail, authNumber);
     } catch (MessagingException e) {
-      log.error(e.getMessage());
+      log.error("[MailSendService] Failed to send email: {}", e.getMessage());
       e.printStackTrace();
     }
   }
 
-  public String checkAuthNum(EmailCheckDto emailCheckDto) {
-    if (valueOperations.get(emailCheckDto.getEmail()) == null) {
-      return "이메일이 존재하지 않습니다.";
-    } else if (valueOperations.get(emailCheckDto.getEmail()).equals(emailCheckDto.getAuthNum())) {
-      return "인증 성공";
-    } else {
-      return "실패";
+  public boolean checkAuthNum(EmailCheckDto emailCheckDto) {
+    if (Objects.isNull(emailCheckDto.getEmail())) {
+      log.error("[MailSendService checkAuthNum] email should not be null.");
+      return false;
     }
+
+    try {
+      String email = emailCheckDto.getEmail();
+      String storedAuthNum = (String) valueOperations.get(emailCheckDto.getEmail());
+      String requestAuthNum = emailCheckDto.getAuthNum();
+      log.info("email: {}, storedAuthNum: {}, requestAuthNum: {}", email, storedAuthNum, requestAuthNum);
+      if (storedAuthNum.equals(requestAuthNum)) {
+        return true;
+      }
+    } catch (Exception e) {
+      log.error("[MailSendService checkAuthNum] {}", e.getMessage());
+    }
+
+    return false;
   }
 }
