@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -31,8 +32,7 @@ public class MemberDTO {
 	
 	boolean fromSocial; // 소셜 회원 여부 추가
 
-	String email;
+	MultipartFile profileImage;
 
-	String oauthType;
-
+	String profileImagePath;
 }

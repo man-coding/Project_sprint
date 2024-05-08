@@ -35,8 +35,5 @@ public class Member extends BaseEntity{
 	
 	private boolean fromSocial;
 
-	private String email;
-
-	private String oauthType;
-	
+	String profileImagePath;
 }

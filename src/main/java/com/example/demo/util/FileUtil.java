@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,27 @@ public class FileUtil {
 
 	@Value("${filepath}") // application.properties에서 설정된 파일 저장 경로를 불러온다
 	String filepath;
+
+	@Value("${filepath.profile}")
+	private String profileFilepath;
+
+	public String profileFileUpload(MultipartFile multipartFile, String id) {
+		Path copyOfLocation = null;
+		String newFileName = null;
+		if(multipartFile.isEmpty()) {
+			return null;
+		}
+		try {
+			UUID uuid = UUID.randomUUID();
+			newFileName = uuid + StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			copyOfLocation = Paths.get(profileFilepath + File.separator + newFileName);
+
+			Files.copy(multipartFile.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return copyOfLocation.toString();
+	}
 
 	public String fileUpload(MultipartFile multipartFile) { // MultipartFile 형태의 파일을 받아 처리하는 메소드
 		Path copyOfLocation = null;
