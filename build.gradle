@@ -50,7 +50,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // OAuth2/OpenID Connect 클라이언트 기능 지원
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 }
-
+test
 tasks.named('test') {
 	useJUnitPlatform() // JUnit Platform을 사용하여 테스트를 실행하도록 설정, JUnit 5 지원을 포함
 }
