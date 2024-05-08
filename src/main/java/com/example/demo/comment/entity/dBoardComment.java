@@ -1,7 +1,6 @@
 package com.example.demo.comment.entity;
 
 import com.example.demo.diaryBoard.entity.Diary;
-import com.example.demo.member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,11 +32,12 @@ public class dBoardComment extends BaseEntity {
     int commentNo;
 
     @ManyToOne
-    Diary board;
+    Diary diary;
+
+    @Column(length = 20, nullable = false)
+    String writer;
 
     @Column(length = 1500)
     String content;
 
-    @ManyToOne
-    Member writer;
 }

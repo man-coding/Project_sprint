@@ -19,10 +19,10 @@ public interface dBoardCommentService {
         //멤버 조회
         Member member = Member.builder().id(dto.getWriter()).build();
         //보드 조회
-        Diary board = Diary.builder().no(dto.getBoardNo()).build();
+        Diary diary = Diary.builder().no(dto.getBoardNo()).build();
         //entity 생성
-        dBoardComment entity = dBoardComment.builder().commentNo(dto.getCommentNo()).board(board)
-                .content(dto.getContent()).writer(member).build();
+        dBoardComment entity = dBoardComment.builder().commentNo(dto.getCommentNo()).diary(diary)
+                .content(dto.getContent()).writer(member.getId()).build();
 
         return entity;
     }
@@ -30,8 +30,8 @@ public interface dBoardCommentService {
     default CommentDTO entityToDto(dBoardComment entity) {
 
         //dto 생성
-        CommentDTO dto = CommentDTO.builder().commentNo(entity.getCommentNo()).boardNo(entity.getBoard().getNo())
-                .content(entity.getContent()).writer(entity.getWriter().getId()).regDate(entity.getRegDate())
+        CommentDTO dto = CommentDTO.builder().commentNo(entity.getCommentNo()).boardNo(entity.getDiary().getNo())
+                .content(entity.getContent()).writer(entity.getWriter()).regDate(entity.getRegDate())
                 .modDate(entity.getModDate()).build();
 
         return dto;

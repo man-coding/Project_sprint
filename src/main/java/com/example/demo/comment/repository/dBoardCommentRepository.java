@@ -8,8 +8,9 @@ import java.util.List;
 
 public interface dBoardCommentRepository extends JpaRepository<dBoardComment, Integer> {
 
-        List<dBoardComment> findByBoard(Diary board);
+        List<dBoardComment> findByDiary(Diary diary);
 
-        void deleteByBoard(Diary board);
+        void deleteByDiary(Diary diary);
+
     }
 

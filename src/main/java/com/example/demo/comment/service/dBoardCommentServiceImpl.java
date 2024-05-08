@@ -2,7 +2,6 @@ package com.example.demo.comment.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class dBoardCommentServiceImpl implements dBoardCommentService {
 
         Diary board = Diary.builder().no(boardNo).build(); // 게시물 조회
 
-        List<dBoardComment> entityList = repository.findByBoard(board);
+        List<dBoardComment> entityList = repository.findByDiary(board);
 
         List<CommentDTO> dtoList = new ArrayList<>();
 
@@ -50,13 +49,16 @@ public class dBoardCommentServiceImpl implements dBoardCommentService {
 
     @Override
     public void remove(int no) {
-        /*dBoardComment comment = repository.findById(no)
-                        .orElseThrow(()-> new EntityNotFoundException("해당 댓글을 찾지 못했습니다."));
+        dBoardComment comment = repository.findById(no)
+                        .orElseThrow(()-> new EntityNotFoundException("해당 댓글을 찾지 못했습니다. "));
+
         Authentication authentication = authenticationFacade.getAuthentication();   // 현재 로그인한 사용자 확인
 
-        if(comment.getWriter().equals(authentication.))
-
-        repository.deleteById(no);*/
+        if(!comment.getWriter().equals(authentication.getName())){
+            System.out.println("해당 댓글은 삭제 불가능합니다. (접근 불가능)");
+        }else{
+            repository.deleteById(no);
+        }
     }
 
 }

@@ -82,16 +82,13 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 
 	@Override
 	public int remove(int no) {
-
 		Optional<Diary> result = repository.findById(no);
 		if (result.isPresent()) {
 			repository.deleteById(no);
-
 			return 1; // 삭제 성공
 		} else {
 			return 0; // 삭제 실패
 		}
-
 	}
 
 	@Override
