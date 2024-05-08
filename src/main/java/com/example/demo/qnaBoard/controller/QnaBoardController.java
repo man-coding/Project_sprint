@@ -53,6 +53,9 @@ public class QnaBoardController {
     @GetMapping("/read")
     public void read(@RequestParam(name="no") int no, @RequestParam(defaultValue = "0", name = "page") int page, Model model) {
         QnaDTO dto = qnaBoardService.read(no);
+
+        System.out.println("no:"+no+"page:"+page);
+
         model.addAttribute("dto", dto);
         model.addAttribute("page", page);
     }

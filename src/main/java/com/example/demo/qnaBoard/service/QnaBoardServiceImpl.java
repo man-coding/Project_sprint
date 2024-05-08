@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -43,7 +43,14 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 
     @Override
     public QnaDTO read(int no) {
-        return null;
+        Optional<Qna> result = repository.findById(no);
+
+        if (result.isPresent()) {
+            Qna qna = result.get();
+            QnaDTO dto = entityToDto(qna);
+
+            return dto;
+
     }
 
     @Override
