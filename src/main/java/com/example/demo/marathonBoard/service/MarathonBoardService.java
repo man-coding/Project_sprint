@@ -1,7 +1,6 @@
 package com.example.demo.marathonBoard.service;
 
 import org.springframework.data.domain.Page;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.marathonBoard.dto.MarathonDTO;
 import com.example.demo.marathonBoard.entity.Marathon;
@@ -9,13 +8,13 @@ import com.example.demo.member.entity.Member;
 
 public interface MarathonBoardService {
 
-	int register(MarathonDTO dto, MultipartFile file) throws Exception;
+	int register(MarathonDTO dto) throws Exception;
 
 	Page<MarathonDTO> getList(int pageNumber);
 
 	MarathonDTO read(int no);
 
-	void modify(MarathonDTO dto, MultipartFile file);
+	void modify(MarathonDTO dto);
 
 	int remove(int no);
 
@@ -23,7 +22,7 @@ public interface MarathonBoardService {
 		Member member = Member.builder().id(dto.getWriter()).build();
 		Marathon entity = Marathon.builder().no(dto.getNo()).writer(member.getId()).title(dto.getTitle())
 				.marathonDate(dto.getMarathonDate()).location(dto.getLocation()).content(dto.getContent())
-				.countLike(dto.getCountLike()).fileName(dto.getFileName()).filePath(dto.getFilePath()).build();
+				.countLike(dto.getCountLike()).imgPath(dto.getImgPath()).build();
 
 		return entity;
 
@@ -33,8 +32,8 @@ public interface MarathonBoardService {
 
 		MarathonDTO dto = MarathonDTO.builder().no(entity.getNo()).writer(entity.getWriter()).title(entity.getTitle())
 				.MarathonDate(entity.getMarathonDate()).location(entity.getLocation()).content(entity.getContent())
-				.countLike(entity.getCountLike()).fileName(entity.getFileName()).filePath(entity.getFilePath())
-				.regDate(entity.getRegDate()).modDate(entity.getModDate()).build();
+				.countLike(entity.getCountLike()).regDate(entity.getRegDate()).modDate(entity.getModDate())
+				.imgPath(entity.getImgPath()).build();
 
 		return dto;
 	}

@@ -1,11 +1,8 @@
 package com.example.demo.qnaBoard.controller;
 
+import com.example.demo.member.service.MemberService;
 import com.example.demo.qnaBoard.dto.QnaDTO;
-import com.example.demo.qnaBoard.repository.QnaRepository;
 import com.example.demo.qnaBoard.service.QnaBoardService;
-import com.example.demo.qnaBoard.service.QnaBoardServiceImpl;
-import com.example.demo.runningBoard.dto.RunningDTO;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/qnaBoard")
@@ -27,24 +23,54 @@ public class QnaBoardController {
     QnaBoardService qnaBoardService;
 
     @Autowired
-    QnaBoardServiceImpl service;
+    MemberService memberService;
 
     @GetMapping("/list")
     public void list(@RequestParam(defaultValue = "0", name = "page") int page, Model model) {
-        Page<QnaDTO> list = service.getList(page);
+        Page<QnaDTO> list = qnaBoardService.getList(page);
         model.addAttribute("list", list);
     }
 
+    /* register 페이지 접근 */
+    @GetMapping("/register")
+    public void register() {
+    }
+
     @PostMapping("/register")
-    public String registerPost(QnaDTO dto, RedirectAttributes redirectAttributes, Principal principal) {
+    public String registerPost(QnaDTO dto, RedirectAttributes redirectAttributes, Principal principal) throws Exception {
 
-        String id = principal.getName();
-        dto.setWriter(id);
+            String id = principal.getName();
+            String name = memberService.findNameById(id);
+            dto.setWriter(name);
 
-        int no = service.register(dto);
+            int no = qnaBoardService.register(dto);
 
-        redirectAttributes.addFlashAttribute("msg", no);
+            redirectAttributes.addFlashAttribute("msg", no);
 
+            return "redirect:/qnaBoard/read?no="+no;
+    }
+
+    @GetMapping("/read")
+    public void read(@RequestParam(name="no") int no, @RequestParam(defaultValue = "0", name = "page") int page, Model model) {
+        QnaDTO dto = qnaBoardService.read(no);
+
+        System.out.println("no:"+no+"page:"+page);
+
+        model.addAttribute("dto", dto);
+        model.addAttribute("page", page);
+    }
+
+    @PostMapping("/modify")
+    public String modifyPost(QnaDTO dto, RedirectAttributes redirectAttributes) {
+        qnaBoardService.modify(dto);
+        redirectAttributes.addAttribute("no", dto.getNo());
+        return "redirect:qnaBoard/read";
+    }
+
+    @PostMapping("/remove")
+    public String removePost(@RequestParam(name = "no") int no) {
+        qnaBoardService.remove(no);
         return "redirect:/qnaBoard/list";
     }
+
 }

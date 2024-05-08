@@ -312,3 +312,17 @@ function setDisplayAppreance(self){
     self.value = '다크모드로 전환';
   }
 }
+
+function isLoggedIn() {
+  return /* 로그인 상태를 반환하는 코드 */;
+}
+
+// 페이지 로드가 완료되면 실행됩니다.
+window.onload = function() {
+  if (isLoggedIn()) {
+    // 로그인 상태일 경우 "로그인" 버튼을 "로그아웃" 버튼으로 변경합니다.
+    var loginLink = document.querySelector('a[href="/customlogin"]');
+    loginLink.href = "/logout"; // 로그아웃 URL로 변경합니다.
+    loginLink.textContent = "로그아웃";
+  }
+};

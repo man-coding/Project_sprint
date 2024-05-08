@@ -18,7 +18,7 @@
     <div class="read-m-container">
         <div class="content-head">
             <div class="container-cate">
-                <h3><a href="runningBoard/list">파티 참가</a></h3> 
+                <h3><a href="http://localhost:8080/marathonBoard/list">마라톤 참가</a></h3> 
             </div>
             <div class="container-title">
                 <h2>[[${dto.title}]]</h2>
@@ -35,24 +35,33 @@
 
                 <div class="flex flex-col items-center">
                     <i class="fa-regular fa-calendar"></i>
-                    <span class="notice-detail-info">[[${dto.marathonDate}]]</span>
+                    <span class="notice-detail-info">[[${#temporals.format(dto.marathonDate, 'yyyy-MM-dd')}]]</span>
                 </div>
 
                 <div class="flex flex-col items-center">
                     <i class="fa-regular fa-clock"></i>
-                    <span class="notice-detail-info">3시45분</span>
+                    <span class="notice-detail-info">[[${#temporals.format(dto.marathonDate,
+							'HH:mm')}]]</span>
                 </div>
             </div>
             
         </div>
+        
         <div class="content-post">
+            
+            <div class="img-container">
+          		<!-- 상대경로: /uploadfile/apple.png -->
+                <!-- 실제경로: C:\\uploadfile\\apple.png -->
+                <img th:src="'/uploadfile/'+${dto.imgPath}" alt="Post image" >
+            </div>
+            
             <h5>
 				[[${dto.content}]]
             </h5>
             
+             
            
-            <div id="map" style="width: 500px; height: 400px;"></div>
-			<input type="hidden" id="location" th:value="${dto.location}">
+            
         </div>
 
         <div class="bottom-logo-info">

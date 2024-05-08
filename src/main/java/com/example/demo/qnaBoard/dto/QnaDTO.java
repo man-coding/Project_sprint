@@ -1,8 +1,5 @@
 package com.example.demo.qnaBoard.dto;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
@@ -23,7 +20,6 @@ public class QnaDTO {
     String title;
     String writer;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    LocalDate createdAt;
     String content;
     int countView;
 

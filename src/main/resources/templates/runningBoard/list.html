@@ -14,7 +14,7 @@
 <!-- templates css -->
 <link href="/css/list.css" rel="stylesheet">
 <!--           js              -->
-<script src="/js/form.js"></script>
+<script src="/js/list.js"></script>
 
 
 
@@ -22,7 +22,10 @@
 <body>
 	<div class="notice-l-container">
 		<!--글 박스 집합-->
-		
+		<div class="list-register">
+			<a th:href="@{/runningBoard/register}"> <input type="button"
+				value="등록"></a>
+		</div>
 		<div th:each="dto : ${list}" class="notice-m-container"  
 		 th:onclick="'window.location.href=\'/runningBoard/read?no=' + ${dto.no} +'&page=' + (${list.number + 1}) + '\''"
 			style="cursor: pointer;">
@@ -62,32 +65,29 @@
 						onclick="event.stopPropagation(); addLike();">
 						<i class="fa-regular fa-heart"></i>
 					</button>
-					<span class="like_count bottom-logo-font">좋아요 0개</span>
+					<span class="like_count bottom-logo-font">0개</span>
 					</button>
 				</div>
 			</div>
 		</div>
-		<div class="list-register">
-			<a th:href="@{/runningBoard/register}"> <input type="button"
-				value="등록"></a>
-		</div>
+		
 	</div>
-		<ul class="pagination">
-				<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
-					<th:block th:if="${list.number+1 == page}">
-						<li class="page-item active">
-							<!-- 리스트 주소 입력하고, 페이지번호를 파라미터로 전달 -->
-							<a class="page-link" th:href="@{/runningBoard/list(page = ${page})}">[[${page}]]</a>
-						</li>
-					</th:block>
-					<th:block th:unless="${list.number+1 == page}">
-						<li class="page-item">
-							<!-- 리스트 주소 입력하고, 페이지번호를 파라미터로 전달 -->
-							<a class="page-link" th:href="@{/runningBoard/list(page = ${page})}">[[${page}]]</a>
-						</li>
-					</th:block>
-				</th:block>
-			</ul>
+		<ul class="pagination" th:if="${list.totalPages > 0}">
+	<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
+		<th:block th:if="${list.number+1 == page}">
+			<li class="page-item active">
+				<!-- 리스트 주소 입력하고, 페이지번호를 파라미터로 전달 -->
+				<a class="page-link" th:href="@{/runningBoard/list(page = ${page})}">[[${page}]]</a>
+			</li>
+		</th:block>
+		<th:block th:unless="${list.number+1 == page}">
+			<li class="page-item">
+				<!-- 리스트 주소 입력하고, 페이지번호를 파라미터로 전달 -->
+				<a class="page-link" th:href="@{/runningBoard/list(page = ${page})}">[[${page}]]</a>
+			</li>
+		</th:block>
+	</th:block>
+</ul>
 	</body>
 		</html>
 	</th:block>

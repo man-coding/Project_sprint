@@ -1,8 +1,6 @@
 package com.example.demo.marathonBoard.service;
 
-import java.io.File;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,11 +8,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.marathonBoard.dto.MarathonDTO;
 import com.example.demo.marathonBoard.entity.Marathon;
 import com.example.demo.marathonBoard.repository.MarathonRepository;
+import com.example.demo.util.FileUtil;
 
 @Service
 public class MarathonBoardServiceImpl implements MarathonBoardService {
@@ -22,24 +20,39 @@ public class MarathonBoardServiceImpl implements MarathonBoardService {
 	@Autowired
 	MarathonRepository repository;
 
+	@Autowired
+	private FileUtil fileUtil;
+
 	@Override
-	public int register(MarathonDTO dto, MultipartFile file) throws Exception {
+	public int register(MarathonDTO dto) {
 
-		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
-		UUID uuid = UUID.randomUUID();
-		String fileName = uuid + "_" + file.getOriginalFilename();
+		Marathon entity = dtoToEntity(dto); // 파라미터로 전달받은 dto를 엔티티로 변환
 
-		File saveFile = new File(projectPath, fileName);
-		file.transferTo(saveFile);
+		// 유틸클래스를 이용해서 파일을 폴더에 저장하고 파일이름을 반환받는다
+		String imgPath = fileUtil.fileUpload(dto.getUploadFile());
+		// 그리고 엔티티에 파일이름을 저장한다
+		entity.setImgPath(imgPath);
 
-		Marathon entity = dtoToEntity(dto);
-
-		entity.setFileName(fileName); // 파일명 변경
-		entity.setFilePath("/files/" + fileName);
-
-		repository.save(entity);
+		repository.save(entity); // 리파지토리로 게시물 등록
 		int newNo = entity.getNo();
-		return newNo;
+
+		return newNo; // 새로운 게시물의 번호 반환
+
+//		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+//		UUID uuid = UUID.randomUUID();
+//		String fileName = uuid + "_" + file.getOriginalFilename();
+//
+//		File saveFile = new File(projectPath, fileName);
+//		file.transferTo(saveFile);
+//
+//		Marathon entity = dtoToEntity(dto);
+//
+//		entity.setFileName(fileName); // 파일명 변경
+//		entity.setFilePath("/files/" + fileName);
+//
+//		repository.save(entity);
+//		int newNo = entity.getNo();
+//		return newNo;
 	}
 
 	@Override
@@ -73,7 +86,7 @@ public class MarathonBoardServiceImpl implements MarathonBoardService {
 	}
 
 	@Override
-	public void modify(MarathonDTO dto, MultipartFile file) {
+	public void modify(MarathonDTO dto) {
 
 		Optional<Marathon> result = repository.findById(dto.getNo());
 
@@ -85,8 +98,7 @@ public class MarathonBoardServiceImpl implements MarathonBoardService {
 			entity.setMarathonDate(dto.getMarathonDate());
 			entity.setLocation(dto.getLocation());
 			entity.setContent(dto.getContent());
-			entity.setFileName(dto.getFileName());
-			entity.setFilePath(dto.getFilePath());
+			entity.setImgPath(fileUtil.fileUpload(dto.getUploadFile()));
 
 			repository.save(entity);
 		}

@@ -22,7 +22,7 @@
 			<div class="content-head">
 				<div class="container-cate">
 					<h3>
-						<a href="http://localhost:8080/runningBoard/list">파티 참가</a>
+						<a href="http://localhost:8080/runningBoard/list">러닝 참가</a>
 					</h3>
 				</div>
 				<div class="container-title">
@@ -53,6 +53,7 @@
 							'HH:mm')}]]</span>
 					</div>
 				</div>
+				<div class="weather-container" >
 				<!-- Makin-Things / weather-icons -->
 				<div class="weather-info" th:each="item : ${weather}"
 					th:if="${item.forecastTime == 0}">
@@ -60,10 +61,12 @@
 						th:src="${item.weather == '맑음' ? '/img/weather/day.svg' : 
                   item.weather == '구름많음' ? '/img/weather/cloudy-original.svg' : 
                   item.weather == '흐리고 한때 비 곳' ? '/img/weather/rainy-3.svg' : 
-                  item.weather == '구름많고 한때 비 곳' ? '/img/weather/rainy-3.svg' : 
+                  item.weather == '구름많고 한때 비 곳' ? '/img/weather/rainy-3.svg' :
+                    item.weather == '흐림' ? '/img/weather/cloudy-day-1.svg': 
                   '/images/default.png'}"
                   
 				alt="Weather Icon">
+				</div>
 				</div>
 			</div>
 			</div>
@@ -77,19 +80,20 @@
 			<div class="bottom-logo-info">
 				<div class="comment-count">
 					<i class="fa-regular fa-comment"></i> <span
-						id="comment_count bottom-logo-font">[[${dto.location}]]</span>
+						id="comment_count bottom-logo-font">0</span>
 				</div>
 				<div class="heart-info">
 					<button class="heartBtn"
-						onclick="event.stopPropagation(); addLike();">
+						onclick="addLike();">
 						<i class="fa-regular fa-heart"></i>
 					</button>
 					<span class="like_count bottom-logo-font">0</span>
 				</div>
+
 				<div class="participate-info">
 					<div class="user-icon">
 						<i class="fa-solid fa-user bottom-logo-font"></i>
-						<div class="tooltip"></div>
+						<div class="tooltip"> </div>
 					</div>
 					<button class="participateBtn" onclick="joining();">같이뛰기</button>
 
@@ -224,11 +228,15 @@
 
 	            running_div.empty(); // 먼저 기존에 출력되었던 내용을 지웁니다.
 
+	            if(running_div.is(':empty')) {
+	                running_div.append('참석자<br>'); // '참석자' 글씨와 줄바꿈을 추가합니다.
+	            }
+
 	            for(let i in runninglist) {
 	                let runningMember = runninglist[i];
 	                let writer_div = runningMember.runnerId;
 	                let no_div = runningMember.joinNo; // joinNo를 가져옵니다.
-	                let running_html = no_div + '. ' + writer_div + '<br>'; // 수정: 번호와 이름 사이에 '.'과 공백을 추가해 가독성을 높입니다.
+	                let running_html = writer_div + '<br>'; // 수정: 번호와 이름 사이에 '.'과 공백을 추가해 가독성을 높입니다.
 	                running_div.append(running_html);
 	            } 
 	        },
@@ -250,8 +258,14 @@
 	        }
 	    });
 	}
-	
-	
+
+    $(".removeBtn").click(function(){
+    	form
+            .attr("action", "/runningBoard/remove")
+            .attr("method","post")
+            .submit();
+    });
+
 </script>
 
 

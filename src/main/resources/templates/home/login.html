@@ -9,10 +9,10 @@
 <!-- =========================================================================== -->
 <link rel="stylesheet" type="text/css" href="/css/login.css">
 <!-- =========================================================================== -->
-<script src="https://kit.fontawesome.com/fc8d331d05.js"
+<script src="https://kit.fontawesome.com/fc8d331d05.js" /> <!-- icon -->
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script> <!-- Kakao Login API-->
 
 </head>
 <body>
@@ -26,8 +26,8 @@
 		<h2>Login</h2>
 		<form  th:action="@{/login}" th:method="post" id="login-form">
 		
-		<input type="text" name="username" placeholder="Email"> 
-	    <input type="password" name="password" placeholder="Password">
+		<input type="text" id="username" name="username" placeholder="Email">
+	    <input type="password" id="password" name="password" placeholder="Password">
 	    <label for="remember-check">
 	     <input type="checkbox" id="remember-check"> 아이디 저장하기
 		</label> <a href="/register" id="signup-link">회원가입</a> 
@@ -66,3 +66,55 @@
 		}) 
 	}
 	</script>
+<script>
+$(document).ready(function(){ //아이디 비번 저장 cookie
+var key = getCookie("idChk"); //user1
+if(key!=""){
+$("#username").val(key);
+}e
+
+if($("#username").val() != ""){
+$("#remember-check").attr("checked", true);
+}
+
+$("#remember-check").change(function(){
+if($("#remember-check").is(":checked")){
+setCookie("idChk", $("#username").val(), 7);
+}else{
+deleteCookie("idChk");
+}
+});
+
+$("#username").keyup(function(){
+if($("#remember-check").is(":checked")){
+setCookie("idChk", $("#username").val(), 7);
+}
+});
+});
+function setCookie(cookieName, value, exdays) {
+	var exdate = new Date();
+	exdate.setDate(exdate.getDate() + exdays);
+	var cookieValue = encodeURIComponent(value) + ((exdays == null) ? "" : "; expires=" + exdate.toGMTString());
+	document.cookie = cookieName + "=" + cookieValue;
+}
+
+function deleteCookie(cookieName){
+var expireDate = new Date();
+expireDate.setDate(expireDate.getDate() - 1);
+document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+}
+
+function getCookie(cookieName) {
+cookieName = cookieName + '=';
+var cookieData = document.cookie;
+var start = cookieData.indexOf(cookieName);
+var cookieValue = '';
+if(start != -1){
+start += cookieName.length;
+var end = cookieData.indexOf(';', start);
+if(end == -1)end = cookieData.length;
+cookieValue = cookieData.substring(start, end);
+}
+return unescape(cookieValue);
+}
+</script>

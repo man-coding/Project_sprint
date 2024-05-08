@@ -1,5 +1,3 @@
-@import "//cdn.jsdelivr.net/npm/font-applesdgothicneo@1.0/all.min.css";
-
 
 
 .body {
@@ -105,7 +103,7 @@ h3.main-title {
 .list-register{
 	width: 80%;
 	margin: 20px;
-	
+	text-align: right; /* 텍스트 정렬을 오른쪽으로 변경 */
 }
 .list-register input {
     border: 1px solid #ccc;
@@ -115,7 +113,7 @@ h3.main-title {
   	font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 120px;
+    width: 90px;
     height: auto;
     padding: 10px 20px;
 }
