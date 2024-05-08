@@ -21,4 +21,4 @@ public class ChatHandler extends TextWebSocketHandler {
 	}
 }
 testtest
-test
+testtest
