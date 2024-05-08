@@ -3,11 +3,7 @@ package com.example.demo.qnaBoard.service;
 import com.example.demo.qnaBoard.dto.QnaDTO;
 import com.example.demo.qnaBoard.entity.Qna;
 import com.example.demo.qnaBoard.repository.QnaRepository;
-
-import com.example.demo.runningBoard.dto.RunningDTO;
-import com.example.demo.runningBoard.entity.Running;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -47,7 +43,14 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 
     @Override
     public QnaDTO read(int no) {
-        return null;
+        Optional<Qna> result = repository.findById(no);
+
+        if (result.isPresent()) {
+            Qna qna = result.get();
+            QnaDTO dto = entityToDto(qna);
+
+            return dto;
+
     }
 
     @Override

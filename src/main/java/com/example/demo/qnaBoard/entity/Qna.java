@@ -29,9 +29,6 @@ public class Qna extends BaseEntity{
     @Column(length = 20, nullable = false)
     String writer;
 
-    @Column(length = 30, nullable = false)
-    LocalDate createdAt;
-
     @Column(length = 255, nullable = false)
     String content;
 

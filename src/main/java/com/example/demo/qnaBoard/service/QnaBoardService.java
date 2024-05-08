@@ -26,7 +26,6 @@ public interface QnaBoardService {
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .countView(dto.getCountView())
-                .createdAt(dto.getCreatedAt())
                 .build();
 
         return entity;
@@ -40,7 +39,6 @@ public interface QnaBoardService {
                 .writer(entity.getWriter())
                 .title(entity.getTitle())
                 .content(entity.getContent())
-                .createdAt(entity.getCreatedAt())
                 .countView(entity.getCountView()).build();
 
         return dto;
