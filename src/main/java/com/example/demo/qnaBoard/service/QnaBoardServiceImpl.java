@@ -50,16 +50,30 @@ public class QnaBoardServiceImpl implements QnaBoardService{
             QnaDTO dto = entityToDto(qna);
 
             return dto;
-
+        }
+        return null;
     }
 
     @Override
     public void modify(QnaDTO dto) {
+        Optional<Qna> result = repository.findById(dto.getNo());
 
+        if(result.isPresent()){
+            Qna entity = result.get();
+            entity.setTitle(dto.getTitle());
+            entity.setContent(dto.getContent());
+            repository.save(entity);
+        }
     }
 
     @Override
     public int remove(int no) {
-        return 0;
-    }
+        Optional<Qna> result = repository.findById(no);
+        if (result.isPresent()) {
+            repository.delete(result.get());
+            return 1;
+        }else {
+            return 0;
+        }
+        }
 }

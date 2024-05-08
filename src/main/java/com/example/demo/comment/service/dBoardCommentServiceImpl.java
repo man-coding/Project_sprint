@@ -2,8 +2,11 @@ package com.example.demo.comment.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.comment.dto.CommentDTO;
@@ -16,6 +19,9 @@ public class dBoardCommentServiceImpl implements dBoardCommentService {
 
     @Autowired
     private dBoardCommentRepository repository;
+
+    @Autowired
+    private AuthenticationFacade authenticationFacade;
 
     @Override
     public int register(CommentDTO dto) {
@@ -44,8 +50,13 @@ public class dBoardCommentServiceImpl implements dBoardCommentService {
 
     @Override
     public void remove(int no) {
+        /*dBoardComment comment = repository.findById(no)
+                        .orElseThrow(()-> new EntityNotFoundException("해당 댓글을 찾지 못했습니다."));
+        Authentication authentication = authenticationFacade.getAuthentication();   // 현재 로그인한 사용자 확인
 
-        repository.deleteById(no);
+        if(comment.getWriter().equals(authentication.))
+
+        repository.deleteById(no);*/
     }
 
 }
