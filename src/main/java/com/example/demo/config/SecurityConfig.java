@@ -36,6 +36,7 @@ public class SecurityConfig {
 		// 보안규칙 (메뉴별 접근제한 설정)
 	    http.authorizeHttpRequests()
 				.requestMatchers("/register").permitAll() //회원가입은 아무나 접근 가능
+				.requestMatchers("/email/**").permitAll()
 				.requestMatchers("/assets/*", "/css/*", "/js/*", "/vendor/**", "/img/**","/files/*").permitAll() //리소스는 아무나 접근 가능
 				.requestMatchers("/qnaBoard/*").authenticated() //qna게시판은 로그인한 사용자이면 접근 가능
 				.requestMatchers("/").permitAll() //메인화면은 로그인한 사용자이면 접근 가능
@@ -46,7 +47,7 @@ public class SecurityConfig {
 				.requestMatchers("/rBoardcomment/*","/mBoardcomment/*","/dBoardComment/*").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/joinMember/*").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/search/*").permitAll()
-	    		.requestMatchers("/member/*").hasAnyRole("ADMIN","USER"); // 소셜로그인 회원 정보를 수정하기 위해 변경
+				.requestMatchers("/member/*").hasAnyRole("ADMIN","USER"); // 소셜로그인 회원 정보를 수정하기 위해 변경
 
 	    http.formLogin(); 
         http.csrf().disable(); //csrf는 get을 제외하여 상태값을 위조(변경)할 수있는 post,put,delete 메소드를 막음

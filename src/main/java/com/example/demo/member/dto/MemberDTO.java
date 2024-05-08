@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -30,4 +31,8 @@ public class MemberDTO {
 	String role;
 	
 	boolean fromSocial; // 소셜 회원 여부 추가
+
+	MultipartFile profileImage;
+
+	String profileImagePath;
 }

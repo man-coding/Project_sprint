@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.member.dto.MemberDTO;
@@ -59,9 +60,9 @@ public class MemberController {
 	}
 
 	@PostMapping("/member/modify")
-	public String modifyPost(MemberDTO dto, RedirectAttributes redirectAttributes) {
-		service.modify(dto); // 입력받은 MemberDTO로 회원 정보를 수정합니다.
-		redirectAttributes.addAttribute("id", dto.getId()); // 수정된 회원의 ID를 연이어 조회할 수 있도록 리다이렉트 속성에 추가합니다.
+	public String modifyPost(MemberDTO memberDTO, RedirectAttributes redirectAttributes) {
+		service.modify(memberDTO); // 입력받은 MemberDTO로 회원 정보를 수정합니다.
+		redirectAttributes.addAttribute("id", memberDTO.getId()); // 수정된 회원의 ID를 연이어 조회할 수 있도록 리다이렉트 속성에 추가합니다.
 		return "redirect:/member/read"; // 회원의 상세 정보 페이지로 리다이렉트합니다.
 	}
 }

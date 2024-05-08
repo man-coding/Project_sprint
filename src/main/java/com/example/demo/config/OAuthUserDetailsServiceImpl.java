@@ -13,6 +13,8 @@ import com.example.demo.member.dto.CustomUser;
 import com.example.demo.member.dto.MemberDTO;
 import com.example.demo.member.service.MemberService;
 
+import java.util.Map;
+
 /*
  * 구글 소셜 로그인 인증 커스텀 서비스
  * */
@@ -37,9 +39,13 @@ public class OAuthUserDetailsServiceImpl extends DefaultOAuth2UserService { // O
         });
 
         String email = null; // 이메일을 저장할 변수를 선언합니다.
-
+        Map<String, Object> attributes = oAuth2User.getAttributes();
         if(clientName.equals("Google")){ // 클라이언트 이름이 "Google"인 경우
             email = oAuth2User.getAttribute("email"); //OAuth2User 속성에서 이메일을 가져옵니다.
+        } else if (clientName.equals("kakao")) {
+            email = ((Map<String, Object>) attributes.get("kakao_account")).get("email").toString();
+        } else if (clientName.equals("naver")) {
+            email = ((Map<String, Object>) oAuth2User.getAttribute("response")).get("email").toString();
         }
 
         System.out.println("EMAIL:" + email); // 이메일을 출력합니다.
