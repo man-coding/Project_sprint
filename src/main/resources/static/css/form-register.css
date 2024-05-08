@@ -56,7 +56,7 @@ label {
 	margin-bottom: 10px; /* 간격을 조절했습니다. */
 }
 /* 전송버튼 */
-#submit {
+#submit,#submit-del {
 	background-color: #000000;
 	color: white;
 	border: none;
@@ -69,7 +69,7 @@ label {
 	height: auto;
 }
 
-#submit:hover {
+#submit:hover, #submit-del{
 	background-color: #717ff5;;
 }
 .back-button-container{

@@ -12,21 +12,23 @@
  	<link href="/css/form-register.css" rel="stylesheet">
 </head>
 <body>
-    <div class="register-l-container" >
+    <div class="register-l-container " >
     <div class="back-button-container">
     
             <div class="back-button" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></div>
         </div>
-    <form class="register-m-container">
-       <input type="hidden" name="no" th:value="${dto.no}">
-        <div class="form-title">    
-           <label>제목</label>
-            <input type="text" class="form-con" id="form-title" name="title" th:value="${dto.title}" >
+        
+        
+    <form class="register-m-container" th:action="@{/qnaBoard/modify}" th:method="post" enctype="multipart/form-data">
+      <input type="hidden" name="no" th:value="${dto.no}">
+        <div class="form-title">
+            <label>제목</label>
+            <input type="text" class="form-con" id="form-title" name="title" th:value="${dto.title}">
         </div>
 
         <div class="form-time">
         <label>일시</label>
-        <input type="datetime-local" name="runningDate" class="form-con" th:value="${dto.runningDate}">
+        <input type="datetime-local" class="form-con" name= "qnaDate" th:value="${dto.qnaDate}" >
         </div>
 
         <div class="form-location">
@@ -38,17 +40,21 @@
         <label>내용</label>
         <textarea type="text" class="form-con" id="form-content" name="content" rows="10">[[${dto.content}]]</textarea>
         </div>
-         
+
 		<div class="register-container">
         <input type="submit" id="submit" class="modifyBtn" value="완료">
-        <!--  <input type="submit" id="submit" class="listBtn" value="목록으로"> -->
-         <input type="submit" id="submit-del" class="removeBtn" value="삭제">
- 		</div>
+        
+        <input type="file" id="image" name="uploadFile">
+        
+        <label for="image" id="image-label">이미지</label>
+        <!--  <input type="submit" id="submit" class="listBtn" value="목록으로">-->
+        <input type="submit" id="submit-del" class="removeBtn" value="삭제">
+        </div>
     </form> 
     </div>
 </body>
 </html>
-  <script th:inline="javascript">
+<script th:inline="javascript">
 
         	var form = $("form");
 
@@ -58,26 +64,25 @@
                 }
 
                 form
-                    .attr("action", "/runningBoard/modify")
+                    .attr("action", "/marathonBoard/modify")
                     .attr("method","post")
                     .submit();
             });
 
             $(".listBtn").click(function() {
                 form
-                    .attr("action", "/runningBoard/list")
+                    .attr("action", "/marathonBoard/list")
                     .attr("method","get")
               		.submit();
             })
 
             $(".removeBtn").click(function(){
             	form
-                    .attr("action", "/runningBoard/remove")
+                    .attr("action", "/marathonBoard/remove")
                     .attr("method","post")
                     .submit();
             });
 
         </script>
-
 </th:block>
 </th:block>

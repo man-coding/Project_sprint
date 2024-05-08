@@ -167,7 +167,7 @@ i {
 }
 
 /* Submit button styles */
-#submit {
+#submit,#submit-del {
     padding: 10px 20px;
     border: none;
     border-radius: 5px; /* 버튼의 모서리를 둥글게 */
@@ -177,7 +177,7 @@ i {
     transition: background-color 0.3s ease; /* 버튼 색상을 부드럽게 변경 */
 }
 
-#submit:hover {
+#submit:hover, #submit-del:hover {
     background-color: #555; /* 마우스 오버 시 버튼 색상 변경 */
 }
 .comment-item {

@@ -30,7 +30,7 @@
 	    <label for="remember-check">
 	     <input type="checkbox" id="remember-check"> 아이디 저장하기
 		</label> <a href="/register" id="signup-link">회원가입</a> 
-		<input class="login-set" type="submit" value="로그인">
+		<input class="login-set" id="login" type="submit" value="로그인">
 			<div class="social-menu">
 				<ul>
 					<li><a href=""><i class="fa fa-facebook"></i></a></li>
@@ -45,6 +45,18 @@
 </body>
 </html>
 
+<script>
+	$("#login").on("click",function (){
+		let username = $("#username").val();
+		let password = $("#password").val();
+
+		if(username == ""){
+			alert("아이디를 입력해주세요");
+		}else if(password == ""){
+			alert("비밀번호를 입력해주세요");
+		}
+	});
+</script>
 <script>  
 	window.Kakao.init("9f979ab2d4c9a507cc151ab32eebb072");
 	

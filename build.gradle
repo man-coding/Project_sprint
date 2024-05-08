@@ -1,12 +1,12 @@
 plugins {
-	id 'java' // Java 플러그인 추가, Java 프로젝트를 빌드하기 위한 기본적인 작업을 포함합니다.
-	id 'war' // WAR 플러그인 추가, 웹 애플리케이션을 위한 WAR 파일을 빌드합니다.
-	id 'org.springframework.boot' version '3.2.2' // Spring Boot 플러그인 추가, Spring Boot 애플리케이션의 빌드와 실행을 간소화합니다.
-	id 'io.spring.dependency-management' version '1.1.4' // Spring의 의존성 관리 플러그인, 버전 관리가 용이하도록 도와줍니다.
+	id 'java'
+	id 'war'
+	id 'org.springframework.boot' version '3.2.2'
+	id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'com.example' // 프로젝트의 그룹 아이디 설정, Maven central 등에서 고유성을 가지도록 합니다.
-version = '0.0.1-SNAPSHOT' // 프로젝트의 버전 설정, SNAPSHOT은 아직 개발 중인 버전임을 나타냅니다.
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
 
 java {
 	sourceCompatibility = '17' // 소스 코드 호환성을 Java 17으로 설정
@@ -30,7 +30,7 @@ dependencies {
 	
 	compileOnly 'org.projectlombok:lombok' // 롬복, 자바 소스코드를 간결하게 작성할 수 있게 도와주는 라이브러리
 	annotationProcessor 'org.projectlombok:lombok' // 롬복을 어노테이션 프로세서로 사용 설정
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat' // 내장 톰캣 서버 사용 설정 
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat' // 내장 톰캣 서버 사용 설정
 	testImplementation 'org.springframework.boot:spring-boot-starter-test' // 테스트를 위한 Spring Boot 스타터
 	
 	// 기타 의존성 추가
@@ -41,7 +41,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security' // 스프링 시큐리티 기본 지원
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6' // Thymeleaf에서 Spring Security 지원
 	testImplementation 'org.springframework.security:spring-security-test' // 스프링 시큐리티 테스트 지원
-	
+
 	// 추가적인 Spring Boot 스타터 의존성.
 	implementation('org.springframework.boot:spring-boot-starter-actuator') // 애플리케이션의 상태와 메트릭을 관리하는 데 사용
 	implementation('org.springframework.boot:spring-boot-starter-data-rest') // Spring Data REST를 사용하여 RESTful 서비스 개발을 간소화
@@ -59,6 +59,7 @@ dependencies {
 	// redis
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 }
+
 
 tasks.named('test') {
 	useJUnitPlatform() // JUnit Platform을 사용하여 테스트를 실행하도록 설정, JUnit 5 지원을 포함
