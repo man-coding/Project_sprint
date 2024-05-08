@@ -20,3 +20,4 @@ public class ChatHandler extends TextWebSocketHandler {
 		}
 	}
 }
+test
