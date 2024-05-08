@@ -51,6 +51,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 }
 
+
 tasks.named('test') {
 	useJUnitPlatform() // JUnit Platform을 사용하여 테스트를 실행하도록 설정, JUnit 5 지원을 포함
 }
