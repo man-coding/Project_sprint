@@ -31,4 +31,15 @@ public class DiaryDTO {
 	
 	private String keyword; // 검색 키워드
 
+	// 좋아요를 추가하는 메서드
+	public void addLike() {
+		this.countLike++;
+	}
+
+	// 좋아요를 삭제하는 메서드
+	public void removeLike() {
+		if (this.countLike > 0) {
+			this.countLike--;
+		}
+	}
 }

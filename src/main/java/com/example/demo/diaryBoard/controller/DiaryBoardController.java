@@ -2,15 +2,14 @@ package com.example.demo.diaryBoard.controller;
 
 import java.security.Principal;
 
+import com.example.demo.diaryBoard.entity.Diary;
 import com.example.demo.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.diaryBoard.dto.DiaryDTO;
@@ -24,6 +23,7 @@ public class DiaryBoardController {
 	DiaryBoardService service;
 	@Autowired
 	MemberService memberService;
+
 	@GetMapping("/list")
 	public void list(@RequestParam(defaultValue = "0", name = "page") int page, Model model) {
 
@@ -78,4 +78,19 @@ public class DiaryBoardController {
 		service.remove(no);
 		return "redirect:/DiaryBoard/list";
 	}
+
+	@PostMapping("/like")
+	public ResponseEntity<DiaryDTO> likeDiary(@RequestParam int no) {
+		DiaryDTO diary = service.read(no);
+		diary.setCountLike(service.likeDiary(no).getCountLike());
+		return ResponseEntity.ok(diary);
+	}
+
+	@PostMapping("/unlike")
+	public ResponseEntity<DiaryDTO> unlikeDiary(@RequestParam int no) {
+		DiaryDTO diary = service.read(no);
+		diary.setCountLike(service.unlikeDiary(no).getCountLike());
+		return ResponseEntity.ok(diary);
+	}
+
 }

@@ -1,13 +1,50 @@
 var count = 0;
 var isLiked = false;
+
+var xhr = new XMLHttpRequest();
+
+var currentUrl = new URLSearchParams(window.location.search);  // 해당 페이지 no 받아오기
+var no = currentUrl.get('no');
+
 function addLike() {
     const pushHeartBtn = document.querySelector(".heartBtn");
     if (!isLiked) {
         pushHeartBtn.innerHTML = '<i class="fa-solid fa-heart" style="color: #ff0000;"></i>';
+
+        /* 좋아요 기능 */
+        xhr.open('POST', `/diaryBoard/like?no=${no}`, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                if (xhr.status == 200) {
+                    // 요청 성공
+                    console.log(xhr.responseText); // 응답 내용 출력
+                } else {
+                    // 요청 실패
+                    console.error('요청 실패: ' + xhr.status);
+                }
+            }
+        };
+        xhr.send();
+        
         countPlus();
     } else {
         pushHeartBtn.innerHTML = '<i class="fa-regular fa-heart"></i>';
         countMinus();
+
+        /* 좋아요 기능 */
+        xhr.open('POST', `/diaryBoard/unlike?no=${no}`, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                if (xhr.status == 200) {
+                    // 요청 성공
+                    console.log(xhr.responseText); // 응답 내용 출력
+                } else {
+                    // 요청 실패
+                    console.error('요청 실패: ' + xhr.status);
+                }
+            }
+        };
+        xhr.send();
     }
     isLiked = !isLiked;
 }
@@ -40,6 +77,8 @@ function countMinus() {
 	document.querySelector('.fa-regular.fa-heart').addEventListener('click', function(event) {
 	    event.stopPropagation(); // 상위 요소로 이벤트 전파를 막음
 	    // 하트 클릭 시 수행할 동작을 여기에 작성하세요
+
+
 	});
 
 $(document).ready(function() {

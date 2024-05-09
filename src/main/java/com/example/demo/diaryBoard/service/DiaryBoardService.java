@@ -12,6 +12,10 @@ public interface DiaryBoardService {
 
 	Page<DiaryDTO> getList(int pageNumber);
 
+	Diary likeDiary(int no);
+
+	Diary unlikeDiary(int no);
+
 	DiaryDTO read(int no);
 
 	void modify(DiaryDTO dto);
