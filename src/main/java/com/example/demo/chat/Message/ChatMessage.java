@@ -16,6 +16,6 @@ import lombok.ToString;
 
 public class ChatMessage {
 
-	private String sender;
-	private String content;
+	private String sender;  //보내는 사람
+	private String content; //내용
 }

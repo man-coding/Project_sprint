@@ -3,22 +3,27 @@ package com.example.demo.chat.controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.chat.Message.ChatMessage;
-import com.example.demo.member.service.MemberService;
 
 @Controller
 public class ChatController {
-	
+
 	@Autowired
-	MemberService memberService;
-	
+	private SimpMessagingTemplate template;
+
 	@MessageMapping("/chat/private-{userId}")
-	public ChatMessage sendMessage(ChatMessage chatMessage, Principal principal) {
-		
-		String senderId = principal.getName();
+	public void sendMessage(@DestinationVariable String userId, ChatMessage chatMessage, Principal principal) {
+
+		String senderId = principal.getName();    //발신자
+
+		chatMessage.setSender(senderId);
+
+		template.convertAndSendToUser(userId, "/queue/reply", chatMessage); //userId는 수신자
+
 	}
 }
