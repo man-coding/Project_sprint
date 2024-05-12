@@ -61,4 +61,11 @@ public class dBoardCommentServiceImpl implements dBoardCommentService {
         }
     }
 
+    @Override
+    public CommentDTO reply(CommentDTO dto) {
+        dBoardComment comment = dtoToEntity(dto);
+        /* ! */
+        return null;
+    }
+
 }

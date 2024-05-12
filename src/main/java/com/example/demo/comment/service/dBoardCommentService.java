@@ -13,6 +13,8 @@ public interface dBoardCommentService {
 
     List<CommentDTO> getListByBoardNo(int boardNo);
 
+    CommentDTO reply(CommentDTO dto);
+
     void remove(int no);
 
     default dBoardComment dtoToEntity(CommentDTO dto) {
