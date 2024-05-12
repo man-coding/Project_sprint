@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +29,7 @@ public class dBoardComment extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int commentNo;
 
-    @ManyToOne
-    @JoinColumn(name = "parent_comment_id")
-    dBoardComment parentComment;
-
-    @OneToMany(mappedBy = "parentComment")
-    private List<dBoardComment> replies = new ArrayList<>();
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "diary_id")
     Diary diary;
 
@@ -45,4 +39,12 @@ public class dBoardComment extends BaseEntity {
     @Column(length = 1500)
     String content;
 
+    /* 대댓글 */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_comment_id")
+    @JsonIgnore
+    dBoardComment parentComment;
+
+    @OneToMany(mappedBy = "parentComment")
+    private List<dBoardComment> replies = new ArrayList<>();
 }

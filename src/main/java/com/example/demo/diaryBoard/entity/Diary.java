@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Where;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class Diary extends BaseEntity {
 	int no;
 
 	@OneToMany(mappedBy = "diary", cascade = CascadeType.ALL, orphanRemoval = true)
+	@Where(clause = "parent_comment_id is null")
 	List<dBoardComment> comments = new ArrayList<>();
 
 	@Column(length = 100, nullable = false)
