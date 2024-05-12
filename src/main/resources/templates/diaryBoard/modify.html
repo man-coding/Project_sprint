@@ -19,21 +19,11 @@
         </div>
         
         
-    <form class="register-m-container" th:action="@{/marathonBoard/modify}" th:method="post" enctype="multipart/form-data">
+    <form class="register-m-container" th:action="@{/diaryBoard/modify}" th:method="post" enctype="multipart/form-data">
       <input type="hidden" name="no" th:value="${dto.no}">
         <div class="form-title">
             <label>제목</label>
             <input type="text" class="form-con" id="form-title" name="title" th:value="${dto.title}">
-        </div>
-
-        <div class="form-time">
-        <label>일시</label>
-        <input type="datetime-local" class="form-con" name= "marathonDate" th:value="${dto.diaryDate}" >
-        </div>
-
-        <div class="form-location">
-        <label>위치</label>
-        <input type="text" class="form-con" id="form-location" name="location" th:value="${dto.location}">
         </div>
 
         <div class="form-content">
@@ -49,6 +39,7 @@
         <!--  <input type="submit" id="submit" class="listBtn" value="목록으로">-->
         <input type="submit" id="submit-del" class="removeBtn" value="삭제">
         </div>
+
     </form> 
     </div>
 </body>
@@ -63,21 +54,21 @@
                 }
 
                 form
-                    .attr("action", "/marathonBoard/modify")
+                    .attr("action", "/diaryBoard/modify")
                     .attr("method","post")
                     .submit();
             });
 
             $(".listBtn").click(function() {
                 form
-                    .attr("action", "/marathonBoard/list")
+                    .attr("action", "/diaryBoard/list")
                     .attr("method","get")
               		.submit();
             })
 
             $(".removeBtn").click(function(){
             	form
-                    .attr("action", "/marathonBoard/remove")
+                    .attr("action", "/diaryBoard/remove")
                     .attr("method","post")
                     .submit();
             });
