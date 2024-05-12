@@ -30,7 +30,7 @@
 	    <label for="remember-check">
 	     <input type="checkbox" id="remember-check"> 아이디 저장하기
 		</label> <a href="/register" id="signup-link">회원가입</a> 
-		<input class="login-set" id="login" type="submit" value="로그인">
+		<input class="login-set" id="login" type="submit" value="로그인" onclick="loginCheck();">
 			<div class="social-menu">
 				<ul>
 					<li><a href=""><i class="fa fa-facebook"></i></a></li>
@@ -44,64 +44,92 @@
 	</div>
 </body>
 </html>
+	<script>
+		function loginCheck() {
+		$('#login-form').submit(function (event) {
+			event.preventDefault();
+			var username = $('#username').val();
+			var password = $('#password').val();
 
-<script>
-	$("#login").on("click",function (){
-		let username = $("#username").val();
-		let password = $("#password").val();
+			if (username == "") {
+				alert("아이디를 입력해주세요");
+				return;
+			} else if (password == "") {
+				alert("비밀번호를 입력해주세요");
+				return;
+			}
 
-		if(username == ""){
-			alert("아이디를 입력해주세요");
-		}else if(password == ""){
-			alert("비밀번호를 입력해주세요");
-		}
-	});
+			$.ajax({
+				type: 'POST',
+				url: '/login',
+				data: {
+					username: username,
+					password: password
+				},
+				success: function (data) {
+					if (data.success) {
+						alert('로그인 되었습니다');
+						window.location.href = "/localhost:8080"
+					} else {
+						alert('등록되지 않은 아이디이거나 또는 비밀번호를 잘못 입력하셨습니다.'); // display failure alert
+					}
+				},
+				error: function (xhr, status, error) {
+					alert('에러가 발생했습니다.');
+				}
+			});
+		});
+	};
+
+		$("#login").on("click", loginCheck);
 </script>
-<script>  
+<script>
 	window.Kakao.init("9f979ab2d4c9a507cc151ab32eebb072");
-	
+
 	function kakaoLogin() {
 		window.Kakao.Auth.login({
-			scope:'profile_nickname, profile_image',
-			success: function(authObj) {
+			scope: 'profile_nickname, profile_image',
+			success: function (authObj) {
 				console.log(authObj);
 				window.Kakao.API.request({
-					url:'/v2/user/me',
+					url: '/v2/user/me',
 					success: res => {
 						const kakao_account = res.kakao_account;
 						console.log(kakao_account);
 					}
 				})
 			}
-		}) 
+		})
 	}
-	</script>
+</script>
 <script>
-$(document).ready(function(){ //아이디 비번 저장 cookie
-var key = getCookie("idChk"); //user1
-if(key!=""){
-$("#username").val(key);
-}e
+	$(document).ready(function () { //아이디 비번 저장 cookie
+		var key = getCookie("idChk"); //user1
+		if (key != "") {
+			$("#username").val(key);
+		}
+		e
 
-if($("#username").val() != ""){
-$("#remember-check").attr("checked", true);
-}
+		if ($("#username").val() != "") {
+			$("#remember-check").attr("checked", true);
+		}
 
-$("#remember-check").change(function(){
-if($("#remember-check").is(":checked")){
-setCookie("idChk", $("#username").val(), 7);
-}else{
-deleteCookie("idChk");
-}
-});
+		$("#remember-check").change(function () {
+			if ($("#remember-check").is(":checked")) {
+				setCookie("idChk", $("#username").val(), 7);
+			} else {
+				deleteCookie("idChk");
+			}
+		});
 
-$("#username").keyup(function(){
-if($("#remember-check").is(":checked")){
-setCookie("idChk", $("#username").val(), 7);
-}
-});
-});
-function setCookie(cookieName, value, exdays) {
+		$("#username").keyup(function () {
+			if ($("#remember-check").is(":checked")) {
+				setCookie("idChk", $("#username").val(), 7);
+			}
+		});
+	});
+
+	function setCookie(cookieName, value, exdays) {
 	var exdate = new Date();
 	exdate.setDate(exdate.getDate() + exdays);
 	var cookieValue = encodeURIComponent(value) + ((exdays == null) ? "" : "; expires=" + exdate.toGMTString());

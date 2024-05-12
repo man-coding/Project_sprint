@@ -1503,3 +1503,8 @@ p {
   object-fit: cover; /* 이미지 비율 유지하면서 채우기 */
    border: 1px solid #268dce;
 }
+@media (max-width: 1024px) {
+  .search-container {
+    display: none;
+  }
+}
