@@ -75,6 +75,17 @@ public class SecurityConfig {
                 }
         )
 		.permitAll(); // 접근 권한
+
+		// 다중 로그인 설정
+		http
+				.sessionManagement((auth) -> auth
+						.maximumSessions(1)
+						.maxSessionsPreventsLogin(false));
+		// 세션 고정 보호
+		http
+				.sessionManagement((auth) -> auth
+						.sessionFixation().changeSessionId());
+
 		return http.build();
 	}
 
