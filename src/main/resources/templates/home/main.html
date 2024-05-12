@@ -76,7 +76,7 @@
             </ul>
          </li>
 
-         <li class="dropdown" > <a class="nav-link scrollto" href="#learnRun" style="padding: 10px 200px 10px 30px !important;">LEARN & RUN<i class="bi bi-chevron-down"></i></a>
+         <li class="dropdown" > <a class="nav-link scrollto" href="#learnRun">LEARN & RUN<i class="bi bi-chevron-down"></i></a>
          	<ul>
              <li><a href="https://www.youtube.com/results?search_query=%EB%8B%AC%EB%A6%AC%EA%B8%B0+%EC%A3%BC%EB%B2%95">주법</a></li>
               <li><a href="https://www.youtube.com/results?search_query=%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%B9%AD">스트레칭</a></li>
@@ -93,7 +93,7 @@
 					document.getElementById('searchForm').submit();
 				});
 			</script>
-			</form>
+          </form>
                     <li th:if="${loggedInUser != null}">
                         <a th:href="@{'/member/modify?id=' + ${loggedInUser.id}}">
                             <img sec:authorize="isAuthenticated()" src="/img/user.png" class="profile-image">
