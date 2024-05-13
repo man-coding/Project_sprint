@@ -6,26 +6,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import java.io.IOException;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
   private final ObjectMapper objectMapper;
 
   @Override
-  public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-    String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
-    log.info("sessionId: {}", sessionId);
+  public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
     LoginResponseDto loginResponseDto = new LoginResponseDto();
-    loginResponseDto.setCode("200");
+    loginResponseDto.setCode("400");
     response.getWriter().print(objectMapper.writeValueAsString(loginResponseDto));
     response.setStatus(HttpServletResponse.SC_OK);
   }

@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,10 +11,7 @@ import com.example.demo.member.dto.CustomUser;
 import com.example.demo.member.dto.MemberDTO;
 import com.example.demo.member.service.MemberService;
 
-
-
-
-
+@Slf4j
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -22,8 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-		System.out.println("login id : " + username);
+		log.info("login request id: {}", username);
 
 		// 실제 회원정보 가져오기
 		MemberDTO dto = service.read(username);
@@ -35,7 +32,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			// dto를 인증객체로 변환하여 반환
 			return new CustomUser(dto);
 		}
-
 	}
-
 }
