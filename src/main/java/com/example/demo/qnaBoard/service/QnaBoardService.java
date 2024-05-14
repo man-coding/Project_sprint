@@ -1,5 +1,6 @@
 package com.example.demo.qnaBoard.service;
 
+import com.example.demo.diaryBoard.dto.DiaryDTO;
 import com.example.demo.member.entity.Member;
 import com.example.demo.qnaBoard.dto.QnaDTO;
 import com.example.demo.qnaBoard.entity.Qna;
@@ -16,6 +17,7 @@ public interface QnaBoardService {
 
     int remove(int no);
 
+    Page<QnaDTO> getSearchList(int pageNumber, String keyword);
 
     default Qna dtoToEntity(QnaDTO dto) {
         Member member = Member.builder().id(dto.getWriter()).build();
@@ -39,6 +41,8 @@ public interface QnaBoardService {
                 .writer(entity.getWriter())
                 .title(entity.getTitle())
                 .content(entity.getContent())
+                .regDate(entity.getRegDate())
+                .modDate(entity.getModDate())
                 .countView(entity.getCountView()).build();
 
         return dto;

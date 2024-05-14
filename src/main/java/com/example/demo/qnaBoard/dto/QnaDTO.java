@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
@@ -19,7 +21,8 @@ public class QnaDTO {
     int no;
     String title;
     String writer;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    LocalDateTime regDate;
+    LocalDateTime modDate;
     String content;
     int countView;
 

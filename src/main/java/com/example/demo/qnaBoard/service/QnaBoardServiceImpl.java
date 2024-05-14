@@ -1,5 +1,7 @@
 package com.example.demo.qnaBoard.service;
 
+import com.example.demo.diaryBoard.dto.DiaryDTO;
+import com.example.demo.diaryBoard.entity.Diary;
 import com.example.demo.qnaBoard.dto.QnaDTO;
 import com.example.demo.qnaBoard.entity.Qna;
 import com.example.demo.qnaBoard.repository.QnaRepository;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -40,19 +43,53 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 
         return dtoPage;
     }
-
     @Override
     public QnaDTO read(int no) {
+        Optional<Qna> result = repository.findById(no);
+
+        if (result.isPresent()) {
+            Qna qna = result.get();
+            QnaDTO dto = entityToDto(qna);
+
+            return dto;
+        }
         return null;
     }
 
-    @Override
     public void modify(QnaDTO dto) {
+        Optional<Qna> result = repository.findById(dto.getNo());
 
+        if (result.isPresent()) {
+            Qna entity = result.get();
+
+            entity.setTitle(dto.getTitle());
+            entity.setContent(dto.getContent());
+            repository.save(entity);
+        }
     }
 
     @Override
     public int remove(int no) {
-        return 0;
+
+        Optional<Qna> result = repository.findById(no);
+        if (result.isPresent()) {
+            repository.deleteById(no);
+
+            return 1; // 삭제 성공
+        } else {
+            return 0; // 삭제 실패
+        }
+
     }
+
+    @Override
+    public Page<QnaDTO> getSearchList(int pageNumber, String keyword) {
+        Pageable pageable = PageRequest.of(pageNumber, 10, Sort.by("no").descending());
+
+        Page<Qna> entityPage = repository.findByTitleContainingIgnoreCase(keyword, pageable);
+
+        Page<QnaDTO> dtoPage = entityPage.map(this::entityToDto);
+        return dtoPage;
+    }
+
 }
