@@ -1,17 +1,17 @@
 package com.example.demo.diaryBoard.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.demo.comment.entity.dBoardComment;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Where;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -28,6 +28,9 @@ public class Diary extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int no;
 
+	@OneToMany(mappedBy = "diary", cascade = CascadeType.ALL, orphanRemoval = true)
+	List<dBoardComment> comments = new ArrayList<>();
+
 	@Column(length = 100, nullable = false)
 	String title;
 
@@ -42,4 +45,5 @@ public class Diary extends BaseEntity {
 
 	@Column(length = 200, nullable = true)
 	private String imgPath; // 첨부파일 이름
+
 }

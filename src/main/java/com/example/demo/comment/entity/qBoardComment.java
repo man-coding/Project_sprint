@@ -19,7 +19,7 @@ public class qBoardComment {
     int commentNo;
 
     @ManyToOne
-    Qna board;
+    Qna qna;
 
     @Column(length = 1500)
     String content;

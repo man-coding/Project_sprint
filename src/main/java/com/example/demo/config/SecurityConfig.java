@@ -38,34 +38,34 @@ public class SecurityConfig {
 				.requestMatchers("/register").permitAll() //회원가입은 아무나 접근 가능
 				.requestMatchers("/email/**").permitAll()
 				.requestMatchers("/assets/*", "/css/*", "/js/*", "/vendor/**", "/img/**","/files/*").permitAll() //리소스는 아무나 접근 가능
-				.requestMatchers("/qnaBoard/*").authenticated() //qna게시판은 로그인한 사용자이면 접근 가능
+				.requestMatchers("/qnaBoard/**").authenticated() //qna게시판은 로그인한 사용자이면 접근 가능
 				.requestMatchers("/").permitAll() //메인화면은 로그인한 사용자이면 접근 가능
 				.requestMatchers("/runningBoard/**").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
-				.requestMatchers("/marathonBoard/*").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
-				.requestMatchers("/diaryBoard/*").hasAnyRole("ADMIN","USER")
+				.requestMatchers("/marathonBoard/**").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
+				.requestMatchers("/diaryBoard/**").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/uploadfile/**").permitAll() //파일첨부 이미지 모두 접근 가능
 				.requestMatchers("/rBoardcomment/*","/mBoardcomment/*","/dBoardComment/*").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/joinMember/*").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/search/*").permitAll()
 				.requestMatchers("/member/*").hasAnyRole("ADMIN","USER"); // 소셜로그인 회원 정보를 수정하기 위해 변경
 
-	    http.formLogin(); 
+	    http.formLogin();
         http.csrf().disable(); //csrf는 get을 제외하여 상태값을 위조(변경)할 수있는 post,put,delete 메소드를 막음
         http.logout()
 	        .logoutUrl("/logout")
 	        .logoutSuccessUrl("/");
         ; // 로그아웃 처리
 
-        
+
      // aouth 로그인이 가능하도록 설정
      		http.oauth2Login()
      				.successHandler(new CustomAuthenticationSuccessHandler()); // 핸들러 등록
-        
+
         //커스텀 로그인 페이지 적용
 		http.formLogin()
 		.loginPage("/customlogin")
 		.loginProcessingUrl("/login")
-		
+
 		.successHandler(
                 new AuthenticationSuccessHandler() {
 					@Override

@@ -82,16 +82,13 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 
 	@Override
 	public int remove(int no) {
-
 		Optional<Diary> result = repository.findById(no);
 		if (result.isPresent()) {
 			repository.deleteById(no);
-
 			return 1; // 삭제 성공
 		} else {
 			return 0; // 삭제 실패
 		}
-
 	}
 
 	@Override
@@ -102,6 +99,30 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 
 		Page<DiaryDTO> dtoPage = entityPage.map(this::entityToDto);
 		return dtoPage;
+	}
+
+	@Override
+	public Diary likeDiary(int no) {
+		Optional<Diary> result = repository.findById(no);
+
+		if (result.isPresent()) {
+			Diary diary = result.get();
+			diary.setCountLike(diary.getCountLike()+1);
+			return repository.save(diary);
+		}
+		return null;
+	}
+
+	@Override
+	public Diary unlikeDiary(int no) {
+		Optional<Diary> result = repository.findById(no);
+
+		if (result.isPresent()) {
+			Diary diary = result.get();
+			diary.setCountLike(diary.getCountLike()-1);
+			return repository.save(diary);
+		}
+		return null;
 	}
 
 }
