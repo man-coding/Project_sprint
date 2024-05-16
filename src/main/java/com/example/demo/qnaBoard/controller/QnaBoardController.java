@@ -1,5 +1,6 @@
 package com.example.demo.qnaBoard.controller;
 
+import com.example.demo.diaryBoard.dto.DiaryDTO;
 import com.example.demo.member.service.MemberService;
 import com.example.demo.qnaBoard.dto.QnaDTO;
 import com.example.demo.qnaBoard.service.QnaBoardService;
@@ -57,11 +58,18 @@ public class QnaBoardController {
         model.addAttribute("page", page);
     }
 
+    @GetMapping("/modify")
+    public void modify(@RequestParam(name = "no") int no, Model model) {
+        QnaDTO dto = qnaBoardService.read(no);
+        model.addAttribute("dto", dto);
+    }
+
     @PostMapping("/modify")
     public String modifyPost(QnaDTO dto, RedirectAttributes redirectAttributes) {
         qnaBoardService.modify(dto);
         redirectAttributes.addAttribute("no", dto.getNo());
-        return "redirect:qnaBoard/read";
+        return "redirect:/qnaBoard/read?no=" + dto.getNo();
+
     }
 
     @PostMapping("/remove")

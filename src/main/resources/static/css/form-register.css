@@ -69,7 +69,7 @@ label {
 	height: auto;
 }
 
-#submit:hover, #submit-del{
+#submit:hover, #submit-del:hover{
 	background-color: #717ff5;;
 }
 .back-button-container{
