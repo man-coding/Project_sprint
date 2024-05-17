@@ -107,9 +107,10 @@
 			<div class="content-comment-list" id="content-comment-list"></div>
 		</div>
 		<div class="bottom-button">
-			<a th:href="@{/runningBoard/modify(no = ${dto.no})}">
+			<a th:href="@{/runningBoard/modify(no = ${dto.no})}"  th:if="${isAuthor}">
 				<button type="button">수정</button>
-			</a> <a th:href="@{/runningBoard/list(no=${page})}">
+			</a>
+			<a th:href="@{/runningBoard/list(no=${page})}">
 				<button type="button">목록</button>
 			</a>
 		</div>
