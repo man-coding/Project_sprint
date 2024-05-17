@@ -47,7 +47,9 @@ public class SecurityConfig {
 				.requestMatchers("/rBoardcomment/*","/mBoardcomment/*","/dBoardComment/*").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/joinMember/*").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/search/*").permitAll()
-				.requestMatchers("/member/*").hasAnyRole("ADMIN","USER"); // 소셜로그인 회원 정보를 수정하기 위해 변경
+				.requestMatchers("/member/*").hasAnyRole("ADMIN","USER") // 소셜로그인 회원 정보를 수정하기 위해 변경
+	    		.requestMatchers("/chat.html").permitAll()
+	    		.requestMatchers("/ws/**").permitAll();
 
 	    http.formLogin(); 
         http.csrf().disable(); //csrf는 get을 제외하여 상태값을 위조(변경)할 수있는 post,put,delete 메소드를 막음

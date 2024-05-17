@@ -17,7 +17,7 @@ public class ChatController {
 	private SimpMessagingTemplate template;
 
 	@MessageMapping("/chat/private-{userId}")
-	public void sendMessage(@DestinationVariable String userId, ChatMessage chatMessage, Principal principal) {
+	public void sendMessage(@DestinationVariable("userId") String userId, ChatMessage chatMessage, Principal principal) {
 
 		String senderId = principal.getName();    //발신자
 
