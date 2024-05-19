@@ -20,7 +20,7 @@ body {
 
 a {
   color: #4154f1;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 a:hover {
@@ -1482,7 +1482,7 @@ p {
 
 }
 .search input {
-	
+
   border: 1px solid #bbb;
   border-radius: 8px;
   padding: 10px 12px;
