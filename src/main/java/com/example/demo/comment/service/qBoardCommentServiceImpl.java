@@ -1,54 +1,54 @@
 package com.example.demo.comment.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.example.demo.comment.dto.CommentDTO;
+import com.example.demo.comment.entity.qBoardComment;
+import com.example.demo.comment.repository.qBoardCommentRepository;
+import com.example.demo.qnaBoard.entity.Qna;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.comment.dto.CommentDTO;
-import com.example.demo.comment.entity.dBoardComment;
-import com.example.demo.comment.repository.dBoardCommentRepository;
-import com.example.demo.diaryBoard.entity.Diary;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
-public class dBoardCommentServiceImpl implements dBoardCommentService {
+public class qBoardCommentServiceImpl implements qBoardCommentService{
 
     @Autowired
-    private dBoardCommentRepository repository;
+    qBoardCommentRepository repository;
 
     @Autowired
     private AuthenticationFacade authenticationFacade;
 
+
     @Override
     public int register(CommentDTO dto) {
-        dBoardComment entity = dtoToEntity(dto);
+        qBoardComment entity = dtoToEntity(dto);
+        System.out.println(entity);
         repository.save(entity);
         return entity.getCommentNo();
     }
 
     @Override
     public List<CommentDTO> getListByBoardNo(int boardNo) {
+        Qna board = Qna.builder().no(boardNo).build(); // 게시물 조회
 
-        Diary board = Diary.builder().no(boardNo).build(); // 게시물 조회
-
-        List<dBoardComment> entityList = repository.findByDiary(board);
+        List<qBoardComment> entityList = repository.findByQna(board);
 
         List<CommentDTO> dtoList = new ArrayList<>();
 
-        for (dBoardComment entity : entityList) {
+        for (qBoardComment entity : entityList) {
             CommentDTO dto = entityToDto(entity);
             dtoList.add(dto);
         }
         return dtoList;
-
     }
 
     @Override
     public void remove(int no) {
-        dBoardComment comment = repository.findById(no)
+        qBoardComment comment = repository.findById(no)
                 .orElseThrow(()-> new EntityNotFoundException("해당 댓글을 찾지 못했습니다. "));
 
         Authentication authentication = authenticationFacade.getAuthentication();   // 현재 로그인한 사용자 확인
@@ -59,7 +59,5 @@ public class dBoardCommentServiceImpl implements dBoardCommentService {
             repository.deleteById(no);
         }
     }
-
-
 
 }

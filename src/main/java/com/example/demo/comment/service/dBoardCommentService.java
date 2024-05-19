@@ -18,7 +18,6 @@ public interface dBoardCommentService {
     default dBoardComment dtoToEntity(CommentDTO dto) {
         //멤버 조회
         Member member = Member.builder().id(dto.getWriter()).build();
-        //보드 조회
         Diary diary = Diary.builder().no(dto.getBoardNo()).build();
         //entity 생성
         dBoardComment entity = dBoardComment.builder().commentNo(dto.getCommentNo()).diary(diary)

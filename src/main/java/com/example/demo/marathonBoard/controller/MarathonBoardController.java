@@ -1,5 +1,6 @@
 package com.example.demo.marathonBoard.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 
 import com.example.demo.member.service.MemberService;
@@ -56,12 +57,17 @@ public class MarathonBoardController {
 	}
 
 	@GetMapping("/read")
-	public void read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
-			Model model) {
+	public String read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
+					   Model model, Principal principal) throws IOException {
 
 		MarathonDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
+
+		boolean isAuthor = principal != null && dto.getWriter().equals(principal.getName());
+		model.addAttribute("isAuthor", isAuthor);
+
+		return "marathonBoard/read";
 	}
 
 	@GetMapping("/modify")

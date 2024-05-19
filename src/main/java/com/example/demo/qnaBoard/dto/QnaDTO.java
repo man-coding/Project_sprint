@@ -24,6 +24,7 @@ public class QnaDTO {
     LocalDateTime regDate;
     LocalDateTime modDate;
     String content;
+    int countLike;
     int countView;
 
 }

@@ -1,6 +1,4 @@
 package com.example.demo.comment.entity;
-
-import com.example.demo.member.entity.Member;
 import com.example.demo.qnaBoard.entity.Qna;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +10,7 @@ import lombok.*;
 @Getter
 @ToString
 @Builder
-public class qBoardComment {
+public class qBoardComment extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +22,6 @@ public class qBoardComment {
     @Column(length = 1500)
     String content;
 
-    @ManyToOne
-    Member writer;
+    @Column(length = 20, nullable = false)
+    String writer;
 }

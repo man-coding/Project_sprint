@@ -19,6 +19,8 @@ public interface QnaBoardService {
 
     Page<QnaDTO> getSearchList(int pageNumber, String keyword);
 
+    void addCountView(int no);
+
     default Qna dtoToEntity(QnaDTO dto) {
         Member member = Member.builder().id(dto.getWriter()).build();
 

@@ -1,9 +1,11 @@
 package com.example.demo.qnaBoard.entity;
 
+import com.example.demo.comment.entity.qBoardComment;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -23,6 +25,9 @@ public class Qna extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int no;
 
+    @OneToMany(mappedBy = "qna", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<qBoardComment> comments = new ArrayList<>();
+
     @Column(length = 100, nullable = false)
     String title;
 
@@ -32,6 +37,9 @@ public class Qna extends BaseEntity{
     @Column(length = 255, nullable = false)
     String content;
 
-    @Column(length = 10, nullable = true)
+    @Column(length = 255, nullable = false)
+    int countLike;
+
+    @Column(length = 255, nullable = false)
     int countView;
 }

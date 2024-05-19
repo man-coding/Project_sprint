@@ -1,15 +1,18 @@
 package com.example.demo.diaryBoard.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 
-import com.example.demo.diaryBoard.entity.Diary;
 import com.example.demo.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.diaryBoard.dto.DiaryDTO;
@@ -23,7 +26,6 @@ public class DiaryBoardController {
 	DiaryBoardService service;
 	@Autowired
 	MemberService memberService;
-
 	@GetMapping("/list")
 	public void list(@RequestParam(defaultValue = "0", name = "page") int page, Model model) {
 
@@ -52,12 +54,17 @@ public class DiaryBoardController {
 	}
 
 	@GetMapping("/read")
-	public void read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
-					 Model model) {
+	public String read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
+					   Model model, Principal principal) throws IOException {
 
 		DiaryDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
+
+		boolean isAuthor = principal != null && dto.getWriter().equals(principal.getName());
+		model.addAttribute("isAuthor", isAuthor);
+
+		return "/diaryBoard/read";
 	}
 
 	@GetMapping("/modify")
@@ -70,15 +77,14 @@ public class DiaryBoardController {
 	public String modifyPost(DiaryDTO dto, RedirectAttributes redirectAttributes) {
 		service.modify(dto);
 		redirectAttributes.addAttribute("no", dto.getNo());
-		return "redirect:DiaryBoard/read";
+		return "redirect:/diaryBoard/read";
 	}
 
 	@PostMapping("/remove")
 	public String removePost(@RequestParam(name = "no") int no) {
 		service.remove(no);
-		return "redirect:/DiaryBoard/list";
+		return "redirect:/diaryBoard/list";
 	}
-
 	@PostMapping("/like")
 	public ResponseEntity<DiaryDTO> likeDiary(@RequestParam int no) {
 		DiaryDTO diary = service.read(no);
@@ -92,5 +98,6 @@ public class DiaryBoardController {
 		diary.setCountLike(service.unlikeDiary(no).getCountLike());
 		return ResponseEntity.ok(diary);
 	}
+
 
 }

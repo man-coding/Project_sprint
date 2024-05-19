@@ -1,7 +1,5 @@
 package com.example.demo.qnaBoard.service;
 
-import com.example.demo.diaryBoard.dto.DiaryDTO;
-import com.example.demo.diaryBoard.entity.Diary;
 import com.example.demo.qnaBoard.dto.QnaDTO;
 import com.example.demo.qnaBoard.entity.Qna;
 import com.example.demo.qnaBoard.repository.QnaRepository;
@@ -13,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,7 +47,6 @@ public class QnaBoardServiceImpl implements QnaBoardService{
         if (result.isPresent()) {
             Qna qna = result.get();
             QnaDTO dto = entityToDto(qna);
-
             return dto;
         }
         return null;
@@ -90,6 +86,16 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 
         Page<QnaDTO> dtoPage = entityPage.map(this::entityToDto);
         return dtoPage;
+    }
+
+    @Override
+    public void addCountView(int no) {
+        Optional<Qna> result = repository.findById(no);
+        if(result.isPresent()){
+            Qna qna = result.get();
+            qna.setCountView(qna.getCountView()+1);
+            repository.save(qna);
+        }
     }
 
 }
