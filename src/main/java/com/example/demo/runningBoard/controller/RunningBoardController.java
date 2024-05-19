@@ -44,7 +44,7 @@ public class RunningBoardController {
 
 	@GetMapping("/search")
 	public String search(@RequestParam(defaultValue = "0", name = "page") int page,
-						 @RequestParam(name = "keyword") String keyword, Model model) {
+			@RequestParam(name = "keyword") String keyword, Model model) {
 		Page<RunningDTO> list = service.getSearchList(page, keyword); // 검색어로 필터링된 목록을 가져옴
 		model.addAttribute("list", list); // 모델에 목록 추가
 		return "/runningBoard/list"; // 목록 페이지로 리다이렉트
@@ -72,16 +72,23 @@ public class RunningBoardController {
 	}
 
 	@GetMapping("/read")
-	public void read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
-					 Model model) throws IOException {
+	public String read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
+			Model model, Principal principal) throws IOException {
+		RunningDTO dto = service.read(no);
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
 
-		RunningDTO dto = service.read(no); // 글 번호로 글 정보를 가져옴
-		model.addAttribute("dto", dto); // 모델에 글 정보 추가
-		model.addAttribute("page", page); // 조회한 페이지 번호를 모델에 추가
+		List<WeatherDTO> weather = weatherService.entityToDto();
+		model.addAttribute("weather", weather);
 
-		List<WeatherDTO> weather = weatherService.entityToDto(); // 날씨 정보를 가져옴
+		// 현재 로그인한 사용자와 글 작성자 비교
+		boolean isAuthor = principal != null && dto.getWriter().equals(principal.getName());
+		model.addAttribute("isAuthor", isAuthor);
+		System.out.println(dto.getWriter());
+		System.out.println(principal.getName());
 
-		model.addAttribute("weather", weather); // 모델에 날씨 정보 추가
+
+		return "runningBoard/read";
 	}
 
 	@GetMapping("/modify")
