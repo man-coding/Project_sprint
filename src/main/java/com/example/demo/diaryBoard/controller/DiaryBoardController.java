@@ -1,5 +1,6 @@
 package com.example.demo.diaryBoard.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 
 import com.example.demo.member.service.MemberService;
@@ -52,12 +53,17 @@ public class DiaryBoardController {
 	}
 
 	@GetMapping("/read")
-	public void read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
-			Model model) {
+	public String read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
+					   Model model, Principal principal) throws IOException {
 
 		DiaryDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
+
+		boolean isAuthor = principal != null && dto.getWriter().equals(principal.getName());
+		model.addAttribute("isAuthor", isAuthor);
+
+		return "/diaryBoard/read";
 	}
 
 	@GetMapping("/modify")
@@ -70,12 +76,12 @@ public class DiaryBoardController {
 	public String modifyPost(DiaryDTO dto, RedirectAttributes redirectAttributes) {
 		service.modify(dto);
 		redirectAttributes.addAttribute("no", dto.getNo());
-		return "redirect:DiaryBoard/read";
+		return "redirect:/diaryBoard/read";
 	}
 
 	@PostMapping("/remove")
 	public String removePost(@RequestParam(name = "no") int no) {
 		service.remove(no);
-		return "redirect:/DiaryBoard/list";
+		return "redirect:/diaryBoard/list";
 	}
 }
