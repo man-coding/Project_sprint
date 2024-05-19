@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.security.Principal;
 
 @Controller
@@ -52,10 +53,17 @@ public class QnaBoardController {
     }
 
     @GetMapping("/read")
-    public void read(@RequestParam(name="no") int no, @RequestParam(defaultValue = "0", name = "page") int page, Model model) {
+    public String read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
+                       Model model, Principal principal) throws IOException {
         QnaDTO dto = qnaBoardService.read(no);
         model.addAttribute("dto", dto);
         model.addAttribute("page", page);
+
+        // 현재 로그인한 사용자와 글 작성자 비교
+        boolean isAuthor = principal != null && dto.getWriter().equals(principal.getName());
+        model.addAttribute("isAuthor", isAuthor);
+
+        return "qnaBoard/read";
     }
 
     @GetMapping("/modify")

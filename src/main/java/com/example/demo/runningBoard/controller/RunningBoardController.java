@@ -72,16 +72,20 @@ public class RunningBoardController {
 	}
 
 	@GetMapping("/read")
-	public void read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
-					 Model model) throws IOException {
+	public String read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page,
+					   Model model, Principal principal) throws IOException {
+		RunningDTO dto = service.read(no);
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
 
-		RunningDTO dto = service.read(no); // 글 번호로 글 정보를 가져옴
-		model.addAttribute("dto", dto); // 모델에 글 정보 추가
-		model.addAttribute("page", page); // 조회한 페이지 번호를 모델에 추가
+		List<WeatherDTO> weather = weatherService.entityToDto();
+		model.addAttribute("weather", weather);
 
-		List<WeatherDTO> weather = weatherService.entityToDto(); // 날씨 정보를 가져옴
+		// 현재 로그인한 사용자와 글 작성자 비교
+		boolean isAuthor = principal != null && dto.getWriter().equals(principal.getName());
+		model.addAttribute("isAuthor", isAuthor);
 
-		model.addAttribute("weather", weather); // 모델에 날씨 정보 추가
+		return "runningBoard/read";
 	}
 
 	@GetMapping("/modify")
