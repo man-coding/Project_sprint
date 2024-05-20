@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -107,4 +108,17 @@ public class RunningBoardController {
 		return "redirect:/runningBoard/list";
 	}
 
+	@PostMapping("/like")
+	public ResponseEntity<RunningDTO> likeRunning(@RequestParam int no) {
+		RunningDTO running = service.read(no);
+		running.setCountLike(service.likeRunning(no).getCountLike());
+		return ResponseEntity.ok(running);
+	}
+
+	@PostMapping("/unlike")
+	public ResponseEntity<RunningDTO> unlikeRunning(@RequestParam int no) {
+		RunningDTO running = service.read(no);
+		running.setCountLike(service.unlikeRunning(no).getCountLike());
+		return ResponseEntity.ok(running);
+	}
 }

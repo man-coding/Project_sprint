@@ -40,6 +40,9 @@ public class Diary extends BaseEntity {
 	@Column(length = 10, nullable = true)
 	int countLike;
 
+//	@Column(length = 10, nullable = true)
+//	int countView;
+
 	@Column(length = 200, nullable = true)
 	private String imgPath; // 첨부파일 이름
 }

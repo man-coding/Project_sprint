@@ -18,6 +18,10 @@ public interface MarathonBoardService {
 
 	int remove(int no);
 
+	Marathon likeMarathon(int no);
+
+	Marathon unlikeMarathon(int no);
+
 	default Marathon dtoToEntity(MarathonDTO dto) {
 		Member member = Member.builder().id(dto.getWriter()).build();
 		Marathon entity = Marathon.builder().no(dto.getNo()).writer(member.getId()).title(dto.getTitle())

@@ -6,6 +6,7 @@ import java.security.Principal;
 import com.example.demo.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -83,5 +84,19 @@ public class DiaryBoardController {
 	public String removePost(@RequestParam(name = "no") int no) {
 		service.remove(no);
 		return "redirect:/diaryBoard/list";
+	}
+
+	@PostMapping("/like")
+	public ResponseEntity<DiaryDTO> likeDiary(@RequestParam int no) {
+		DiaryDTO diary = service.read(no);
+		diary.setCountLike(service.likeDiary(no).getCountLike());
+		return ResponseEntity.ok(diary);
+	}
+
+	@PostMapping("/unlike")
+	public ResponseEntity<DiaryDTO> unlikeDiary(@RequestParam int no) {
+		DiaryDTO diary = service.read(no);
+		diary.setCountLike(service.unlikeDiary(no).getCountLike());
+		return ResponseEntity.ok(diary);
 	}
 }

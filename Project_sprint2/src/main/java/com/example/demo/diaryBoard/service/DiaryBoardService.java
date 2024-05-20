@@ -18,6 +18,10 @@ public interface DiaryBoardService {
 
 	int remove(int no);
 
+	Diary likeDiary(int no);
+
+	Diary unlikeDiary(int no);
+
 	Page<DiaryDTO> getSearchList(int pageNumber, String keyword);
 
 	default Diary dtoToEntity(DiaryDTO dto) {

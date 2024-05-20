@@ -7,6 +7,7 @@ import com.example.demo.member.service.MemberService;
 import com.example.demo.weatherApi.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -87,5 +88,19 @@ public class MarathonBoardController {
 	public String removePost(@RequestParam(name = "no") int no) {
 		service.remove(no);
 		return "redirect:/marathonBoard/list";
+	}
+
+	@PostMapping("/like")
+	public ResponseEntity<MarathonDTO> likeMarathon(@RequestParam int no) {
+		MarathonDTO marathon = service.read(no);
+		marathon.setCountLike(service.likeMarathon(no).getCountLike());
+		return ResponseEntity.ok(marathon);
+	}
+
+	@PostMapping("/unlike")
+	public ResponseEntity<MarathonDTO> unlikeMarathon(@RequestParam int no) {
+		MarathonDTO marathon = service.read(no);
+		marathon.setCountLike(service.unlikeMarathon(no).getCountLike());
+		return ResponseEntity.ok(marathon);
 	}
 }

@@ -103,5 +103,28 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 		Page<DiaryDTO> dtoPage = entityPage.map(this::entityToDto);
 		return dtoPage;
 	}
+	@Override
+	public Diary likeDiary(int no) {
+		Optional<Diary> result = repository.findById(no);
+
+		if (result.isPresent()) {
+			Diary diary = result.get();
+			diary.setCountLike(diary.getCountLike()+1);
+			return repository.save(diary);
+		}
+		return null;
+	}
+
+	@Override
+	public Diary unlikeDiary(int no) {
+		Optional<Diary> result = repository.findById(no);
+
+		if (result.isPresent()) {
+			Diary diary = result.get();
+			diary.setCountLike(diary.getCountLike()-1);
+			return repository.save(diary);
+		}
+		return null;
+	}
 
 }

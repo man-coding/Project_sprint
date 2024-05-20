@@ -112,5 +112,29 @@ public class RunningBoardServiceImpl implements RunningBoardService {
 	    return dtoPage;
 	}
 
+	@Override
+	public Running likeRunning(int no) {
+		Optional<Running> result = repository.findById(no);
+
+		if (result.isPresent()) {
+			Running running = result.get();
+			running.setCountLike(running.getCountLike()+1);
+			return repository.save(running);
+		}
+		return null;
+	}
+
+	@Override
+	public Running unlikeRunning(int no) {
+		Optional<Running> result = repository.findById(no);
+
+		if (result.isPresent()) {
+			Running running = result.get();
+			running.setCountLike(running.getCountLike()-1);
+			return repository.save(running);
+		}
+		return null;
+	}
+
 
 }

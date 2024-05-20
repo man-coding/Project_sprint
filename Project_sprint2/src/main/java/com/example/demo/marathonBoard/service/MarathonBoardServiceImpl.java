@@ -7,12 +7,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.marathonBoard.dto.MarathonDTO;
 import com.example.demo.marathonBoard.entity.Marathon;
 import com.example.demo.marathonBoard.repository.MarathonRepository;
 import com.example.demo.util.FileUtil;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class MarathonBoardServiceImpl implements MarathonBoardService {
@@ -118,4 +121,29 @@ public class MarathonBoardServiceImpl implements MarathonBoardService {
 		}
 
 	}
+	@Override
+	public Marathon likeMarathon(int no) {
+		Optional<Marathon> result = repository.findById(no);
+
+		if (result.isPresent()) {
+			Marathon marathon = result.get();
+			marathon.setCountLike(marathon.getCountLike()+1);
+			return repository.save(marathon);
+		}
+		return null;
+	}
+
+	@Override
+	public Marathon unlikeMarathon(int no) {
+		Optional<Marathon> result = repository.findById(no);
+
+		if (result.isPresent()) {
+			Marathon marathon = result.get();
+			marathon.setCountLike(marathon.getCountLike()-1);
+			return repository.save(marathon);
+		}
+		return null;
+	}
+
+
 }
