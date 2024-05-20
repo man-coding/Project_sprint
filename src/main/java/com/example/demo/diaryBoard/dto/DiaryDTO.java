@@ -1,6 +1,7 @@
 package com.example.demo.diaryBoard.dto;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +29,8 @@ public class DiaryDTO {
 	String imgPath; // 파일 이름
 	LocalDateTime regDate;
 	LocalDateTime modDate;
-	
+	int countView;
+	private Set<String> likedUsers; // 좋아요를 누른 사용자 ID 목록
 	private String keyword; // 검색 키워드
 
 }

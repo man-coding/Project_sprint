@@ -80,6 +80,7 @@ public class RunningBoardController {
 
 		List<WeatherDTO> weather = weatherService.entityToDto();
 		model.addAttribute("weather", weather);
+		service.addCountView(no);
 
 		// 현재 로그인한 사용자와 글 작성자 비교
 		boolean isAuthor = principal != null && dto.getWriter().equals(principal.getName());

@@ -39,6 +39,9 @@
                     <span class="notice-detail-info">[[${#temporals.format(dto.regDate,
 							'HH:mm')}]]</span>
                 </div>
+                <div class="flex flex-col items-right">
+                    <span >조회수 [[${dto.countView}]]</span>
+                </div>
             </div>
             
         </div>
@@ -66,9 +69,9 @@
                 <span id="comment_count bottom-logo-font">0</span>
             </div>
             <div class="heart-info">
-                <button class="heartBtn" onclick="event.stopPropagation(); addLike();">
-                    <i class="fa-regular fa-heart"></i></button>
-                    <span class="like_count bottom-logo-font">0</span>
+                <button class="heartBtn" th:data-no="${dto.no}">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="like_count bottom-logo-font" th:id="'like-count-' + ${dto.no}">[[${dto.countLike}]]</span>
                 </button>
             </div>
         </div>
@@ -167,4 +170,7 @@
             }
         });
     }
+
+
 </script>
+

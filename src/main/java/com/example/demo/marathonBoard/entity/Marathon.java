@@ -51,4 +51,7 @@ public class Marathon extends BaseEntity {
 	
 	@Column(length = 200, nullable = true)
 	private String imgPath; //첨부파일 이름
+
+	@Column(length = 255, nullable = false)
+	int countView;
 }

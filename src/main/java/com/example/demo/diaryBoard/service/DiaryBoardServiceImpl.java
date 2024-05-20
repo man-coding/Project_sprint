@@ -1,7 +1,9 @@
 package com.example.demo.diaryBoard.service;
 
 import java.util.Optional;
+import java.util.Set;
 
+import com.example.demo.marathonBoard.entity.Marathon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -102,6 +104,36 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 
 		Page<DiaryDTO> dtoPage = entityPage.map(this::entityToDto);
 		return dtoPage;
+	}
+
+	public void addCountView(int no) {
+		Optional<Diary> result = repository.findById(no);
+		if(result.isPresent()){
+			Diary diary = result.get();
+			diary.setCountView(diary.getCountView()+1);
+			repository.save(diary);
+		}
+	}
+	@Override
+	public Diary toggleLike(int no, String userId) {
+		Optional<Diary> result = repository.findById(no);
+
+		if (result.isPresent()) {
+			Diary diary = result.get();
+			Set<String> likedUsers = diary.getLikedUsers();
+
+			if (likedUsers.contains(userId)) {
+				likedUsers.remove(userId);
+				diary.setCountLike(diary.getCountLike() - 1);
+			} else {
+				likedUsers.add(userId);
+				diary.setCountLike(diary.getCountLike() + 1);
+			}
+
+			return repository.save(diary);
+		}
+
+		return null;
 	}
 
 }

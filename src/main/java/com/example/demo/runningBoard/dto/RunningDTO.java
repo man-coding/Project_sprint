@@ -31,6 +31,7 @@ public class RunningDTO {
 	double latitude;
 	double longtitude;
 	int countLike;
+	int countView;
 	LocalDateTime regDate;
 	LocalDateTime modDate;
 	

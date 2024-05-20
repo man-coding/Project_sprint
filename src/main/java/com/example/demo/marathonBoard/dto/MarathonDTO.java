@@ -27,6 +27,7 @@ public class MarathonDTO {
 	String location;
 	String content;
 	int countLike;
+	int countView;
 	MultipartFile uploadFile; // 파일 스트림
 	String imgPath; // 파일 이름
 	LocalDateTime regDate;

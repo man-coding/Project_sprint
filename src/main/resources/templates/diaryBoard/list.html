@@ -44,16 +44,14 @@
                 <img th:src="'/uploadfile/'+${dto.imgPath}" alt="Post image" >
             </div>
 
-            <div class="info-container" onclick="event.stopPropagation(); addLike();">
+            <div class="info-container">
                 <div class="people-info">
                     <i class="fa-solid fa-user"></i>
-                    <span class="people-count bottom-logo-font">1명</span>
+                    <span class="people-count bottom-logo-font">[[${dto.countView}]]</span>
                 </div>
                 <div class="heart-info">
-                    <button class="heartBtn" onclick="event.stopPropagation(); addLike();">
                         <i class="fa-regular fa-heart"></i>
-                        <span class="like_count bottom-logo-font">0개</span>
-                    </button>
+                        <span class="like_count bottom-logo-font" >[[${dto.countLike}]]</span>
                 </div>
             </div>
             <div class="m-title">

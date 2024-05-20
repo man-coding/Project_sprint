@@ -18,11 +18,14 @@ public interface MarathonBoardService {
 
 	int remove(int no);
 
+	void addCountView(int no);
+
+
 	default Marathon dtoToEntity(MarathonDTO dto) {
 		Member member = Member.builder().id(dto.getWriter()).build();
 		Marathon entity = Marathon.builder().no(dto.getNo()).writer(member.getId()).title(dto.getTitle())
 				.marathonDate(dto.getMarathonDate()).location(dto.getLocation()).content(dto.getContent())
-				.countLike(dto.getCountLike()).imgPath(dto.getImgPath()).build();
+				.countLike(dto.getCountLike()).imgPath(dto.getImgPath()).countView(dto.getCountView()).build();
 
 		return entity;
 
@@ -33,7 +36,7 @@ public interface MarathonBoardService {
 		MarathonDTO dto = MarathonDTO.builder().no(entity.getNo()).writer(entity.getWriter()).title(entity.getTitle())
 				.MarathonDate(entity.getMarathonDate()).location(entity.getLocation()).content(entity.getContent())
 				.countLike(entity.getCountLike()).regDate(entity.getRegDate()).modDate(entity.getModDate())
-				.imgPath(entity.getImgPath()).build();
+				.imgPath(entity.getImgPath()).countView(entity.getCountView()).build();
 
 		return dto;
 	}

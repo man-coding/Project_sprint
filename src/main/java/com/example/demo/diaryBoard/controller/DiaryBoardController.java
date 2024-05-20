@@ -2,10 +2,16 @@ package com.example.demo.diaryBoard.controller;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.example.demo.diaryBoard.entity.Diary;
 import com.example.demo.member.service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,6 +65,7 @@ public class DiaryBoardController {
 		DiaryDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
+		service.addCountView(no);
 
 		boolean isAuthor = principal != null && dto.getWriter().equals(principal.getName());
 		model.addAttribute("isAuthor", isAuthor);
@@ -84,4 +91,18 @@ public class DiaryBoardController {
 		service.remove(no);
 		return "redirect:/diaryBoard/list";
 	}
+
+	@PostMapping("/toggleLike")
+	public ResponseEntity<Map<String, Object>> toggleLike(@RequestParam int no, Principal principal) {
+		String userId = principal.getName(); // Principal 객체에서 사용자 이름 가져오기
+
+		Diary diary = service.toggleLike(no, userId);
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("liked", diary.getLikedUsers().contains(userId));
+		response.put("countLike", diary.getCountLike());
+
+		return ResponseEntity.ok(response);
+	}
+
 }

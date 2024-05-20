@@ -17,6 +17,8 @@ public interface QnaBoardService {
 
     int remove(int no);
 
+    void addCountView(int no);
+
     Page<QnaDTO> getSearchList(int pageNumber, String keyword);
 
     default Qna dtoToEntity(QnaDTO dto) {

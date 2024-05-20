@@ -45,20 +45,6 @@
 </div>
 </body>
 </html>
-<script type="text/javascript">
-	// DOM이 로드된 후 실행될 함수
-	document.addEventListener('DOMContentLoaded', function () {
-		// 'valid' 아이디를 가진 요소의 텍스트 내용을 변수에 저장
-		var errorMessage = document.getElementById('valid').textContent;
-
-		// 에러 메시지가 기본 메시지가 아니면 alert 창을 띄움
-		if (errorMessage !== 'Default error message') {
-			alert(errorMessage);
-		}
-	});
-</script>
-
-
 <script>
 	$(document).ready(function () { //아이디 비번 저장 cookie
 		var key = getCookie("idChk"); //user1
