@@ -65,7 +65,7 @@ div {
 
 /* First notice styles */
 .notice-first-info {
-    width: 80%;
+    width: 100%;
     font-size: 16px;
     color: #333333;
     display: flex;
@@ -160,7 +160,9 @@ i {
 .comment-count {
     margin-right: 20px;
 }
-
+.view-count{
+    margin-right: 20px;
+}
 /* Comment container styles */
 .content-comment {
     display: flex;

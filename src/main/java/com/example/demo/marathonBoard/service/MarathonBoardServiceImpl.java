@@ -2,6 +2,7 @@ package com.example.demo.marathonBoard.service;
 
 import java.util.Optional;
 
+import com.example.demo.runningBoard.entity.Running;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -117,5 +118,14 @@ public class MarathonBoardServiceImpl implements MarathonBoardService {
 			return 0; // 실패
 		}
 
+	}
+
+	public void addCountView(int no) {
+		Optional<Marathon> result = repository.findById(no);
+		if(result.isPresent()){
+			Marathon marathon = result.get();
+			marathon.setCountView(marathon.getCountView()+1);
+			repository.save(marathon);
+		}
 	}
 }

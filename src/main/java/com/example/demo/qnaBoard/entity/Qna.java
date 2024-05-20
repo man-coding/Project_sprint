@@ -32,6 +32,6 @@ public class Qna extends BaseEntity{
     @Column(length = 255, nullable = false)
     String content;
 
-    @Column(length = 10, nullable = true)
+    @Column(length = 255, nullable = false)
     int countView;
 }

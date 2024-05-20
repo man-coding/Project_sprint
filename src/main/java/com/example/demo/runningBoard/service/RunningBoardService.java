@@ -22,7 +22,10 @@ public interface RunningBoardService {
 	
 	// 주어진 번호(no)에 해당하는 러닝 게시물을 삭제하고, 삭제된 게시물의 ID를 반환합니다.
 	int remove(int no);
-	
+
+	void addCountView(int no);
+
+
 	// 주어진 키워드로 검색된 러닝 게시물 목록을 Page<RunningDTO> 형태로 반환합니다. 검색은 페이지 번호에 따라 페이징됩니다.
 	Page<RunningDTO> getSearchList(int pageNumber, String keyword);
 	
@@ -34,7 +37,8 @@ public interface RunningBoardService {
 
 		Running entity = Running.builder().no(dto.getNo()).writer(member.getId()).title(dto.getTitle())
 				.runningDate(dto.getRunningDate()).location(dto.getLocation()).content(dto.getContent())
-				.latitude(dto.getLatitude()).longtitude(dto.getLongtitude()).countLike(dto.getCountLike()).build();
+				.latitude(dto.getLatitude()).longtitude(dto.getLongtitude()).countLike(dto.getCountLike())
+				.countView(dto.getCountView()).build();
 
 		return entity;
 
@@ -49,7 +53,7 @@ public interface RunningBoardService {
 		RunningDTO dto = RunningDTO.builder().no(entity.getNo()).writer(entity.getWriter()).title(entity.getTitle())
 				.runningDate(entity.getRunningDate()).location(entity.getLocation()).content(entity.getContent())
 				.latitude(entity.getLatitude()).longtitude(entity.getLongtitude()).countLike(entity.getCountLike())
-				.regDate(entity.getRegDate()).modDate(entity.getModDate()).build();
+				.regDate(entity.getRegDate()).modDate(entity.getModDate()).countView(entity.getCountView()).build();
 
 		return dto;
 	}

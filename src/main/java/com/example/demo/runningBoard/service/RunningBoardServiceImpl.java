@@ -2,6 +2,7 @@ package com.example.demo.runningBoard.service;
 
 import java.util.Optional;
 
+import com.example.demo.qnaBoard.entity.Qna;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page; // Spring Data의 페이징 처리를 위한 클래스
 import org.springframework.data.domain.PageRequest; // 페이징 요청 정보를 생성하는 클래스
@@ -111,6 +112,13 @@ public class RunningBoardServiceImpl implements RunningBoardService {
 	    // 변환된 RunningDTO 페이지를 반환합니다.
 	    return dtoPage;
 	}
-
+	public void addCountView(int no) {
+		Optional<Running> result = repository.findById(no);
+		if(result.isPresent()){
+			Running running = result.get();
+			running.setCountView(running.getCountView()+1);
+			repository.save(running);
+		}
+	}
 
 }

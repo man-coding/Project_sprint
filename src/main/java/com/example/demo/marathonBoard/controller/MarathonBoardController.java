@@ -63,6 +63,7 @@ public class MarathonBoardController {
 		MarathonDTO dto = service.read(no);
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
+		service.addCountView(no);
 
 		boolean isAuthor = principal != null && dto.getWriter().equals(principal.getName());
 		model.addAttribute("isAuthor", isAuthor);

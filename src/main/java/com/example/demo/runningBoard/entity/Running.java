@@ -61,5 +61,7 @@ public class Running extends BaseEntity {
 	@Column(length = 20, nullable = true)
 	String keyword;
 	//파일첨부 필요없음
+	@Column(length = 255, nullable = false)
+	int countView;
 
 }

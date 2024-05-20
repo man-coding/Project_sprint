@@ -92,4 +92,16 @@ public class QnaBoardServiceImpl implements QnaBoardService{
         return dtoPage;
     }
 
+    @Override
+    public void addCountView(int no) {
+        Optional<Qna> result = repository.findById(no);
+        if(result.isPresent()){
+            Qna qna = result.get();
+            qna.setCountView(qna.getCountView()+1);
+            repository.save(qna);
+        }
+    }
+
+
+
 }
