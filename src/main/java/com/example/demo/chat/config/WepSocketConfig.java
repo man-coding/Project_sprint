@@ -18,3 +18,4 @@ public class WepSocketConfig {
 		registry.addHandler(webSocketHandler, "ws/chat").setAllowedOrigins("*");
 	}
 }
+test
