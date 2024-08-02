@@ -68,12 +68,14 @@
                 <i class="fa-regular fa-comment"></i>
                 <span id="comment_count bottom-logo-font">0</span>
             </div>
+            
             <div class="heart-info">
                 <button class="heartBtn" th:data-no="${dto.no}">
                     <i class="fa-regular fa-heart"></i>
                     <span class="like_count bottom-logo-font" th:id="'like-count-' + ${dto.no}">[[${dto.countLike}]]</span>
                 </button>
             </div>
+            
         </div>
         
         <div class="content-comment">

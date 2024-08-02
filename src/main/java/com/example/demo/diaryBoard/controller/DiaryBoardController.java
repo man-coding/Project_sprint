@@ -66,6 +66,7 @@ public class DiaryBoardController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
 		service.addCountView(no);
+		
 
 		boolean isAuthor = principal != null && dto.getWriter().equals(principal.getName());
 		model.addAttribute("isAuthor", isAuthor);
@@ -93,7 +94,7 @@ public class DiaryBoardController {
 	}
 
 	@PostMapping("/toggleLike")
-	public ResponseEntity<Map<String, Object>> toggleLike(@RequestParam int no, Principal principal) {
+	public ResponseEntity<Map<String, Object>> toggleLike(@RequestParam(name = "no") int no, Principal principal) {
 		String userId = principal.getName(); // Principal 객체에서 사용자 이름 가져오기
 
 		Diary diary = service.toggleLike(no, userId);
