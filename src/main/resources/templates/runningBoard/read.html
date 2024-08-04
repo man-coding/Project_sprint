@@ -197,6 +197,7 @@
 				}
 		});
 	}
+	
 	$(document).ready(function() {
 		getAttendeesList()
 		
@@ -205,6 +206,7 @@
 	
 	function joining(){
     var running = [[${dto}]];
+    
     $.ajax({
         type: "POST",
         url: "/joinMember/joinRunning?runningNo="+running.no,
@@ -222,6 +224,7 @@
     });
 }
 	function getAttendeesList(){
+		
 	    var running = [[${dto}]];
 	    let running_div = $('.tooltip');
 	    $.ajax({

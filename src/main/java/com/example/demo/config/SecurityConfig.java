@@ -62,7 +62,7 @@ public class SecurityConfig {
         ; // 로그아웃 처리
 
 
-     // aouth 로그인이 가능하도록 설정
+     // oauth 로그인이 가능하도록 설정
      		http.oauth2Login()
      				.successHandler(new CustomAuthenticationSuccessHandler()); // 핸들러 등록
 

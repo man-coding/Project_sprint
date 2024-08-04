@@ -23,7 +23,7 @@ public interface JoinMemberService {
     int cancelJoin(int runningNo, String runnerId);
 
     // DTO를 엔티티로 변환하는 기본 메서드
-    default JoinMember dtoToEntity(JoinMemberDTO dto) {
+    default JoinMember dtoToEntity(JoinMemberDTO dto) {  //필요없는 메서드 -> dto가 없음
 
         Running running = Running.builder().no(dto.getRunningNo()).build(); // Running 객체 생성
 

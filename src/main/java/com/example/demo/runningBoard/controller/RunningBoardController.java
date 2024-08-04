@@ -78,9 +78,9 @@ public class RunningBoardController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
 
-		List<WeatherDTO> weather = weatherService.entityToDto();
+		List<WeatherDTO> weather = weatherService.entityToDto(); //날씨 호출
 		model.addAttribute("weather", weather);
-		service.addCountView(no);
+		service.addCountView(no); //조회수 증가
 
 		// 현재 로그인한 사용자와 글 작성자 비교
 		boolean isAuthor = principal != null && dto.getWriter().equals(principal.getName());
