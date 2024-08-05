@@ -3,7 +3,6 @@ package com.example.demo.diaryBoard.service;
 import java.util.Optional;
 import java.util.Set;
 
-import com.example.demo.marathonBoard.entity.Marathon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -106,6 +105,7 @@ public class DiaryBoardServiceImpl implements DiaryBoardService {
 		return dtoPage;
 	}
 
+	@Override
 	public void addCountView(int no) {
 		Optional<Diary> result = repository.findById(no);
 		if(result.isPresent()){

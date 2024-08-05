@@ -5,13 +5,9 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.demo.diaryBoard.entity.Diary;
-import com.example.demo.member.service.MemberService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.diaryBoard.dto.DiaryDTO;
+import com.example.demo.diaryBoard.entity.Diary;
 import com.example.demo.diaryBoard.service.DiaryBoardService;
+import com.example.demo.member.service.MemberService;
 
 @Controller
 @RequestMapping("/diaryBoard")
@@ -103,7 +101,7 @@ public class DiaryBoardController {
 		response.put("liked", diary.getLikedUsers().contains(userId));
 		response.put("countLike", diary.getCountLike());
 
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok(response); // 200 OK 와 response 객체 전달(json-> "liked" : true , "countLike" : 1)
 	}
 
 }
