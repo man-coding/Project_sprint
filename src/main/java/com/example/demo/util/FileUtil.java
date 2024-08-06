@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUtil {
 
 	@Value("${filepath}") // application.properties에서 설정된 파일 저장 경로를 불러온다
-	String filepath;
+	private String filepath;
 
 	@Value("${filepath.profile}")
 	private String profileFilepath;
@@ -45,20 +45,23 @@ public class FileUtil {
 
 	public String fileUpload(MultipartFile multipartFile) { // MultipartFile 형태의 파일을 받아 처리하는 메소드
 		Path copyOfLocation = null;
+		String newFileName = null;
 		
 		if(multipartFile.isEmpty()) { // 전달받은 파일이 비어있으면 메서드를 종료한다
 			return null;
 		}
 		try {
-			copyOfLocation = Paths
-					.get(filepath + File.separator + StringUtils.cleanPath(multipartFile.getOriginalFilename())); // 저장할 파일의 전체 경로를 생성한다
+			UUID uuid = UUID.randomUUID();
+			newFileName = uuid + StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			copyOfLocation = Paths.get(filepath + File.separator + newFileName); // 저장할 파일의 전체 경로를 생성한다
 					// StringUtils.cleanPath로 파일 이름에서 '..' 등의 경로 조작을 방지한다
+					//File.separator는 OS에 맞는 경로 구분자임. StringUtils.cleanPath 는 경로 조작 공격을 방지함.
 			
 			Files.copy(multipartFile.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING); // 실제 파일을 위에서 생성한 경로에 저장한다. 이미 파일이 존재하면 대체한다
 		} catch (IOException e) { // 파일 처리 중 오류가 발생하면 예외를 캐치한다
 			e.printStackTrace();
 		}
 		// 메소드를 성공적으로 마칠 경우, 원본 파일의 이름을 반환한다.
-		return multipartFile.getOriginalFilename();
+		return newFileName;
 	}
 }
