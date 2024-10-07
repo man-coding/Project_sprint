@@ -48,7 +48,7 @@ public class SecurityConfig {
 				.requestMatchers("/runningBoard/**").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
 				.requestMatchers("/marathonBoard/*").hasAnyRole("ADMIN","USER") //게시물 관리는 관리자 또는 사용자이면 접근 가능
 				.requestMatchers("/diaryBoard/*").hasAnyRole("ADMIN","USER")
-				.requestMatchers("/uploadfile/**").permitAll() //파일첨부 이미지 모두 접근 가능
+				.requestMatchers("/uploadfiles/**").permitAll() //파일첨부 이미지 모두 접근 가능
 				.requestMatchers("/rBoardcomment/*","/mBoardcomment/*","/dBoardComment/*").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/joinMember/*").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/search/*").permitAll()

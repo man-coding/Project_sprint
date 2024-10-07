@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder                 //dto 생성을 위한 lombok 어노테이션
 
 public class RunningDTO {
 

@@ -3,6 +3,7 @@ package com.example.demo.member.service;
 import java.util.Optional;
 
 import com.example.demo.util.FileUtil;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 //MemberServiceImpl 클래스: 회원 관련 서비스를 제공하는 클래스입니다.
 @Slf4j
 @Service
+@Log4j2
 public class MemberServiceImpl implements MemberService {
 
   // MemberRepository 인터페이스를 자동으로 주입받습니다 (의존성 주입).
@@ -139,15 +141,15 @@ public class MemberServiceImpl implements MemberService {
       // 이름과 권한을 변경합니다.
       entity.setName(dto.getName());
 //      entity.setRole(dto.getRole());
-      if (!dto.getProfileImage().isEmpty()) {
-        String path = fileUtil.profileFileUpload(dto.getProfileImage(), dto.getId());
-        entity.setProfileImagePath(path);
-      }
+//      if (!dto.getProfileImage().isEmpty()) {
+//        String path = fileUtil.profileFileUpload(dto.getProfileImage(), dto.getId());
+//        entity.setProfileImagePath(path);
+//      }
 
       // 기존 비밀번호와 다르면 새로운 비밀번호로 변경합니다.
       boolean matchResult1 = entity.getPassword().equals(dto.getPassword());
       if (!matchResult1) {
-        System.out.println("패스워드가 변경되었습니다");
+        log.info("pw changed");
         String hashpassword = passwordEncoder.encode(dto.getPassword());
         entity.setPassword(hashpassword);
       }

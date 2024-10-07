@@ -37,7 +37,7 @@ public class MarathonBoardServiceImpl implements MarathonBoardService {
 		repository.save(entity); // 리파지토리로 게시물 등록
 		int newNo = entity.getNo();
 
-		return newNo; // 새로운 게시물의 번호 반환
+		return newNo; // 새로운 게시물의 번호 반환 (리다이렉트를 위해 번호 반환)
 
 //		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 //		UUID uuid = UUID.randomUUID();

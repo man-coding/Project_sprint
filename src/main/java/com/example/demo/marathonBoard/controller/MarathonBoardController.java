@@ -52,7 +52,7 @@ public class MarathonBoardController {
 		int no = service.register(dto);
 
 		redirectAttributes.addFlashAttribute("msg", no);
-		return "redirect:/marathonBoard/read?no=" + no;
+		return "redirect:/marathonBoard/read?no=" + no;  //재요청
 
 	}
 

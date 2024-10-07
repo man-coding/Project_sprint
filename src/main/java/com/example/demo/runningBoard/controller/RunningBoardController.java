@@ -62,7 +62,7 @@ public class RunningBoardController {
 
 		String name = memberService.findNameById(id); // ID로 사용자 이름을 찾음
 
-		dto.setWriter(name); // DTO에 작성자 설정
+		dto.setWriter(name); // 계정ID로 생성된 작성자를 닉네임(이름)으로 재설정
 
 		int no = service.register(dto); // 글 등록 후 글 번호를 받음
 
