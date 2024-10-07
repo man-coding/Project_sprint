@@ -19,7 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {	
 		//폴더와 상대경로 맵핑
 		//url을 통해 첨부파일에 접근할 수 있음.
-		registry.addResourceHandler("/uploadfiles/**").addResourceLocations(webpath);
+		registry.addResourceHandler("/uploadfiles/**").addResourceLocations(webpath); //핸들러를 통해 /uploadfiles/** 요청이 들어오면 매핑된 webpath에 접근
 		WebMvcConfigurer.super.addResourceHandlers(registry); //생략해도 됨.
 	}
 
