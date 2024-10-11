@@ -25,7 +25,7 @@ public class OAuthUserDetailsServiceImpl extends DefaultOAuth2UserService { // O
     @Autowired
     MemberService memberService; // 멤버 서비스에 대한 의존성을 주입합니다.
     
-    @Override // 부모 클래스의 메소드를 오버라이드하여 로그인 시 호출될 로직을 정의합니다.
+    @Override // 부모 클래스의 메소드를 오버라이드하여 로그인 시 호출될 로직을 정의합니다.  // 자동 호출됨
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         System.out.println("--------------------------------");
         System.out.println("userRequest: " + userRequest); // 로그인 요청 정보를 출력합니다.

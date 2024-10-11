@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	MemberService service;
 
-	@Override
+	@Override    //로그인 시 자동 호출되는 메서드
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		System.out.println("login id : " + username);
