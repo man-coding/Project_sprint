@@ -7,70 +7,54 @@
 /* 공지사항 컨테이너 스타일링 */
 .notice-l-container {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px;
-    box-sizing: border-box; 
-}
-
-/* 개별 공지사항 박스 스타일링 */
-.notice-m-container {
     display: flex;
-    flex-direction: column; 
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #fff;
-    width: 80%;
-    align-items: center; /* 요소들을 가운데 정렬 */
-    margin: 15px;
-  
-}
-
-/* 공지사항 상세 정보 라인 스타일링 */
-.notice-first-info {
-    width: 85%;
-    height: 20%;
-    margin: 13px;
-    display: flex;
-    justify-content: flex-start; /* 왼쪽 정렬 */
-    gap: 10px; /* 아이템 간 간격 조정 */
-    border-bottom: 1px solid #000; /* 하단 경계선 추가 */
-    padding: 15px;
-
-    
-}
-
-/* 아이콘과 텍스트를 포함하는 박스 스타일링 */
-.flex {
-   
     flex-direction: column;
-    align-items: center;
+    gap: 16px;
 }
 
-/* 상세 정보 텍스트 스타일링 */
-.notice-detail-info {
-    margin-top: 10px;
+
+
+.notice-header {
+    display: flex;
+    justify-content: space-between;
     font-size: 14px;
-    color: #333333;
-}
-.content-box{
-    padding: 15px;
-    margin-top: 0px;
+    color: #666;
 }
 
-/* 박스 하단부분 및 아이콘 폰트 */
+.notice-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #777;
+    margin: 0;
+}
 
+.notice-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #444;
+}
 
+.notice-footer .info-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.notice-footer i {
+    margin-right: 4px;
+    color: #666;
+}
 
 .heartBtn {
-    border: none; /* 버튼의 테두리 제거 */
-    background: none; /* 버튼의 배경색 제거 */
-    outline: none; /* 클릭 시 생기는 아웃라인 제거 */
-    cursor: pointer; /* 마우스 커서가 버튼 위에 있을 때 손가락 모양으로 변경 */
-    pointer-events: auto;
-    font-size: 24px;
-    
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #e74c3c;
+    font-size: 18px;
 }
 
 .people-info{
@@ -100,28 +84,103 @@ h3.main-title {
     margin: 0px;
 }
 
-.list-register{
-	width: 80%;
-	margin: 20px;
-	text-align: right; /* 텍스트 정렬을 오른쪽으로 변경 */
-}
-.list-register input {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #268dce;
-    color: white;
-  	font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 90px;
-    height: auto;
-    padding: 10px 20px;
+.list-register {
+    width: 90%;
+    margin: 20px auto 0 auto;
+    text-align: right;
 }
 
-.list-register input:hover {
-    background-color: #717ff5;
+.register-btn {
+    background-color: black;
+    color: white;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.2s ease;
 }
-.pagination{
+
+.register-btn:hover {
+    background-color: #333;
+}
+
+
+
+.pagination {
 	display: flex;
-    justify-content: center;
+	justify-content: center;
+	list-style: none;
+	padding: 0;
+	margin-bottom: 30px;
+
+}
+.page-item .page-link {
+    display: block;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.page-item.active .page-link {
+    background-color: #333;
+    font-weight: bold;
+}
+
+.page-item .page-link:hover {
+    background-color: #555;
+}
+
+.card {
+    width: 90%;
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    padding-left: 5px;
+    border-left: 4px solid #268dce;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+}
+
+.card-footer span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }

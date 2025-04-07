@@ -1,95 +1,54 @@
-
-<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
 
 	<th:block th:fragment="content">
-		<!DOCTYPE html>
-		<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<!---------------------fontawesome------------------>
-<script src="https://kit.fontawesome.com/fc8d331d05.js"
-	crossorigin="anonymous"></script>
-<!-- templates css -->
-<link href="/css/list.css" rel="stylesheet">
-<!--           js              -->
-<script src="/js/list.js"></script>
 
 
-
-</head>
-<body>
-	<div class="notice-l-container">
-		<!--글 박스 집합-->
-		<div class="list-register">
-			<a th:href="@{/runningBoard/register}"> <input type="button"
-				value="등록"></a>
-		</div>
-		<div th:each="dto : ${list}" class="notice-m-container"  
-		 th:onclick="'window.location.href=\'/runningBoard/read?no=' + ${dto.no} +'&page=' + (${list.number + 1}) + '\''"
-			style="cursor: pointer;">
-			<!-- 글 박스 -->
-			<div class="notice-first-info">
-				<!-- 로고 + 이름박스 라인 -->
-				<div class="flex flex-col items-center">
-					<!-- 로고 + 이름박스-->
-					<i class="fa-solid fa-location-dot"></i> <span
-						class="notice-detail-info">[[${dto.location}]]</span>
-				</div>
-
-				<div class="flex flex-col items-center">
-					<!-- 로고 + 이름박스-->
-					<i class="fa-regular fa-calendar"></i> <span
-						class="notice-detail-info">[[${#temporals.format(dto.runningDate, 'yyyy-MM-dd')}]]</span>
-				</div>
-
-				<div class="flex flex-col items-center">
-					<!-- 로고 + 이름박스-->
-					<i class="fa-solid fa-hashtag"></i> <span
-						class="notice-detail-info">[[${dto.no}]]</span>
-				</div>
-
+		<!-- 카드 컨테이너 -->
+		<div class="notice-l-container">
+			<!-- 등록 버튼 -->
+			<div class="list-register">
+				<a th:href="@{/runningBoard/register}">
+					<button class="register-btn">등록</button>
+				</a>
 			</div>
-			<div class="content-box">
-				<h3 class="main-title">[[${dto.title}]]</h3>
-			</div>
-			<div class="bottom-logo-info"
-				onclick="event.stopPropagation(); addLike();">
-				<div class="people-info">
-					<i class="fa-solid fa-user"></i> <span
-						class="people-count bottom-logo-font">[[${dto.countView}]]</span>
+
+			<div th:each="dto, iterStat : ${list}"
+				 class="card"
+				 th:classappend="${iterStat.index % 2 == 0} ? ' card-even' : ' card-odd'"
+				 th:onclick="'window.location.href=\'/runningBoard/read?no=' + ${dto.no} +'&page=' + (${list.number + 1}) + '\''"
+				 style="cursor: pointer;">
+				<!-- 카드 상단 -->
+				<div class="card-header">
+					<span><i class="fa-solid fa-location-dot"></i> [[${dto.location}]]</span>
+					<span><i class="fa-regular fa-calendar"></i> [[${#temporals.format(dto.runningDate, 'yyyy-MM-dd')}]]</span>
+					<span># [[${dto.no}]]</span>
 				</div>
-				<div class="heart-info">
-					<button class="heartBtn"
-						onclick="event.stopPropagation(); addLike();">
-						<i class="fa-regular fa-heart"></i>
-					</button>
-					<span class="like_count bottom-logo-font">0개</span>
-					</button>
+
+				<!-- 카드 제목 -->
+				<div class="card-title">
+					[[${dto.title}]]
+				</div>
+
+				<!-- 카드 하단 -->
+				<div class="card-footer" onclick="event.stopPropagation();">
+					<span><i class="fa-solid fa-user"></i> [[${dto.countView}]]</span>
+					<span><i class="fa-regular fa-heart"></i> 0개</span>
 				</div>
 			</div>
 		</div>
-		
-	</div>
+
+		<!-- 페이지네이션 -->
+
 		<ul class="pagination" th:if="${list.totalPages > 0}">
-	<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
-		<th:block th:if="${list.number+1 == page}">
-			<li class="page-item active">
-				<!-- 리스트 주소 입력하고, 페이지번호를 파라미터로 전달 -->
-				<a class="page-link" th:href="@{/runningBoard/list(page = ${page})}">[[${page}]]</a>
-			</li>
-		</th:block>
-		<th:block th:unless="${list.number+1 == page}">
-			<li class="page-item">
-				<!-- 리스트 주소 입력하고, 페이지번호를 파라미터로 전달 -->
-				<a class="page-link" th:href="@{/runningBoard/list(page = ${page})}">[[${page}]]</a>
-			</li>
-		</th:block>
-	</th:block>
-</ul>
-	</body>
-		</html>
-	</th:block>
-</th:block>
+			<th:block th:each="page : ${#numbers.sequence(1, list.totalPages)}">
+				<li th:classappend="${list.number+1 == page} ? 'active' : ''" class="page-item">
+					<a class="page-link" th:href="@{/runningBoard/list(page = ${page})}">
+						[[${page}]]
+					</a>
+				</li>
+			</th:block>
+		</ul>
 
+	</th:block>
+
+</th:block>
