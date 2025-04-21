@@ -36,6 +36,8 @@ dependencies {
 	// 기타 의존성 추가
 	implementation "org.springframework.cloud:spring-cloud-starter-openfeign:3.1.0" // OpenFeign을 사용한 선언적 REST 클라이언트 생성을 위한 스타터
 	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.1.2' // MariaDB JDBC 드라이버
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 
 	implementation 'org.springframework.security:spring-security-crypto:5.7.1' // 스프링 시큐리티의 암호화 기능 지원
 	implementation 'org.springframework.boot:spring-boot-starter-security' // 스프링 시큐리티 기본 지원
