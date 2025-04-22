@@ -59,7 +59,7 @@
 				<div class="weather-container" >
 				<!-- Makin-Things / weather-icons -->
 				<div class="weather-info" th:each="item : ${weather}"
-					th:if="${item.forecastTime == 0}">
+					th:if="${item.forecastTime == 0}">  <!--오늘 날씨면-->
 					<img
 						th:src="${item.weather == '맑음' ? '/img/weather/day.svg' : 
                   item.weather == '구름많음' ? '/img/weather/cloudy-original.svg' : 
