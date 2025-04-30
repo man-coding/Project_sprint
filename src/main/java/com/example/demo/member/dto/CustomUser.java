@@ -14,10 +14,10 @@ import lombok.Getter;
 public class CustomUser extends User implements OAuth2User {
 
     // 소셜 로그인 시 비밀번호 확인을 위한 필드 추가
-    String password;
+    private String password;
 
     // OAuth2 사용자 속성을 저장할 맵
-    Map<String, Object> attr;
+    private Map<String, Object> attr;
 
     // MemberDTO를 받아 사용자 ID, 비밀번호, 권한 설정을 초기화하는 생성자
     public CustomUser(MemberDTO dto) {

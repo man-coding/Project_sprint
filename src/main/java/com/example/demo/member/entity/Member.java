@@ -22,18 +22,18 @@ public class Member extends BaseEntity{
 
 	@Id
 	@Column(length = 50)
-	String id;
+	private String id;
 	
 	@Column(length = 200, nullable = false)
-	String password;
+	private String password;
 	
 	@Column(length = 100, nullable = false)
-	String name;
+	private String name;
 	
 	@Column(length = 100, nullable = true)
-	String role;	//사용자 등급 추가
+	private String role;	//사용자 등급 추가
 	
 	private boolean fromSocial;
 
-	String profileImagePath;
+	private String profileImagePath;
 }
