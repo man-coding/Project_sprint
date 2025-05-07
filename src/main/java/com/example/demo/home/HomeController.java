@@ -20,21 +20,21 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String home(Model model) {
-		// 현재 로그인한 사용자의 정보를 가져옵니다.
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String loggedInUserId = authentication.getName();
 
-		// 현재 로그인한 사용자의 정보를 서비스를 통해 가져옵니다.
-		MemberDTO loggedInUser = memberService.findMemberById(loggedInUserId);
+		if (authentication != null && authentication.isAuthenticated()
+				&& !"anonymousUser".equals(authentication.getPrincipal())) {
 
-		// 모델에 현재 로그인한 사용자의 정보를 추가합니다.
-		model.addAttribute("loggedInUser", loggedInUser);
+			String loggedInUserId = authentication.getName();
+			MemberDTO loggedInUser = memberService.findMemberById(loggedInUserId);
+			model.addAttribute("loggedInUser", loggedInUser);
+		}
 
 		return "/home/main";
 	}
 
 	/* 로그인 페이지와 에러 메시지 처리 */
-	@GetMapping("/customlogin")
+	@GetMapping("/login")
 	public String customLogin(@RequestParam(value = "error", required = false) String error,
 							  @RequestParam(value = "exception", required = false) String exception,
 							  Model model) {
